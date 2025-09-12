@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>okhenn — contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{--hot:#ff4db8;--ink:#222;--sub:#555;--bg1:#ffe8f5;--bg2:#d2f3ff}
+    *{box-sizing:border-box} body{margin:0;font-family:"Comic Sans MS",system-ui,sans-serif;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:var(--ink)}
+    header,footer{background:#fff;border-block:4px solid var(--hot)} header{padding:1rem .75rem}
+    .wrap{max-width:700px;margin:0 auto;padding:0 1rem} nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+    nav a{padding:.45rem .8rem;border:2px solid var(--ink);border-radius:999px;background:#fff;text-decoration:none;color:var(--ink)}
+    main{padding:2rem 1rem}
+    form{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:1rem;display:grid;gap:.75rem}
+    input,textarea{padding:.7rem;border:2px solid var(--ink);border-radius:12px;font:inherit}
+    button{padding:.65rem 1rem;border:2px solid var(--ink);border-radius:999px;background:#fff;cursor:pointer}
+    footer{padding:1rem;text-align:center;color:#444}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>contact ✉️</h1>
+      <nav>
+        <a href="index.html">home</a><a href="journal.html">journal</a><a href="adventures.html">adventures</a>
+        <a href="cooking.html">cooking</a><a href="about.html">about</a><a href="contact.html">contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <form onsubmit="event.preventDefault(); alert('message sent (spiritually) ✨');">
+      <input placeholder="your email (promise i’ll read it)" required />
+      <textarea rows="6" placeholder="your message (low pressure zone)"></textarea>
+      <button type="submit">send it</button>
+    </form>
+  </main>
+
+  <footer>© <span id="y"></span> okhenn</footer>
+  <script>document.getElementById("y").textContent=new Date().getFullYear()</script>
+</body>
+</html>
