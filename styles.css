@@ -44,6 +44,22 @@ header, footer{
 }
 header{padding:1rem .75rem}
 footer{padding:1rem;text-align:center;color:var(--muted)}
+.site-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.home-logo {
+  display: block;
+  margin: 0 auto .5rem;
+}
+
+.home-logo img {
+  width: 100px;   /* adjust size as you like */
+  height: auto;
+  border-radius: 20%;
+}
 
 /* headings */
 h1,h2,h3{
@@ -79,6 +95,15 @@ main{padding:2rem 1rem}
 
 /* squiggle divider */
 .squig{display:block;margin:1.25rem auto;width:120px;opacity:.9}
+.site-footer {
+  background: #fff;
+  border-top: 4px solid var(--hot); /* uses your existing hot-pink accent */
+  margin-top: 2rem;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
+}
 
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
