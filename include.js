@@ -22,4 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Include error for', file, e);
     }
   });
+
+  // auto-year in footer
+  const yearSpot = document.getElementById("y");
+  if (yearSpot) {
+    yearSpot.textContent = new Date().getFullYear();
+  }
 });
