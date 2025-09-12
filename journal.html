@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>okhenn — journal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* reuse simple styles inline for now (no build step) */
+    :root { --hot:#ff4db8; --ink:#222; --sub:#555; --bg1:#ffe8f5; --bg2:#d2f3ff; }
+    *{box-sizing:border-box} body{margin:0;font-family:"Comic Sans MS",system-ui,sans-serif;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:var(--ink)}
+    header,footer{background:#fff;border-block:4px solid var(--hot)} header{padding:1rem .75rem}
+    .wrap{max-width:900px;margin:0 auto;padding:0 1rem} h1{margin:.25rem 0;font-size:2.2rem}
+    .tag{color:var(--sub)} nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+    nav a{padding:.45rem .8rem;border:2px solid var(--ink);border-radius:999px;background:#fff;text-decoration:none;color:var(--ink)}
+    main{padding:2rem 1rem}
+    .post{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:1rem;margin:0 0 1rem}
+    .date{font-size:.85rem;color:var(--sub)}
+    footer{padding:1rem;text-align:center;color:#444}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>journal 📝</h1>
+      <p class="tag">short, honest, slightly feral</p>
+      <nav>
+        <a href="index.html">home</a><a href="journal.html">journal</a><a href="adventures.html">adventures</a>
+        <a href="cooking.html">cooking</a><a href="about.html">about</a><a href="contact.html">contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="post">
+      <div class="date">2025-09-10</div>
+      <h3>micro-joys log</h3>
+      <p>sat in a sun patch with coffee. that’s it. that’s the post.</p>
+    </article>
+    <article class="post">
+      <div class="date">2025-09-03</div>
+      <h3>productivity, but humane</h3>
+      <p>my to-do list now includes “look at clouds.” 10/10 would recommend.</p>
+    </article>
+    <article class="post">
+      <div class="date">2025-08-20</div>
+      <h3>notes from a kinder timeline</h3>
+      <p>we clap for effort here.</p>
+    </article>
+  </main>
+
+  <footer>© <span id="y"></span> okhenn</footer>
+  <script>document.getElementById("y").textContent=new Date().getFullYear()</script>
+</body>
+</html>
