@@ -56,10 +56,17 @@ footer{padding:1rem;text-align:center;color:var(--muted)}
 }
 
 .home-logo img {
-  width: 100px;   /* adjust size as you like */
+  width: 100px;
   height: auto;
   border-radius: 20%;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
+.home-logo img:hover {
+  transform: scale(1.08) rotate(-3deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
 
 /* headings */
 h1,h2,h3{
