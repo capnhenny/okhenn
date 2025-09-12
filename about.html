@@ -5,18 +5,11 @@
   <title>okhenn — about</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css">
+  <script src="include.js" defer></script>
   <link rel="icon" href="assets/favicon.png" type="image/png">
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <h1>about 💬</h1>
-      <nav>
-        <a href="index.html">home</a><a href="journal.html">journal</a><a href="adventures.html">adventures</a>
-        <a href="cooking.html">cooking</a><a href="about.html">about</a><a href="contact.html">contact</a>
-      </nav>
-    </div>
-  </header>
+    <div data-include="partials/header.html"></div>
 
   <main class="wrap">
     <p>gen-z minimalism × 90s memphis. honest posts, light chaos, maximal kindness.</p>
@@ -30,7 +23,6 @@
     </ul>
   </main>
 
-  <footer>© <span id="y"></span> okhenn</footer>
-  <script>document.getElementById("y").textContent=new Date().getFullYear()</script>
+ <div data-include="partials/footer.html"></div>
 </body>
 </html>
