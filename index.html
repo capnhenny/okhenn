@@ -8,20 +8,7 @@
   <link rel="icon" href="assets/favicon.png" type="image/png">
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <h1>okhenn 🚀</h1>
-      <p class="tag">soft launch, hard vibes</p>
-      <nav>
-        <a href="index.html">home</a>
-        <a href="journal.html">journal</a>
-        <a href="adventures.html">adventures</a>
-        <a href="cooking.html">cooking</a>
-        <a href="about.html">about</a>
-        <a href="contact.html">contact</a>
-      </nav>
-    </div>
-  </header>
+  <div data-include="partials/header.html"></div>
 
   <main class="wrap">
     <p>welcome to my corner of the internet ✨ minimal UI, unserious background, wholesome chaos.</p>
@@ -42,9 +29,7 @@
     </div>
   </main>
 
-  <footer>
-    © <span id="y"></span> okhenn — built with 🕺 & 💖
-  </footer>
-  <script>document.getElementById("y").textContent=new Date().getFullYear()</script>
+  <div data-include="partials/footer.html"></div>
+
 </body>
 </html>
