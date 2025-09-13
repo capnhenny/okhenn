@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const slots = document.querySelectorAll('[data-include]');
   slots.forEach(async (el) => {
-    const file = el.getAttribute('data-include');
-    const url = file.startsWith('/') ? file : '/' + file; // <-- force root
-    try {
-      const res = await fetch(url, { cache: 'no-cache' });
+const file = el.getAttribute('data-include');
+const url = file.startsWith('/') ? file : '/' + file;
+const res = await fetch(url, { cache: 'no-cache' });
+
       if (!res.ok) throw new Error(res.statusText);
       const html = await res.text();
       el.innerHTML = html;
