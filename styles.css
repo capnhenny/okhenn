@@ -232,18 +232,19 @@ main { padding: 2rem 1rem; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 200px;   /* lock uniform height */
-  max-width: 600px;    /* optional: keeps cards from being too wide */
-  margin: 0 auto;      /* centers them in the page */
+  min-height: 200px;
+  width: 100%;          /* let them scale within the container */
+  max-width: 600px;     /* uniform width for all cards */
+  margin: 0 auto;       /* center cards in column layout */
 
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: url("/assets/dark-gradient.png") no-repeat center center / cover;
+border: 2px solid #1a0b0b;
   border-radius: var(--radius);
   padding: 1.5rem;
   color: #fff;
   text-decoration: none;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
-  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
   transition: transform .2s ease, box-shadow .2s ease, background .3s ease;
   /* NEW: subtle rise-in animation */
   opacity: 0; /* start hidden */
@@ -262,7 +263,7 @@ main { padding: 2rem 1rem; }
   transform: translateY(-6px) scale(1.02);
   box-shadow: 0 12px 24px rgba(0,0,0,0.4);
   background: rgba(255, 255, 255, 0.15); /* brighter on hover */
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .card h3 {
