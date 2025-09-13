@@ -270,11 +270,11 @@ border: 2px solid #1a0b0b;
 
 .card h3 {
   margin: 0 0 0.5rem;
-  font-size: 1.25rem;                 /* smaller keeps pixel edges sharper */
+  font-size: 1.3rem;
   line-height: 1.2;
   letter-spacing: 0.05em;
   font-family: 'Press Start 2P', monospace;
-  font-weight: 400;                   /* Press Start has only one weight */
+  font-weight: 400;
   text-transform: uppercase;
   text-align: center;
 
@@ -283,52 +283,29 @@ border: 2px solid #1a0b0b;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  /* crisp stroke for readability */
-  -webkit-text-stroke: 1px #3b1b00;
-  text-shadow: 1px 1px 0 #3b1b00;
+  /* soft idle glow */
+  text-shadow:
+    0 0 4px rgba(255, 211, 105, 0.6),
+    0 0 8px rgba(184, 110, 0, 0.5);
 
-  /* rendering hints */
-  image-rendering: pixelated; /* keeps edges blocky */
-  text-rendering: geometricPrecision;
-
-  transition: transform .2s ease, text-shadow .2s ease;
+  transition: transform 0.25s ease, text-shadow 0.25s ease;
 }
 
 .card:hover h3 {
-  transform: scale(1.04);
+  transform: scale(1.05);
 
-  /* hot pink neon glow */
+  /* soft-edged hot pink glow */
   text-shadow:
-    0 0 6px var(--hot),
-    0 0 12px rgba(255,70,166,0.7),
+    0 0 6px rgba(255,70,166,0.7),
+    0 0 12px rgba(255,70,166,0.6),
     0 0 24px rgba(255,70,166,0.5),
-    1px 1px 0 #3b1b00; /* keeps crisp edge under glow */
+    0 0 48px rgba(255,70,166,0.4);
 }
 
 .card p {
   margin: 0;
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.85); /* softened white */
-}
-
-
-.card:hover h3 {
-  font-weight: 900;  /* heavier on hover */
-  transform: scale(1.05);
-  text-shadow:
-    0 0 10px #ff9a00,
-    0 0 20px #ffd369,
-    0 0 40px #ffb347;
-}
-
-.card p {
-  margin: 0;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.8); /* softer white */
-}
-
-.card:hover h3 {
-  color: var(--hot); /* pink highlight on hover */
 }
 
 /* ------------------ Journal ------------------ */
