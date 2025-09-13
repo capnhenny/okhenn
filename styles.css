@@ -1,11 +1,10 @@
-/* ===== okhenn — polished v2.1 ===== */
+/* ===== okhenn — polished v3 (global skeletons) ===== */
 
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Nunito:wght@400;700&display=swap');
 
 /* ------------------ Design Tokens ------------------ */
 :root {
-  /* vibe */
   --ink: #1a1a1a;
   --muted: #6b6b6b;
   --hot: #ff46a6;  /* hot pink */
@@ -13,7 +12,6 @@
   --bg1: #fff1f8;  /* cotton candy */
   --bg2: #dff7ff;  /* sky gelato */
 
-  /* layout */
   --radius: 20px;
   --border: 2px solid var(--ink);
   --shadow: 0 8px 16px rgba(0,0,0,.08);
@@ -32,305 +30,8 @@ body {
   font-family: Nunito, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   color: var(--ink);
 
-  /* animated gradient for non-home pages */
-  background: linear-gradient(120deg, var(--bg1), var(--bg2));
-  background-size: 200% 200%;
-  animation: gradientShift 12s ease-in-out infinite;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Global content wrapper (used in header and main) */
-.wrap {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* ------------------ Keyframes ------------------ */
-@keyframes gradientShift {
-  0%   { background-position: 0% 50% }
-  50%  { background-position: 100% 50% }
-  100% { background-position: 0% 50% }
-}
-
-@keyframes wiggle {
-  0%   { transform: rotate(0deg) }
-  25%  { transform: rotate(3deg) }
-  50%  { transform: rotate(-3deg) }
-  75%  { transform: rotate(2deg) }
-  100% { transform: rotate(0deg) }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) }
-  50%      { transform: translateY(-6px) }
-}
-
-@keyframes fade {
-  from { opacity: 0; transform: translateY(6px) }
-  to   { opacity: 1; transform: none }
-}
-
-/* ------------------ Home: Skeleton Background ------------------ */
-/* Apply to <body class="home"> on index.html */
-.home {
-  /* full-bleed image, skeletons pinned at bottom */
+  /* skeleton wallpaper everywhere */
   background: url("/assets/skeleton-gradient.jpg") no-repeat center bottom / cover;
-  min-height: 100svh;
-  color: #fff; /* default text on top of image */
-  position: relative;
-}
-
-/* subtle overlay for legibility on bright zones */
-.home::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.20) 0%,
-    rgba(0,0,0,0.10) 40%,
-    rgba(0,0,0,0.00) 70%,
-    rgba(0,0,0,0.10) 100%
-  );
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* keep content above overlay and off the skeletons */
-.home .wrap {
-  position: relative;
-  z-index: 1;
-  padding: 6rem 1.25rem 28vh; /* bottom padding => no overlap with bones */
-}
-
-/* small-screen nudge: move focal point slightly up & add breathing room */
-@media (max-width: 600px) {
-  .home { background-position: center 95%; }
-  .home .wrap { padding-bottom: 34vh; }
-}
-
-/* ------------------ Header / Footer ------------------ */
-header, footer {
-  background: #fff;
-  border-block: 4px solid var(--hot);
-}
-
-header.site-header {
-  position: relative;
-  text-align: center;
-  margin-bottom: 1rem;
-  z-index: 10; /* above overlay */
-}
-
-/* Transparent/glassy header on home so the background shows through */
-.home header.site-header {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.00));
-  border-block: 0;
-  color: #fff;
-  box-shadow: none;
-  backdrop-filter: blur(2px);
-}
-
-/* header inner layout inherits .wrap defaults */
-
-/* logo */
-.home-logo {
-  display: block;
-  margin: 0 auto .5rem;
-}
-
-.home-logo img {
-  width: 100px;
-  height: auto;
-  border-radius: 20%;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  animation: float 4s ease-in-out infinite; /* idle float */
-}
-
-/* add subtle boost on image/logo atop busy areas */
-.home header.site-header .home-logo img {
-  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.25));
-}
-
-.home-logo img:hover {
-  transform: scale(1.08) rotate(-3deg);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-/* footer */
-footer { padding: 1rem; text-align: center; color: var(--muted); }
-
-/* separate site-footer component style (if used) */
-.site-footer {
-  background: #fff;
-  border-top: 4px solid var(--hot);
-  margin-top: 2rem;
-  padding: 1rem 0;
-  font-size: 0.9rem;
-  color: var(--muted);
-  text-align: center;
-}
-
-/* ------------------ Type ------------------ */
-h1, h2, h3 {
-  font-family: "Space Grotesk", Nunito, sans-serif;
-  letter-spacing: .2px;
-}
-
-h1 { margin: .25rem 0; font-size: 2.6rem; }
-h2 { margin: 0 0 .4rem; font-size: 1.6rem; }
-
-.tag { color: var(--muted); margin: .25rem 0 0; }
-
-/* On home, give header text a soft shadow for contrast */
-.home header.site-header h1,
-.home header.site-header .tag {
-  text-shadow: 0 1px 8px rgba(0,0,0,0.15);
-}
-
-/* ------------------ Nav Chips ------------------ */
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-  margin-top: .75rem;
-}
-
-nav a {
-  display: inline-block;
-  margin: 0 .4rem;
-  padding: .3rem .7rem;
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: 500;
-  color: var(--hot);
-  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-}
-
-nav a:hover {
-  background: var(--hot);
-  color: #fff;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  animation: wiggle 0.6s ease-in-out;
-}
-
-/* active/current page */
-nav a[aria-current="page"] {
-  background: var(--hot);
-  color: #fff;
-  font-weight: 700;
-}
-
-/* make links white on home by default for contrast */
-.home header.site-header nav a {
-  color: #fff;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.15);
-}
-
-/* ------------------ Main ------------------ */
-main { padding: 2rem 1rem; }
-
-.squig {
-  display: block;
-  margin: 1.25rem auto;
-  width: 120px;
-  opacity: .9;
-}
-
-/* ------------------ Cards & Grids ------------------ */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.card {
-  display: block;
-  background: #fff;
-  border: var(--border);
-  border-radius: var(--radius);
-  padding: 1rem;
-  color: inherit;
-  text-decoration: none;
-  box-shadow: var(--shadow);
-  transition: transform .15s ease, box-shadow .15s ease;
-}
-.card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 14px 26px rgba(0,0,0,.14); }
-.card h3 { margin: .2rem 0 .6rem; font-size: 1.2rem; }
-
-/* ------------------ Journal ------------------ */
-.post {
-  background: #fff;
-  border: var(--border);
-  border-radius: var(--radius);
-  padding: 1rem;
-  margin: 0 0 1rem;
-  box-shadow: var(--shadow);
-}
-.date { font-size: .85rem; color: var(--muted); }
-
-/* ------------------ Adventures ------------------ */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-  gap: 1rem;
-}
-.card--photo { overflow: hidden; }
-.card--photo img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-bottom: var(--border);
-}
-.card--photo .p { padding: .9rem; }
-
-/* ------------------ Cooking ------------------ */
-.muted { color: var(--muted); }
-
-/* ------------------ Contact / Forms ------------------ */
-form {
-  background: #fff;
-  border: var(--border);
-  border-radius: var(--radius);
-  padding: 1rem;
-  display: grid;
-  gap: .75rem;
-  box-shadow: var(--shadow);
-}
-input, textarea {
-  padding: .8rem;
-  border: var(--border);
-  border-radius: 12px;
-  font: inherit;
-}
-button {
-  padding: .7rem 1.1rem;
-  border: var(--border);
-  border-radius: 999px;
-  background: #fff;
-  cursor: pointer;
-  transition: transform .1s ease, box-shadow .15s ease, background .2s;
-}
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12);
-  background: #f8f8f8;
-}
-
-/* ------------------ Helpers / Utils ------------------ */
-.fade-in { animation: fade .4s ease both; }
-.floaty  { animation: float 4s ease-in-out infinite; }
-
-.center { text-align: center; }
-
-/* --- GLOBAL WALLPAPER: skeletons everywhere --- */
-body {
-  background: url("/assets/skeleton-gradient.jpg") no-repeat center bottom / cover !important;
   min-height: 100dvh;
   color: #fff;
   position: relative;
@@ -339,7 +40,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* overlay for readability (stays behind content) */
+/* overlay for readability */
 body::before {
   content: "";
   position: fixed;
@@ -355,11 +56,13 @@ body::before {
   z-index: 0;
 }
 
-/* keep content above overlay and off the bones */
+/* content wrapper */
 .wrap {
   position: relative;
   z-index: 1;
-  padding: 6rem 1.25rem 28vh; /* bottom padding avoids overlap with skeletons */
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 6rem 1.25rem 28vh;
 }
 
 /* mobile tweak */
@@ -367,3 +70,5 @@ body::before {
   body { background-position: center 95%; }
   .wrap { padding-bottom: 34vh; }
 }
+
+/* ------------------ Keyframes -----------*
