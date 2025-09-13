@@ -31,7 +31,7 @@ body {
   color: var(--ink);
 
   /* skeleton wallpaper everywhere */
-  background: url("/assets/skeleton-gradient.jpg") no-repeat center bottom / cover;
+  background: url("/assets/skeleton-gradient.jpg") no-repeat center bottom / cover fixed;
   min-height: 100dvh;
   color: #fff;
   position: relative;
