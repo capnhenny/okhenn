@@ -6,9 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="assets/favicon.png" type="image/png">
+  <script src="/include.js" defer></script>
+
 </head>
 <body>
-  <div data-include="partials/header.html"></div>
+  <div data-include="/partials/header.html"></div>
 
   <main class="wrap">
     <form onsubmit="event.preventDefault(); alert('message sent (spiritually) ✨');">
@@ -17,8 +19,7 @@
       <button type="submit">send it</button>
     </form>
   </main>
-
-  <div data-include="partials/footer.html"></div>
+<div data-include="/partials/footer.html"></div>
 
 </body>
 </html>
