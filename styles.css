@@ -1,50 +1,92 @@
-/* ===== okhenn — polished v2 ===== */
+/* ===== okhenn — polished v2.1 ===== */
 
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Nunito:wght@400;700&display=swap');
 
-:root{
+/* ------------------ Design Tokens ------------------ */
+:root {
   /* vibe */
-  --ink:#1a1a1a;
-  --muted:#6b6b6b;
-  --hot:#ff46a6;      /* hot pink */
-  --pop:#00d2ff;      /* teal/cyan */
-  --bg1:#fff1f8;      /* cotton candy */
-  --bg2:#dff7ff;      /* sky gelato */
+  --ink: #1a1a1a;
+  --muted: #6b6b6b;
+  --hot: #ff46a6;  /* hot pink */
+  --pop: #00d2ff;  /* teal/cyan */
+  --bg1: #fff1f8;  /* cotton candy */
+  --bg2: #dff7ff;  /* sky gelato */
 
   /* layout */
-  --radius:20px;
-  --border:2px solid var(--ink);
-  --shadow:0 8px 16px rgba(0,0,0,.08);
+  --radius: 20px;
+  --border: 2px solid var(--ink);
+  --shadow: 0 8px 16px rgba(0,0,0,.08);
 }
-/* Global reset (you likely have this already) */
-html, body { height: 100%; margin: 0; }
 
-/* ---- HOME BACKGROUND ---- */
-.home {
-  /* point this to your saved image */
-  --home-hero: url("/assets/skeleton-gradient.jpg");
+/* ------------------ Base / Reset ------------------ */
+* { box-sizing: border-box; }
 
-  /* Make the image fill the viewport and pin the skeletons at the bottom */
-  background-image: var(--home-hero);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center bottom;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-  /* ensure full-bleed section even if content is short */
-  min-height: 100svh;
+body {
+  font-family: Nunito, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--ink);
 
-  /* default text color on top of the image */
-  color: #fff;
+  /* animated gradient for non-home pages */
+  background: linear-gradient(120deg, var(--bg1), var(--bg2));
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease-in-out infinite;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Optional: a soft overlay to improve legibility on busy areas */
+/* Global content wrapper (used in header and main) */
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ------------------ Keyframes ------------------ */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50% }
+  50%  { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+
+@keyframes wiggle {
+  0%   { transform: rotate(0deg) }
+  25%  { transform: rotate(3deg) }
+  50%  { transform: rotate(-3deg) }
+  75%  { transform: rotate(2deg) }
+  100% { transform: rotate(0deg) }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) }
+  50%      { transform: translateY(-6px) }
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(6px) }
+  to   { opacity: 1; transform: none }
+}
+
+/* ------------------ Home: Skeleton Background ------------------ */
+/* Apply to <body class="home"> on index.html */
+.home {
+  /* full-bleed image, skeletons pinned at bottom */
+  background: url("/assets/skeleton-gradient.jpg") no-repeat center bottom / cover;
+  min-height: 100svh;
+  color: #fff; /* default text on top of image */
+  position: relative;
+}
+
+/* subtle overlay for legibility on bright zones */
 .home::before {
   content: "";
-  position: fixed;   /* stays put behind content */
+  position: fixed;
   inset: 0;
   background: linear-gradient(
     to bottom,
@@ -57,85 +99,44 @@ html, body { height: 100%; margin: 0; }
   z-index: 0;
 }
 
-/* Your page content wrapper */
-.wrap {
+/* keep content above overlay and off the skeletons */
+.home .wrap {
   position: relative;
-  z-index: 1;                 /* keep content above the overlay */
-  max-width: 900px;
-  margin: 0 auto;
-
-  /* top padding so text clears the header; adjust to taste */
-  padding: 6rem 1.25rem 28vh; /* bottom padding keeps text off the skeletons */
+  z-index: 1;
+  padding: 6rem 1.25rem 28vh; /* bottom padding => no overlap with bones */
 }
 
-/* Small-screen tweak: nudge focal point a touch higher on narrow/tall phones */
+/* small-screen nudge: move focal point slightly up & add breathing room */
 @media (max-width: 600px) {
   .home { background-position: center 95%; }
-  .wrap { padding-bottom: 34vh; }
+  .home .wrap { padding-bottom: 34vh; }
 }
 
-/* (Optional) If your header has a solid background, you can fade it on home only.
-   Adjust selectors to match your header element inside /partials/header.html */
-/*
-.home .site-header {
-  background: transparent;
-  color: #fff;
-  box-shadow: none;
-}
-*/
-
-/* reset-ish */
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  font-family: Nunito, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color:var(--ink);
-  /* animated gradient bg */
-  background: linear-gradient(120deg,var(--bg1),var(--bg2));
-  background-size: 200% 200%;
-  animation: gradientShift 12s ease-in-out infinite;
-}
-@keyframes gradientShift{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-/* wiggle animation */
-@keyframes wiggle {
-  0%   { transform: rotate(0deg); }
-  25%  { transform: rotate(3deg); }
-  50%  { transform: rotate(-3deg); }
-  75%  { transform: rotate(2deg); }
-  100% { transform: rotate(0deg); }
+/* ------------------ Header / Footer ------------------ */
+header, footer {
+  background: #fff;
+  border-block: 4px solid var(--hot);
 }
 
-/* apply wiggle only if hover lasts a bit */
-nav a:hover {
-  background: var(--hot);
-  color: #fff;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-  animation: wiggle 0.6s ease-in-out infinite;
-
-}
-
-}
-
-.wrap{max-width:1000px;margin:0 auto;padding:0 1rem}
-
-/* header / footer */
-header, footer{
-  background:#fff;
-  border-block:4px solid var(--hot);
-}
-header{padding:1rem .75rem}
-footer{padding:1rem;text-align:center;color:var(--muted)}
-.site-header {
+header.site-header {
   position: relative;
   text-align: center;
   margin-bottom: 1rem;
+  z-index: 10; /* above overlay */
 }
 
+/* Transparent/glassy header on home so the background shows through */
+.home header.site-header {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.00));
+  border-block: 0;
+  color: #fff;
+  box-shadow: none;
+  backdrop-filter: blur(2px);
+}
+
+/* header inner layout inherits .wrap defaults */
+
+/* logo */
 .home-logo {
   display: block;
   margin: 0 auto .5rem;
@@ -149,33 +150,55 @@ footer{padding:1rem;text-align:center;color:var(--muted)}
   animation: float 4s ease-in-out infinite; /* idle float */
 }
 
+/* add subtle boost on image/logo atop busy areas */
+.home header.site-header .home-logo img {
+  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.25));
+}
+
 .home-logo img:hover {
   transform: scale(1.08) rotate(-3deg);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* floaty idle keyframes */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+/* footer */
+footer { padding: 1rem; text-align: center; color: var(--muted); }
+
+/* separate site-footer component style (if used) */
+.site-footer {
+  background: #fff;
+  border-top: 4px solid var(--hot);
+  margin-top: 2rem;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
 }
 
-
-
-/* headings */
-h1,h2,h3{
+/* ------------------ Type ------------------ */
+h1, h2, h3 {
   font-family: "Space Grotesk", Nunito, sans-serif;
-  letter-spacing:.2px;
+  letter-spacing: .2px;
 }
-h1{margin:.25rem 0;font-size:2.6rem}
-h2{margin:0 0 .4rem;font-size:1.6rem}
 
-/* tagline */
-.tag{color:var(--muted);margin:.25rem 0 0}
+h1 { margin: .25rem 0; font-size: 2.6rem; }
+h2 { margin: 0 0 .4rem; font-size: 1.6rem; }
 
-/* nav chips */
-nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
-/* nav links base */
+.tag { color: var(--muted); margin: .25rem 0 0; }
+
+/* On home, give header text a soft shadow for contrast */
+.home header.site-header h1,
+.home header.site-header .tag {
+  text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+}
+
+/* ------------------ Nav Chips ------------------ */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .75rem;
+}
+
 nav a {
   display: inline-block;
   margin: 0 .4rem;
@@ -183,16 +206,16 @@ nav a {
   border-radius: 12px;
   text-decoration: none;
   font-weight: 500;
-  color: var(--hot);   /* or your accent color */
-  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  color: var(--hot);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* hover effect */
 nav a:hover {
   background: var(--hot);
   color: #fff;
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: wiggle 0.6s ease-in-out;
 }
 
 /* active/current page */
@@ -202,66 +225,105 @@ nav a[aria-current="page"] {
   font-weight: 700;
 }
 
+/* make links white on home by default for contrast */
+.home header.site-header nav a {
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.15);
 }
 
-/* main area */
-main{padding:2rem 1rem}
+/* ------------------ Main ------------------ */
+main { padding: 2rem 1rem; }
 
-/* squiggle divider */
-.squig{display:block;margin:1.25rem auto;width:120px;opacity:.9}
-.site-footer {
+.squig {
+  display: block;
+  margin: 1.25rem auto;
+  width: 120px;
+  opacity: .9;
+}
+
+/* ------------------ Cards & Grids ------------------ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  display: block;
   background: #fff;
-  border-top: 4px solid var(--hot); /* uses your existing hot-pink accent */
-  margin-top: 2rem;
-  padding: 1rem 0;
-  font-size: 0.9rem;
-  color: var(--muted);
-  text-align: center;
-}
-
-/* cards */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
-.card{
-  display:block;
-  background:#fff;
-  border:var(--border);
-  border-radius:var(--radius);
-  padding:1rem;
-  color:inherit;
-  text-decoration:none;
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  color: inherit;
+  text-decoration: none;
   box-shadow: var(--shadow);
   transition: transform .15s ease, box-shadow .15s ease;
 }
-.card:hover{transform:translateY(-4px) scale(1.01); box-shadow:0 14px 26px rgba(0,0,0,.14)}
-.card h3{margin:.2rem 0 .6rem;font-size:1.2rem}
+.card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 14px 26px rgba(0,0,0,.14); }
+.card h3 { margin: .2rem 0 .6rem; font-size: 1.2rem; }
 
-/* journal */
-.post{background:#fff;border:var(--border);border-radius:var(--radius);padding:1rem;margin:0 0 1rem;box-shadow:var(--shadow)}
-.date{font-size:.85rem;color:var(--muted)}
+/* ------------------ Journal ------------------ */
+.post {
+  background: #fff;
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 0 0 1rem;
+  box-shadow: var(--shadow);
+}
+.date { font-size: .85rem; color: var(--muted); }
 
-/* adventures */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
-.card--photo{overflow:hidden}
-.card--photo img{width:100%;height:180px;object-fit:cover;border-bottom:var(--border)}
-.card--photo .p{padding:.9rem}
+/* ------------------ Adventures ------------------ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 1rem;
+}
+.card--photo { overflow: hidden; }
+.card--photo img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: var(--border);
+}
+.card--photo .p { padding: .9rem; }
 
-/* cooking */
-.muted{color:var(--muted)}
+/* ------------------ Cooking ------------------ */
+.muted { color: var(--muted); }
 
-/* contact */
-form{background:#fff;border:var(--border);border-radius:var(--radius);padding:1rem;display:grid;gap:.75rem;box-shadow:var(--shadow)}
-input,textarea{padding:.8rem;border:var(--border);border-radius:12px;font:inherit}
-button{
-  padding:.7rem 1.1rem;border:var(--border);border-radius:999px;background:#fff;cursor:pointer;
+/* ------------------ Contact / Forms ------------------ */
+form {
+  background: #fff;
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: grid;
+  gap: .75rem;
+  box-shadow: var(--shadow);
+}
+input, textarea {
+  padding: .8rem;
+  border: var(--border);
+  border-radius: 12px;
+  font: inherit;
+}
+button {
+  padding: .7rem 1.1rem;
+  border: var(--border);
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
   transition: transform .1s ease, box-shadow .15s ease, background .2s;
 }
-button:hover{transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12); background:#f8f8f8}
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12);
+  background: #f8f8f8;
+}
 
-/* tiny helper animations */
-.fade-in{animation:fade .4s ease both}
-@keyframes fade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
-.floaty{animation:float 4s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}}
+/* ------------------ Helpers / Utils ------------------ */
+.fade-in { animation: fade .4s ease both; }
+.floaty  { animation: float 4s ease-in-out infinite; }
 
-/* util */
-.center{text-align:center}
+.center { text-align: center; }
