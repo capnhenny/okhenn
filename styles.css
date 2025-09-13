@@ -33,6 +33,25 @@ body{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
+/* wiggle animation */
+@keyframes wiggle {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(3deg); }
+  50%  { transform: rotate(-3deg); }
+  75%  { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* apply wiggle only if hover lasts a bit */
+nav a:hover {
+  background: var(--hot);
+  color: #fff;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  animation: wiggle 0.4s ease-in-out;
+}
+
 }
 
 .wrap{max-width:1000px;margin:0 auto;padding:0 1rem}
