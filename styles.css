@@ -212,14 +212,20 @@ main { padding: 2rem 1rem; }
 /* ------------------ Cards & Grids ------------------ */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  grid-template-columns: 1fr; /* always one column */
   gap: 1rem;
   margin-top: 1rem;
 }
 
 .card {
-  display: block;
-  background: rgba(255, 255, 255, 0.08); /* subtle frosted panel */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;   /* lock uniform height */
+  max-width: 600px;    /* optional: keeps cards from being too wide */
+  margin: 0 auto;      /* centers them in the page */
+
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius);
   padding: 1.5rem;
