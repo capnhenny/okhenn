@@ -231,7 +231,9 @@ main { padding: 2rem 1rem; }
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   min-height: 200px;
   width: 100%;          /* let them scale within the container */
   max-width: 600px;     /* uniform width for all cards */
