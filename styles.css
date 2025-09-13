@@ -1,4 +1,4 @@
-/* ===== okhenn — polished v3 (global skeletons) ===== */
+/* ===== okhenn — polished v3.4 (global skeletons) ===== */
 
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Nunito:wght@400;700&display=swap');
@@ -8,7 +8,7 @@
 :root {
   --ink: #1a1a1a;
   --muted: #6b6b6b;
-  --hot: #ff46a6;  /* hot pink */
+  --hot: #ff46a6;   /* hot pink */
   --pop: #00d2ff;  /* teal/cyan */
   --bg1: #fff1f8;  /* cotton candy */
   --bg2: #dff7ff;  /* sky gelato */
@@ -29,9 +29,12 @@ html, body {
 
 body {
   font-family: Nunito, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+  /* default text color for dark wallpaper */
   color: #fff;
+
   /* skeleton wallpaper everywhere */
-  background: url("/assets/skeleton-gradient.jpg") no-repeat center bottom / cover fixed;
+  background: url("/assets/skeleton-gradient.png") no-repeat center bottom / cover fixed;
   min-height: 100dvh;
   position: relative;
 
@@ -72,33 +75,27 @@ body::before {
 
 /* ------------------ Keyframes ------------------ */
 @keyframes wiggle {
-  0%   { transform: rotate(0deg) }
-  25%  { transform: rotate(3deg) }
-  50%  { transform: rotate(-3deg) }
-  75%  { transform: rotate(2deg) }
-  100% { transform: rotate(0deg) }
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(3deg); }
+  50%  { transform: rotate(-3deg); }
+  75%  { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) }
-  50%      { transform: translateY(-6px) }
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
 }
 
 @keyframes fade {
-  from { opacity: 0; transform: translateY(6px) }
-  to   { opacity: 1; transform: none }
-}
-@keyframes riseIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
 }
 
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 /* ------------------ Header / Footer ------------------ */
 header.site-header {
@@ -125,14 +122,9 @@ header.site-header .tag {
   text-shadow: 0 1px 8px rgba(0,0,0,0.15);
 }
 
-header.site-header .home-logo img {
-  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.25));
-}
+header.site-header .home-logo img { filter: drop-shadow(0 1px 6px rgba(0,0,0,0.25)); }
 
-.home-logo {
-  display: block;
-  margin: 0 auto .5rem;
-}
+.home-logo { display: block; margin: 0 auto .5rem; }
 
 .home-logo img {
   width: 100px;
@@ -142,10 +134,7 @@ header.site-header .home-logo img {
   animation: float 4s ease-in-out infinite;
 }
 
-.home-logo img:hover {
-  transform: scale(1.08) rotate(-3deg);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
+.home-logo img:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
 
 footer {
   padding: 1rem;
@@ -203,21 +192,12 @@ nav a:hover {
   animation: wiggle 0.6s ease-in-out;
 }
 
-nav a[aria-current="page"] {
-  background: var(--hot);
-  color: #fff;
-  font-weight: 700;
-}
+nav a[aria-current="page"] { background: var(--hot); color: #fff; font-weight: 700; }
 
 /* ------------------ Main ------------------ */
 main { padding: 2rem 1rem; }
 
-.squig {
-  display: block;
-  margin: 1.25rem auto;
-  width: 120px;
-  opacity: .9;
-}
+.squig { display: block; margin: 1.25rem auto; width: 120px; opacity: .9; }
 
 /* ------------------ Cards & Grids ------------------ */
 .cards {
@@ -233,22 +213,27 @@ main { padding: 2rem 1rem; }
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 200px;
-  width: 100%;          /* let them scale within the container */
-  max-width: 600px;     /* uniform width for all cards */
-  margin: 0 auto;       /* center cards in column layout */
 
-  background: url("/assets/dark-gradient.png") no-repeat center center / cover;
-border: 2px solid #1a0b0b;
+  min-height: 200px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+
+  background-image: url("/assets/dark-gradient.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  border: 2px solid #1a0b0b;
   border-radius: var(--radius);
   padding: 1.5rem;
   color: #fff;
   text-decoration: none;
   box-shadow: 0 6px 14px rgba(0,0,0,0.4);
   backdrop-filter: blur(4px);
-  transition: transform .2s ease, box-shadow .2s ease, background .3s ease;
-  /* NEW: subtle rise-in animation */
-  opacity: 0; /* start hidden */
+  transition: transform .2s ease, box-shadow .2s ease, background-color .3s ease;
+
+  opacity: 0;               /* rise-in animation */
   animation: riseIn 0.6s ease forwards;
 }
 
@@ -263,13 +248,14 @@ border: 2px solid #1a0b0b;
   transform: translateY(-6px) scale(1.02);
   box-shadow: 0 12px 24px rgba(0,0,0,0.4);
 
-  /* keep the image; just add a tint */
+  /* keep the image; just add a tint on hover */
   background-color: rgba(255, 255, 255, 0.15);
-  background-blend-mode: lighten; /* optional: blends tint with image */
+  background-blend-mode: lighten;
 
   border-color: rgba(255, 255, 255, 0.15);
 }
 
+/* --- CARD TITLE (Press Start 2P) --- */
 .card h3 {
   margin: 0 0 0.5rem;
   font-size: 1.3rem;
@@ -285,25 +271,25 @@ border: 2px solid #1a0b0b;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  /* soft idle glow */
+  /* soft idle glow (no hard stroke) */
   text-shadow:
-    0 0 4px rgba(255, 211, 105, 0.6),
-    0 0 8px rgba(184, 110, 0, 0.5);
+    0 0 4px rgba(255,211,105,0.6),
+    0 0 8px rgba(184,110,0,0.5);
 
   transition: transform 0.25s ease, text-shadow 0.25s ease;
 }
 
+/* --- CARD TITLE HOVER (soft pink neon) --- */
 .card:hover h3 {
   transform: scale(1.05);
-
-  /* soft-edged hot pink glow */
   text-shadow:
-    0 0 6px rgba(255,70,166,0.7),
-    0 0 12px rgba(255,70,166,0.6),
-    0 0 24px rgba(255,70,166,0.5),
-    0 0 48px rgba(255,70,166,0.4);
+    0 0 6px rgba(255,70,166,0.70),
+    0 0 12px rgba(255,70,166,0.60),
+    0 0 24px rgba(255,70,166,0.50),
+    0 0 48px rgba(255,70,166,0.40);
 }
 
+/* --- CARD SUBTEXT (Orbitron, dark red-black) --- */
 .card p {
   margin: 0;
   font-size: 0.9rem;
@@ -312,9 +298,8 @@ border: 2px solid #1a0b0b;
   letter-spacing: 0.02em;
   color: #1a0b0b; /* same dark red-black as border */
   text-align: center;
-  text-transform: none; /* keep readable, not all caps */
+  text-transform: none;
 }
-
 
 /* ------------------ Journal ------------------ */
 .post {
