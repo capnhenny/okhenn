@@ -29,12 +29,10 @@ html, body {
 
 body {
   font-family: Nunito, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color: var(--ink);
-
+  color: #fff;
   /* skeleton wallpaper everywhere */
   background: url("/assets/skeleton-gradient.jpg") no-repeat center bottom / cover fixed;
   min-height: 100dvh;
-  color: #fff;
   position: relative;
 
   -webkit-font-smoothing: antialiased;
@@ -264,7 +262,11 @@ border: 2px solid #1a0b0b;
 .card:hover {
   transform: translateY(-6px) scale(1.02);
   box-shadow: 0 12px 24px rgba(0,0,0,0.4);
-  background: rgba(255, 255, 255, 0.15); /* brighter on hover */
+
+  /* keep the image; just add a tint */
+  background-color: rgba(255, 255, 255, 0.15);
+  background-blend-mode: lighten; /* optional: blends tint with image */
+
   border-color: rgba(255, 255, 255, 0.15);
 }
 
