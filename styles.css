@@ -271,21 +271,46 @@ border: 2px solid #1a0b0b;
 
 .card h3 {
   margin: 0 0 0.5rem;
-  font-size: 1.4rem;
-  font-family: 'Press Start 2P', sans-serif;
-  font-weight: 500;
+  font-size: 1.55rem;                 /* bumped up slightly */
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  font-family: 'Orbitron', 'Press Start 2P', system-ui, sans-serif;
+  font-weight: 800;                   /* crisp idle weight */
   text-transform: uppercase;
   text-align: center;
 
-  /* gold gradient text */
+  /* gold fill */
   background: linear-gradient(180deg, #ffd369 0%, #b86e00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  /* outline effect */
-text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-  transition: transform 0.2s ease, text-shadow 0.2s ease, font-weight 0.2s ease;
+  /* crisp outline */
+  -webkit-text-stroke: 1px #3b1b00;
+  text-shadow: 0 1px 0 #3b1b00;
+
+  /* rendering polish */
+  text-rendering: geometricPrecision;
+  font-kerning: normal;
+
+  transition: transform .2s ease, text-shadow .2s ease, font-weight .2s ease;
 }
+
+.card:hover h3 {
+  font-weight: 900;  /* heavier when hovering */
+  transform: scale(1.04);
+
+  text-shadow:
+    0 0 8px rgba(255,154,0,.85),
+    0 0 16px rgba(255,211,105,.7),
+    0 0 32px rgba(255,179,71,.6);
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85); /* softened white */
+}
+
 
 .card:hover h3 {
   font-weight: 900;  /* heavier on hover */
