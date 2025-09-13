@@ -89,20 +89,33 @@ h2{margin:0 0 .4rem;font-size:1.6rem}
 
 /* nav chips */
 nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
-nav a{
-  padding:.5rem .9rem;
-  border:var(--border);
-  border-radius:999px;
-  background:#fff;
-  color:var(--ink);
-  text-decoration:none;
-  transition: transform .1s ease, box-shadow .15s ease, background .2s;
-  box-shadow: var(--shadow);
+/* nav links base */
+nav a {
+  display: inline-block;
+  margin: 0 .4rem;
+  padding: .3rem .7rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--hot);   /* or your accent color */
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
-nav a:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 10px 18px rgba(0,0,0,.12);
-  background: #f9f9f9;
+
+/* hover effect */
+nav a:hover {
+  background: var(--hot);
+  color: #fff;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* active/current page */
+nav a[aria-current="page"] {
+  background: var(--hot);
+  color: #fff;
+  font-weight: 700;
+}
+
 }
 
 /* main area */
