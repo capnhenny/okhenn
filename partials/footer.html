@@ -1,5 +1,11 @@
 <footer class="site-footer" id="footer">
   <div class="footer-inner">
+
+    <!-- Row 0: Hit counter -->
+    <div class="footer-row hit-counter" id="hitCounter">
+      visitors: <span id="visits">…</span>
+    </div>
+
     <!-- Row 1: site nav chips -->
     <nav class="footer-row footer-nav" aria-label="footer navigation">
       <a class="footer-chip" href="index.html">home</a>
@@ -10,25 +16,20 @@
       <a class="footer-chip" href="contact.html">contact</a>
     </nav>
 
-    <!-- Row 2: social icons -->
-<nav class="footer-row footer-social" aria-label="social links">
-  <a class="social-icon" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
-    <i class="fa-brands fa-instagram"></i>
-  </a>
-  <a class="social-icon" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
-    <i class="fa-brands fa-github"></i>
-  </a>
-  <a class="social-icon" href="https://tiktok.com/@yourhandle" target="_blank" rel="noopener" aria-label="TikTok">
-    <i class="fa-brands fa-tiktok"></i>
-  </a>
-</nav>
+    <!-- Row 2: social icons (leave as you set up) -->
+    <nav class="footer-row footer-social" aria-label="social links">
+      <a class="social-icon" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a class="social-icon" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a class="social-icon" href="https://tiktok.com/@yourhandle" target="_blank" rel="noopener" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+    </nav>
 
     <!-- Row 3: copyright -->
     <div class="footer-row copyright">© <span id="y"></span> ok henn</div>
   </div>
 </footer>
-
-<script>
-  const y = document.getElementById('y');
-  if (y) y.textContent = new Date().getFullYear();
-</script>
