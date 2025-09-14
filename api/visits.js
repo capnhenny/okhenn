@@ -1,4 +1,7 @@
 // /api/visits.js
+// Edge Function: CountAPI proxy + one-hit-per-browser via cookie.
+// Returns detailed error string to help debug.
+
 export const config = { runtime: 'edge' };
 
 export default async function handler(req) {
@@ -16,21 +19,23 @@ export default async function handler(req) {
 
     const call = async (u) => {
       const r = await fetch(u, noCache);
-      if (!r.ok) throw new Error(`CountAPI HTTP ${r.status}`);
+      if (!r.ok) throw new Error(`CountAPI HTTP ${r.status} for ${u}`);
       return r.json();
     };
 
-    // ensure key exists
+    // Ensure key exists
     const getURL = `https://api.countapi.xyz/get/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(KEY)}`;
-    let r = await fetch(getURL, noCache);
-    if (!r.ok) {
+    let getRes = await fetch(getURL, noCache);
+    if (!getRes.ok) {
       const createURL = `https://api.countapi.xyz/create?namespace=${encodeURIComponent(NAMESPACE)}&key=${encodeURIComponent(KEY)}&value=0`;
       const c = await fetch(createURL, noCache);
-      if (!c.ok) throw new Error(`create failed ${c.status}`);
+      if (!c.ok) throw new Error(`create failed HTTP ${c.status}`);
       await c.json();
     }
 
-    let data, setCookie;
+    let data;
+    let setCookie;
+
     if (mode === 'hit' && !already) {
       const hitURL = `https://api.countapi.xyz/hit/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(KEY)}`;
       data = await call(hitURL);
@@ -48,7 +53,6 @@ export default async function handler(req) {
       }
     });
   } catch (e) {
-    // Return real error so we can see what's wrong
     return new Response(JSON.stringify({ value: null, error: String(e?.message || e) }), {
       status: 200,
       headers: { 'content-type': 'application/json' }
