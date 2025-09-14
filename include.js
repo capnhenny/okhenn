@@ -21,7 +21,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+<script>
   // auto-year
-  const yearSpot = document.getElementById('y');
-  if (yearSpot) yearSpot.textContent = new Date().getFullYear();
-});
+  const y = document.getElementById('y');
+  if (y) y.textContent = new Date().getFullYear();
+
+  // ---- Visitor Counter (countapi + unique per browser) ----
+  (async () => {
+    const ns = 'okhenn-site'; // namespace for your site (can be any string)
+    const key = (location.hostname || 'localhost') + '_visits'; // per-domain key
+    const already = localStorage.getItem('okhenn_counted');
+
+    const setUI = (n) => {
+      const el = document.getElementById('visits');
+      if (el) el.textContent = n?.toLocaleString?.() ?? n;
+    };
+
+    try {
+      // If we haven't counted this browser yet, increment once.
+      if (!already) {
+        const hit = await fetch(`https://api.countapi.xyz/hit/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`)
+          .then(r => r.json());
+        setUI(hit.value);
+        localStorage.setItem('okhenn_counted', '1'); // mark as counted on this browser
+      } else {
+        // Just read the current value without incrementing
+        const get = await fetch(`https://api.countapi.xyz/get/${encodeURIComponent(ns)}/${encodeURIComponent(key)}`)
+          .then(r => r.json());
+        setUI(get.value);
+      }
+    } catch (e) {
+      console.error('Visitor counter error:', e);
+      setUI('—'); // fallback UI
+    }
+  })();
+</script>
