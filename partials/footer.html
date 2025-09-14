@@ -1,5 +1,34 @@
-<footer class="site-footer">
-  <div class="wrap center">
-    <p>© <span id="y"></span> okhenn — built with 🕺 & 💖</p>
+<footer class="site-footer" id="footer">
+  <div class="footer-inner">
+    <!-- mini logo back to home -->
+    <a class="footer-logo" href="index.html" aria-label="okhenn home">
+      <img src="assets/logo.png" alt="okhenn logo">
+    </a>
+
+    <!-- quick footer nav -->
+    <nav class="footer-nav" aria-label="footer navigation">
+      <a class="footer-chip" href="index.html">home</a>
+      <a class="footer-chip" href="journal.html">journal</a>
+      <a class="footer-chip" href="adventures.html">adventures</a>
+      <a class="footer-chip" href="cooking.html">cooking</a>
+      <a class="footer-chip" href="about.html">about</a>
+      <a class="footer-chip" href="contact.html">contact</a>
+    </nav>
+
+    <!-- socials (text links keep it light; swap with icons later if you want) -->
+    <nav class="footer-social" aria-label="social links">
+      <a href="mailto:hi@okhenn.com">email</a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener">instagram</a>
+      <a href="https://github.com/" target="_blank" rel="noopener">github</a>
+    </nav>
+
+    <small class="copyright">© <span id="year"></span> okhenn • made with bones 🦴</small>
+
+    <a class="to-top" href="#top" aria-label="back to top">↑</a>
   </div>
 </footer>
+
+<script>
+  // set year automatically
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
