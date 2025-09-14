@@ -9,6 +9,7 @@
       integrity="sha512-9usAa8mY30s5s+SO1zp+M9Uz+Xb8U0H+x3A3lM2LX2jTZGi4ZLJdkvRjt8WcN6iYG8YEMwRya6LL+k6qV0N/A=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
 
 
 /* ------------------ Design Tokens ------------------ */
@@ -189,6 +190,29 @@ header.site-header{
   align-items: center;
   gap: .5rem;
   flex-wrap: wrap;
+}
+
+/* --- Hit counter row (matches copyright font; glows on hover) --- */
+.hit-counter{
+  font-family: inherit; /* same as copyright/body (Nunito) */
+  font-size: clamp(.55rem, 1.1vw, .85rem);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,.25);
+  justify-content: center;
+  padding: .25rem 0;
+  opacity: .95;
+  transition: text-shadow .2s ease, transform .2s ease;
+}
+
+.hit-counter:hover{
+  transform: translateY(-1px);
+  /* soft hot-pink neon inspired by card hover */
+  text-shadow:
+    0 0 6px rgba(255,70,166,0.7),
+    0 0 12px rgba(255,70,166,0.6),
+    0 0 24px rgba(255,70,166,0.45);
 }
 
 /* Row 1: hollow nav chips with border matching text color */
