@@ -1,21 +1,17 @@
 // /api/visits.js
-// Edge Function: same-origin proxy to CountAPI with one-hit-per-browser via cookie.
-// No dependencies; uses the Edge/Web fetch API.
-
 export const config = { runtime: 'edge' };
 
 export default async function handler(req) {
   try {
     const url = new URL(req.url);
-    const mode = (url.searchParams.get('mode') || 'get').toLowerCase(); // 'get' or 'hit'
+    const mode = (url.searchParams.get('mode') || 'get').toLowerCase(); // 'get'|'hit'
 
-    const host =
-      (req.headers.get('host') || 'localhost').replace(/^www\./, '');
-    const NAMESPACE = 'okhenn-site';             // keep this stable
-    const KEY = `${host}_visits`;                // domain-scoped counter
+    const host = (req.headers.get('host') || 'localhost').replace(/^www\./, '');
+    const NAMESPACE = 'okhenn-site';
+    const KEY = `${host}_visits`;
+
     const cookie = req.headers.get('cookie') || '';
     const already = /oh_counted=1/.test(cookie); // one per browser
-
     const noCache = { cache: 'no-store' };
 
     const call = async (u) => {
@@ -24,19 +20,17 @@ export default async function handler(req) {
       return r.json();
     };
 
-    // Ensure key exists (create at 0 if missing)
-    const getURL  = `https://api.countapi.xyz/get/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(KEY)}`;
-    let cur = await fetch(getURL, noCache);
-    if (!cur.ok) {
+    // ensure key exists
+    const getURL = `https://api.countapi.xyz/get/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(KEY)}`;
+    let r = await fetch(getURL, noCache);
+    if (!r.ok) {
       const createURL = `https://api.countapi.xyz/create?namespace=${encodeURIComponent(NAMESPACE)}&key=${encodeURIComponent(KEY)}&value=0`;
-      const created = await fetch(createURL, noCache);
-      if (!created.ok) throw new Error(`CountAPI create failed (${created.status})`);
-      await created.json();
+      const c = await fetch(createURL, noCache);
+      if (!c.ok) throw new Error(`create failed ${c.status}`);
+      await c.json();
     }
 
-    let data;
-    let setCookie = null;
-
+    let data, setCookie;
     if (mode === 'hit' && !already) {
       const hitURL = `https://api.countapi.xyz/hit/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(KEY)}`;
       data = await call(hitURL);
@@ -49,12 +43,12 @@ export default async function handler(req) {
       status: 200,
       headers: {
         'content-type': 'application/json',
-        'cache-control': 'no-store, no-cache, must-revalidate, max-age=0',
+        'cache-control': 'no-store, no-cache, max-age=0',
         ...(setCookie ? { 'set-cookie': setCookie } : {})
       }
     });
   } catch (e) {
-    // Return the actual error message to make debugging easier
+    // Return real error so we can see what's wrong
     return new Response(JSON.stringify({ value: null, error: String(e?.message || e) }), {
       status: 200,
       headers: { 'content-type': 'application/json' }
