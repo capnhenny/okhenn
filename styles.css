@@ -201,13 +201,11 @@ header.site-header{
   gap: clamp(.35rem, 1.5vw, .6rem);                 /* gap also scales down */
 }
 
-/* Each chip fills its grid cell and shrinks responsively */
 .footer-chip{
-  min-width: 0;                  /* allow true shrinking */
+  min-width: 0;
   width: 100%;
   text-align: center;
 
-  /* height & padding scale with viewport width */
   height: clamp(28px, 4.2vw, 44px);
   padding-inline: clamp(.25rem, 0.9vw, .9rem);
 
@@ -218,12 +216,14 @@ header.site-header{
 
   text-decoration: none;
   font-family: 'Press Start 2P', monospace;
-  /* font shrinks aggressively on small screens */
-  font-size: clamp(.42rem, 1.4vw, .66rem);
-  letter-spacing: clamp(.02em, .25vw, .05em);
-  text-transform: uppercase;
 
+  /* --- KEY CHANGE: font scales with box width --- */
+  font-size: clamp(.35rem, 2.2vw, .7rem);
+  letter-spacing: clamp(.01em, 0.4vw, .08em);
+
+  text-transform: uppercase;
   text-shadow: 0 1px 4px rgba(0,0,0,.25);
+
   transition: transform .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
 }
 
