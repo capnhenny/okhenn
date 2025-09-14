@@ -192,42 +192,39 @@ header.site-header{
 }
 
 /* Row 1: hollow nav chips with border matching text color */
-/* --- Footer row 1: one-row, full-width, equal chips --- */
+/* --- Footer row 1: ONE ROW ALWAYS, auto-shrinking chips --- */
 .footer-nav{
   width: 100%;
-  display: flex;
-  flex-wrap: nowrap;          /* never wrap */
-  justify-content: stretch;   /* let items stretch */
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr)); /* 6 equal columns, one row */
   align-items: center;
-  gap: .6rem;
-  overflow-x: auto;           /* allow side scroll on tiny screens */
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;      /* optional: hide scrollbar */
+  gap: clamp(.35rem, 1.5vw, .6rem);                 /* gap also scales down */
 }
-.footer-nav::-webkit-scrollbar { display: none; }
 
-/* Each chip grows/shrinks to share the row evenly */
+/* Each chip fills its grid cell and shrinks responsively */
 .footer-chip{
-  flex: 1 1 0;                /* equal width, can shrink/grow */
-  min-width: 0;               /* allow shrink past content width */
+  min-width: 0;                  /* allow true shrinking */
+  width: 100%;
   text-align: center;
 
-  height: clamp(34px, 4.8vw, 44px);
-  padding: 0 clamp(.4rem, 1vw, .9rem);
+  /* height & padding scale with viewport width */
+  height: clamp(28px, 4.2vw, 44px);
+  padding-inline: clamp(.25rem, 0.9vw, .9rem);
 
   background: transparent;
-  color: #ffffff;
+  color: #fff;
   border: 2px solid currentColor;
   border-radius: 12px;
 
   text-decoration: none;
   font-family: 'Press Start 2P', monospace;
-  font-size: clamp(.50rem, .95vw, .66rem);  /* scales with page width */
-  letter-spacing: .05em;
+  /* font shrinks aggressively on small screens */
+  font-size: clamp(.42rem, 1.4vw, .66rem);
+  letter-spacing: clamp(.02em, .25vw, .05em);
   text-transform: uppercase;
 
   text-shadow: 0 1px 4px rgba(0,0,0,.25);
-  transition: transform .15s ease, background-color .15s ease, color .15s ease, border-color .15s ease;
+  transition: transform .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
 }
 
 .footer-chip:hover,
@@ -235,6 +232,28 @@ header.site-header{
   transform: translateY(-2px);
   background-color: rgba(255,255,255,.08);
   outline: none;
+}
+
+/* Extra squeeze for very narrow phones */
+@media (max-width: 420px){
+  .footer-chip{
+    height: clamp(26px, 5vw, 34px);
+    padding-inline: clamp(.2rem, .7vw, .6rem);
+    font-size: clamp(.38rem, 3.2vw, .52rem);
+    letter-spacing: .02em;
+    border-width: 1.5px; /* tiny nudge so borders don't crowd */
+  }
+  .footer-nav{
+    gap: clamp(.25rem, 1vw, .45rem);
+  }
+}
+
+/* Ultra-tiny rescue: if someone has <340px width, still one row */
+@media (max-width: 340px){
+  .footer-chip{
+    font-size: clamp(.34rem, 3.8vw, .48rem);
+    padding-inline: clamp(.15rem, .5vw, .5rem);
+  }
 }
 
 /* Row 2: lighter, semi-transparent circular icon buttons */
