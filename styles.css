@@ -192,42 +192,42 @@ header.site-header{
 }
 
 /* Row 1: hollow nav chips with border matching text color */
-/* --- Footer row 1: one row, 6 equal columns --- */
+/* --- Footer row 1: ONE ROW, 6 equal columns, auto-shrinking chips & text --- */
 .footer-nav{
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr)); /* change 6 if you add/remove links */
+  grid-template-columns: repeat(6, 1fr);        /* change 6 if you add/remove links */
   align-items: center;
-  gap: clamp(.35rem, 1.5vw, .6rem);
+  gap: clamp(.25rem, 1vw, .6rem);               /* gap also shrinks */
 }
 
-/* Each chip is a container so its font can scale with its own width */
 .footer-chip{
-  min-width: 0;
+  min-width: 0;                                  /* allow true shrinking */
   width: 100%;
   text-align: center;
+  white-space: nowrap;                           /* keep labels on one line */
 
-  /* make the chip a size container */
-  container-type: inline-size;
-
-  /* fallback sizes (in case cqw isn't supported) */
-  font-size: clamp(.42rem, 1.3vw, .78rem);
-  letter-spacing: clamp(.02em, .25vw, .07em);
-  line-height: 1;
-  padding-inline: clamp(.35rem, .9vw, .9rem);
-  padding-block: .60em;          /* scales with font */
-  min-height: 2.6em;             /* uniform height in em so it scales with font */
+  /* box sizing scales with viewport, reliably */
+  padding-block: clamp(.35em, 1vw, .8em);
+  padding-inline: clamp(.25rem, .9vw, .9rem);
+  min-height: clamp(28px, 4.2vw, 44px);
 
   background: transparent;
   color: #fff;
   border: 2px solid currentColor;
   border-radius: 12px;
   text-decoration: none;
-  text-transform: uppercase;
+
   font-family: 'Press Start 2P', monospace;
+  /* TEXT SHRINKS with screen: conservative floor + responsive middle + cap */
+  font-size: clamp(.36rem, 1.35vw, .70rem);
+  letter-spacing: clamp(.01em, .22vw, .06em);
+  line-height: 1;
+
   text-shadow: 0 1px 4px rgba(0,0,0,.25);
   transition: transform .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
 }
+
 .footer-chip:hover,
 .footer-chip:focus-visible{
   transform: translateY(-2px);
@@ -235,28 +235,26 @@ header.site-header{
   outline: none;
 }
 
-/* If the browser supports container query units, tie font directly to chip width */
-@supports (font-size: 1cqw) {
+/* Extra squeeze on small phones so it STILL fits in one row */
+@media (max-width: 480px){
+  .footer-nav{ gap: clamp(.18rem, .6vw, .35rem); }
   .footer-chip{
-    font-size: clamp(.42rem, 6cqw, .9rem);       /* <- scales with chip width */
-    letter-spacing: clamp(.02em, .9cqw, .08em);
-    padding-inline: clamp(.3rem, 2cqw, 1rem);    /* padding scales with chip */
+    font-size: clamp(.34rem, 1.2vw, .56rem);
+    letter-spacing: clamp(.01em, .18vw, .04em);
+    padding-inline: clamp(.18rem, .7vw, .55rem);
+    min-height: clamp(26px, 5vw, 36px);
+    border-width: 1.8px;
   }
 }
 
-/* Extra squeeze for tiny phones so it still stays one row */
-@media (max-width: 420px){
+@media (max-width: 360px){
   .footer-chip{
+    font-size: .32rem;           /* hard floor so it never wraps */
+    letter-spacing: .01em;
+    padding-inline: .18rem;
     border-width: 1.5px;
   }
-}
-
-/* Ultra-tiny rescue: if someone has <340px width, still one row */
-@media (max-width: 340px){
-  .footer-chip{
-    font-size: clamp(.34rem, 3.8vw, .48rem);
-    padding-inline: clamp(.15rem, .5vw, .5rem);
-  }
+  .footer-nav{ gap: .22rem; }
 }
 
 /* Row 2: lighter, semi-transparent circular icon buttons */
