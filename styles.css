@@ -104,50 +104,125 @@ body::before {
 
 /* ------------------ Header / Footer ------------------ */
 header.site-header {
+/* ------ Header layout tweaks ------ */
+header.site-header {
   position: relative;
-  text-align: center;
-  margin-bottom: 1rem;
   z-index: 10;
+  text-align: center;
 
-  /* glassy header */
+  /* glassy header you already use */
   background: linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.00));
   color: #fff;
   box-shadow: none;
   backdrop-filter: blur(2px);
   border-block: 0;
-}
-
-header.site-header nav a {
-  color: #fff;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.15);
-}
-
-header.site-header h1,
-header.site-header .tag {
-  text-shadow: 0 1px 8px rgba(0,0,0,0.15);
-}
-
-header.site-header .home-logo img {
-  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.25));
+  padding: 1rem 1rem 1.25rem; /* a touch more bottom room for the nav row */
 }
 
 .home-logo {
   display: block;
-  margin: 0 auto .5rem;
+  margin: 0 auto .25rem;
 }
-
 .home-logo img {
   width: 100px;
   height: auto;
   border-radius: 20%;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.25));
 }
-
 .home-logo img:hover {
   transform: scale(1.08) rotate(-3deg);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
+
+/* Tagline centered between logo and nav */
+.site-tagline{
+  margin: .2rem auto .9rem;
+  max-width: 900px;
+  padding: 0 .5rem;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+  font-weight: 600;
+}
+
+/* ------ Card-style nav row ------ */
+:root{
+  /* change these to taste */
+  --navW: 176px;   /* uniform button width */
+  --navH: 64px;    /* uniform button height */
+}
+
+.main-nav{
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: .75rem;
+  padding: 0 .75rem;
+  overflow-x: auto;              /* stays one row on small screens */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* hide scrollbar chrome (optional) */
+.main-nav::-webkit-scrollbar { height: 6px; }
+.main-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 999px; }
+
+/* Each link styled like a mini card */
+.nav-card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--navW);
+  height: var(--navH);
+  padding: 0 .75rem;
+
+  background-image: url("/assets/dark-gradient.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  border: 2px solid #1a0b0b;
+  border-radius: 16px;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  transition: transform .2s ease, box-shadow .2s ease, background-color .25s ease, border-color .25s ease;
+
+  /* Press Start look, slightly smaller for nav */
+  font-family: 'Press Start 2P', monospace;
+  font-size: .8rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+
+  /* subtle idle glow for readability */
+  text-shadow:
+    0 0 3px rgba(255,211,105,.5),
+    0 0 6px rgba(184,110,0,.35);
+}
+
+/* Hover / focus glows to match your cards */
+.nav-card:hover,
+.nav-card:focus-visible{
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.45);
+  background-color: rgba(255,255,255,.12);  /* tint on top of image */
+  background-blend-mode: lighten;
+  border-color: rgba(255,255,255,.25);
+  outline: none;
+  text-shadow:
+    0 0 6px rgba(255,70,166,.70),
+    0 0 12px rgba(255,70,166,.60),
+    0 0 24px rgba(255,70,166,.45);
+}
+
+/* Active/current page highlight */
+.nav-card[aria-current="page"]{
+  border-color: rgba(255,255,255,.35);
+  background-color: rgba(255,255,255,.10);
+  background-blend-mode: lighten;
+}
+
 
 footer {
   padding: 1rem;
@@ -157,14 +232,150 @@ footer {
   border-top: 4px solid var(--hot);
 }
 
-.site-footer {
-  background: #fff;
-  border-top: 4px solid var(--hot);
-  margin-top: 2rem;
-  padding: 1rem 0;
-  font-size: 0.9rem;
-  color: var(--muted);
+/* ===== Footer (card-style, matches header/cards) ===== */
+.site-footer{
+  position: relative;
+  margin-top: 2.5rem;
+  padding: 1.25rem 1rem 1.5rem;
+  color: #fff;
+  z-index: 1;
+}
+
+.site-footer .footer-inner{
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+  border-radius: 18px;
+
+  /* card background like your buttons */
+  background-image: url("/assets/dark-gradient.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  border: 2px solid #1a0b0b;
+  box-shadow: 0 10px 24px rgba(0,0,0,.4);
+  backdrop-filter: blur(4px);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .9rem;
+  align-items: center;
   text-align: center;
+}
+
+/* mini logo */
+.footer-logo img{
+  width: 64px;
+  height: auto;
+  border-radius: 16%;
+  filter: drop-shadow(0 1px 6px rgba(0,0,0,.25));
+}
+
+/* footer nav chips (smaller card buttons) */
+.footer-nav{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.footer-chip{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  height: 44px;
+  padding: 0 .8rem;
+
+  background-color: rgba(255,255,255,.08); /* tint over the gradient */
+  border: 2px solid #1a0b0b;
+  border-radius: 12px;
+
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: .7rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 0 3px rgba(255,211,105,.5),
+    0 0 6px rgba(184,110,0,.35);
+
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
+}
+
+.footer-chip:hover,
+.footer-chip:focus-visible{
+  transform: translateY(-2px) scale(1.02);
+  background-color: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.28);
+  box-shadow: 0 10px 20px rgba(0,0,0,.5);
+  outline: none;
+  text-shadow:
+    0 0 6px rgba(255,70,166,.70),
+    0 0 12px rgba(255,70,166,.60),
+    0 0 24px rgba(255,70,166,.45);
+}
+
+/* socials */
+.footer-social{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.footer-social a{
+  color: #fff;
+  text-decoration: none;
+  opacity: .9;
+  transition: opacity .2s ease, text-shadow .2s ease;
+}
+.footer-social a:hover{
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(255,70,166,.6);
+}
+
+/* copyright + back to top */
+.copyright{
+  display: block;
+  opacity: .85;
+  font-size: .9rem;
+}
+
+.to-top{
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+
+  background: rgba(255,255,255,.08);
+  border: 2px solid #1a0b0b;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(0,0,0,.35);
+  transition: transform .18s ease, background-color .18s ease, border-color .18s ease;
+}
+.to-top:hover{ transform: translateY(-2px); background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.28); }
+
+/* wider screens: lay pieces in a tidy grid */
+@media (min-width: 720px){
+  .site-footer .footer-inner{
+    grid-template-columns: 80px 1fr 1fr 80px;
+    grid-template-areas:
+      "logo nav nav top"
+      ". social copyright .";
+    text-align: left;
+  }
+  .footer-logo{ grid-area: logo; justify-self: center; }
+  .footer-nav{ grid-area: nav; justify-content: flex-start; }
+  .footer-social{ grid-area: social; justify-content: flex-start; }
+  .copyright{ grid-area: copyright; }
+  .to-top{ grid-area: top; position: static; justify-self: end; }
 }
 
 /* ------------------ Type ------------------ */
@@ -179,36 +390,123 @@ h2 { margin: 0 0 .4rem; font-size: 1.6rem; }
 .tag { color: var(--muted); margin: .25rem 0 0; }
 
 /* ------------------ Nav Chips ------------------ */
-nav {
+/* ------ Header layout tweaks ------ */
+header.site-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+
+  /* glassy header you already use */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.00));
+  color: #fff;
+  box-shadow: none;
+  backdrop-filter: blur(2px);
+  border-block: 0;
+  padding: 1rem 1rem 1.25rem; /* a touch more bottom room for the nav row */
+}
+
+.home-logo {
+  display: block;
+  margin: 0 auto .25rem;
+}
+.home-logo img {
+  width: 100px;
+  height: auto;
+  border-radius: 20%;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.25));
+}
+.home-logo img:hover {
+  transform: scale(1.08) rotate(-3deg);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Tagline centered between logo and nav */
+.site-tagline{
+  margin: .2rem auto .9rem;
+  max-width: 900px;
+  padding: 0 .5rem;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+  font-weight: 600;
+}
+
+/* ------ Card-style nav row ------ */
+:root{
+  /* change these to taste */
+  --navW: 176px;   /* uniform button width */
+  --navH: 64px;    /* uniform button height */
+}
+
+.main-nav{
   display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-  margin-top: .75rem;
+  justify-content: center;
+  align-items: stretch;
+  gap: .75rem;
+  padding: 0 .75rem;
+  overflow-x: auto;              /* stays one row on small screens */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
 
-nav a {
-  display: inline-block;
-  margin: 0 .4rem;
-  padding: .3rem .7rem;
-  border-radius: 12px;
+/* hide scrollbar chrome (optional) */
+.main-nav::-webkit-scrollbar { height: 6px; }
+.main-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 999px; }
+
+/* Each link styled like a mini card */
+.nav-card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--navW);
+  height: var(--navH);
+  padding: 0 .75rem;
+
+  background-image: url("/assets/dark-gradient.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  border: 2px solid #1a0b0b;
+  border-radius: 16px;
+  color: #fff;
   text-decoration: none;
-  font-weight: 500;
-  color: var(--hot);
-  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  transition: transform .2s ease, box-shadow .2s ease, background-color .25s ease, border-color .25s ease;
+
+  /* Press Start look, slightly smaller for nav */
+  font-family: 'Press Start 2P', monospace;
+  font-size: .8rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+
+  /* subtle idle glow for readability */
+  text-shadow:
+    0 0 3px rgba(255,211,105,.5),
+    0 0 6px rgba(184,110,0,.35);
 }
 
-nav a:hover {
-  background: var(--hot);
-  color: #fff;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  animation: wiggle 0.6s ease-in-out;
+/* Hover / focus glows to match your cards */
+.nav-card:hover,
+.nav-card:focus-visible{
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.45);
+  background-color: rgba(255,255,255,.12);  /* tint on top of image */
+  background-blend-mode: lighten;
+  border-color: rgba(255,255,255,.25);
+  outline: none;
+  text-shadow:
+    0 0 6px rgba(255,70,166,.70),
+    0 0 12px rgba(255,70,166,.60),
+    0 0 24px rgba(255,70,166,.45);
 }
 
-nav a[aria-current="page"] {
-  background: var(--hot);
-  color: #fff;
-  font-weight: 700;
+/* Active/current page highlight */
+.nav-card[aria-current="page"]{
+  border-color: rgba(255,255,255,.35);
+  background-color: rgba(255,255,255,.10);
+  background-blend-mode: lighten;
 }
 
 /* ------------------ Main ------------------ */
