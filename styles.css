@@ -98,6 +98,26 @@ header.site-header{
   color: #fff;
 }
 
+/* default sparkle (not clickable unless JS makes it so) */
+.sparkle {
+  display: inline-block;
+  transition: transform .15s ease, text-shadow .2s ease;
+}
+
+/* linkable state (only applied on journal page) */
+.sparkle--link {
+  cursor: pointer;
+}
+.sparkle--link:hover,
+.sparkle--link:focus-visible {
+  transform: translateY(-1px) scale(1.05);
+  text-shadow:
+    0 0 6px rgba(255,70,166,.70),
+    0 0 12px rgba(255,70,166,.60),
+    0 0 24px rgba(255,70,166,.45);
+  outline: none;
+}
+
 /* Tagline centered between logo and nav */
 .site-tagline{
   margin: .15rem auto .65rem;
