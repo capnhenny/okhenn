@@ -30,6 +30,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // year
     const y = document.getElementById('y');
     if (y) y.textContent = new Date().getFullYear();
+    // --- Sparkle: only clickable on journal page ---
+    try {
+      const sparkle = document.querySelector('.sparkle');
+      if (sparkle) {
+        // reset any prior state/listeners
+        const fresh = sparkle.cloneNode(true);
+        sparkle.replaceWith(fresh);
+
+        const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+        if (here === 'journal.html') {
+          fresh.classList.add('sparkle--link');
+          fresh.setAttribute('role', 'link');
+          fresh.setAttribute('tabindex', '0');
+          fresh.setAttribute('aria-label', 'Open henntendo.com');
+
+          const go = () => window.open('https://henntendo.com', '_blank', 'noopener');
+          fresh.addEventListener('click', go);
+          fresh.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') go();
+          });
+        } else {
+          fresh.classList.remove('sparkle--link');
+          fresh.removeAttribute('role');
+          fresh.removeAttribute('tabindex');
+          fresh.removeAttribute('aria-label');
+        }
+      }
+    } catch (e) {
+      console.error('Sparkle link error:', e);
+    }
 
     // visitor counter (same-origin -> /api/visits)
     const span = document.getElementById('visits');
