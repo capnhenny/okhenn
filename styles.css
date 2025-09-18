@@ -382,41 +382,35 @@ main { padding: 2rem 1rem; }
 }
 
 .card {
-  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
   min-height: 200px;
-  width: 100%; max-width: 600px; margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 
   background: url("/assets/dark-gradient.png") no-repeat center / cover;
   border: 2px solid #1a0b0b;
   border-radius: var(--radius);
   padding: 1.5rem;
-  color: #fff; text-decoration: none;
+  color: #fff;
+  text-decoration: none;
   box-shadow: 0 6px 14px rgba(0,0,0,0.4);
   backdrop-filter: blur(4px);
   transition: transform .2s ease, box-shadow .2s ease, background-color .3s ease;
 
-  opacity: 0; animation: riseIn .6s ease forwards;
+  opacity: 0;
+  animation: riseIn .6s ease forwards;
 }
 .cards .card:nth-child(1){ animation-delay:.1s; }
 .cards .card:nth-child(2){ animation-delay:.2s; }
 .cards .card:nth-child(3){ animation-delay:.3s; }
 .cards .card:nth-child(4){ animation-delay:.4s; }
 .cards .card:nth-child(5){ animation-delay:.5s; }
-
-.card:hover h3 {
-  transform: scale(1.05);
-
-  /* hot pink neon glow */
-  text-shadow:
-    0 0 6px var(--hot),
-    0 0 12px rgba(255,70,166,0.7),
-    0 0 24px rgba(255,70,166,0.5),
-    1px 1px 0 #3b1b00; /* crisp edge under glow */
-
-  /* optional: also tint text itself */
-  color: var(--hot);
-}
-
 
 /* Card title — Press Start 2P, crisp with soft neon on hover */
 .card h3 {
@@ -439,29 +433,25 @@ main { padding: 2rem 1rem; }
   image-rendering: pixelated;
   text-rendering: geometricPrecision;
 
-  transition: transform .2s ease, text-shadow .2s ease;
+  transition: transform .2s ease, text-shadow .2s ease, color .2s ease;
 }
+
 .card:hover h3 {
   transform: scale(1.05);
-
-  /* hot pink neon glow */
   text-shadow:
     0 0 6px var(--hot),
     0 0 12px rgba(255,70,166,0.7),
     0 0 24px rgba(255,70,166,0.5),
-    1px 1px 0 #3b1b00; /* crisp edge under glow */
-
-  /* optional: also tint text itself */
+    1px 1px 0 #3b1b00;
   color: var(--hot);
 }
 
-
-/* Card subtext */
 .card p {
   margin: 0;
   font-size: 0.95rem;
   color: rgba(255,255,255,0.85);
 }
+
 
 /* ------------------ Journal ------------------ */
 .post { background:#fff; border:var(--border); border-radius:var(--radius); padding:1rem; margin:0 0 1rem; box-shadow:var(--shadow); }
