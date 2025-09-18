@@ -455,6 +455,37 @@ main { padding: 2rem 1rem; }
   /* keep stroke color if you use it */
   -webkit-text-stroke-color: #3b1b00;
 }
+/* === GOLD HOVER FOR CARD TITLES === */
+:root{
+  --gold: #ffd369;
+  --gold-deep: #b86e00;
+  --gold-glow-1: rgba(255,211,105,.95);
+  --gold-glow-2: rgba(255,180,0,.65);
+}
+
+/* keep your base gradient look as-is above */
+
+/* on hover/focus: solid gold fill + glow (no gradient clip) */
+.card:hover h3,
+.card:focus-visible h3{
+  transform: scale(1.05);
+
+  /* turn OFF gradient so normal color & glow render */
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: var(--gold) !important;
+
+  /* explicit color fallback for non-webkit */
+  color: var(--gold) !important;
+
+  /* crisp outline under the glow */
+  -webkit-text-stroke: 1px #3b1b00;
+  text-shadow:
+    0 0 6px var(--gold-glow-1),
+    0 0 12px var(--gold-glow-1),
+    0 0 24px var(--gold-glow-2),
+    1px 1px 0 #3b1b00;
+}
 
 .card p {
   margin: 0;
