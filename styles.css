@@ -403,16 +403,20 @@ main { padding: 2rem 1rem; }
 .cards .card:nth-child(4){ animation-delay:.4s; }
 .cards .card:nth-child(5){ animation-delay:.5s; }
 
-.card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+.card:hover h3 {
+  transform: scale(1.05);
 
-  /* keep the image; just tint it */
-  background-color: rgba(255,255,255,0.15);
-  background-blend-mode: lighten;
+  /* hot pink neon glow */
+  text-shadow:
+    0 0 6px var(--hot),
+    0 0 12px rgba(255,70,166,0.7),
+    0 0 24px rgba(255,70,166,0.5),
+    1px 1px 0 #3b1b00; /* crisp edge under glow */
 
-  border-color: rgba(255,255,255,0.15);
+  /* optional: also tint text itself */
+  color: var(--hot);
 }
+
 
 /* Card title — Press Start 2P, crisp with soft neon on hover */
 .card h3 {
@@ -437,14 +441,20 @@ main { padding: 2rem 1rem; }
 
   transition: transform .2s ease, text-shadow .2s ease;
 }
-.card:hover h3{
-  transform: scale(1.04);
+.card:hover h3 {
+  transform: scale(1.05);
+
+  /* hot pink neon glow */
   text-shadow:
     0 0 6px var(--hot),
     0 0 12px rgba(255,70,166,0.7),
     0 0 24px rgba(255,70,166,0.5),
-    1px 1px 0 #3b1b00;
+    1px 1px 0 #3b1b00; /* crisp edge under glow */
+
+  /* optional: also tint text itself */
+  color: var(--hot);
 }
+
 
 /* Card subtext */
 .card p {
