@@ -438,12 +438,22 @@ main { padding: 2rem 1rem; }
 
 .card:hover h3 {
   transform: scale(1.05);
+
+  /* switch OFF the gradient fill so color & glow actually render */
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: currentColor; /* critical */
+  color: var(--hot);
+
+  /* neon glow */
   text-shadow:
     0 0 6px var(--hot),
     0 0 12px rgba(255,70,166,0.7),
     0 0 24px rgba(255,70,166,0.5),
-    1px 1px 0 #3b1b00;
-  color: var(--hot);
+    1px 1px 0 #3b1b00; /* crisp edge under glow */
+
+  /* keep stroke color if you use it */
+  -webkit-text-stroke-color: #3b1b00;
 }
 
 .card p {
