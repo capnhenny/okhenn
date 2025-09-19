@@ -514,3 +514,43 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .fade-in { animation: fade .4s ease both; }
 .floaty  { animation: float 4s ease-in-out infinite; }
 .center  { text-align: center; }
+
+/* ===== Small screens: header nav becomes a horizontal slidey rail ===== */
+@media (max-width: 720px){
+  header.site-header .main-nav{
+    display: flex;                 /* switch grid -> row */
+    gap: .6rem;                    /* keep your existing gap */
+    overflow-x: auto;              /* enable horizontal scroll */
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 0 .75rem;
+
+    /* subtle edge fades to hint “scroll me” */
+    -webkit-mask-image: linear-gradient(to right,
+      transparent 0,
+      black 24px,
+      black calc(100% - 24px),
+      transparent 100%);
+            mask-image: linear-gradient(to right,
+      transparent 0,
+      black 24px,
+      black calc(100% - 24px),
+      transparent 100%);
+  }
+
+  /* don’t change sizes — just make each card a snap target */
+  header.site-header .nav-card{
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  /* slim, visible scrollbar for discoverability */
+  header.site-header .main-nav::-webkit-scrollbar{ height: 6px; }
+  header.site-header .main-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
+  header.site-header .main-nav::-webkit-scrollbar-thumb{
+    background: rgba(255,255,255,.28);
+    border-radius: 999px;
+  }
+}
