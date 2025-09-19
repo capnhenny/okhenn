@@ -139,6 +139,11 @@ header.site-header{
 }
 
 }
+
+<div class="nav-rail">
+  <nav class="main-nav">
+    <a class="nav-card" href="/journal">Captain’s Log</a>
+    <!-- rest of your nav-card links -->
 .main-nav::-webkit-scrollbar { height: 6px; }
 .main-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 999px; }
 
@@ -185,6 +190,66 @@ header.site-header{
   background-color: rgba(255,255,255,.10);
   background-blend-mode: lighten;
 }
+/* ===== Mobile slidey top nav ===== */
+.nav-rail {
+  position: relative;
+}
+
+/* subtle edge fades to hint “scroll me” */
+.nav-rail::before,
+.nav-rail::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 36px;
+  pointer-events: none;
+  z-index: 5;
+}
+.nav-rail::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0,0,0,.45), rgba(0,0,0,0));
+}
+.nav-rail::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0,0,0,.45), rgba(0,0,0,0));
+}
+
+/* turn the grid into a horizontal scroller on small screens */
+@media (max-width: 720px) {
+  .main-nav{
+    display: flex;
+    gap: .5rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: .25rem .75rem .25rem; /* breathing room so first/last chip isn’t flush */
+  }
+
+  /* each card becomes a snap “chip” */
+  .nav-card{
+    flex: 0 0 var(--navW);        /* from your tokens: 176px */
+    height: var(--navH);          /* from your tokens: 64px */
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  /* slimmer scrollbar (keeps it visible = discoverable) */
+  .main-nav::-webkit-scrollbar { height: 6px; }
+  .main-nav::-webkit-scrollbar-track { background: rgba(255,255,255,.06); }
+  .main-nav::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.28);
+    border-radius: 999px;
+  }
+}
+
+/* optional: extra squeeze on very small phones */
+@media (max-width: 380px){
+  .nav-card{ flex-basis: 160px; }
+}
+
+  </nav>
+</div>
 
 /* ------------------ Footer (card-style) ------------------ */
 /* Footer: transparent, single row, mini hollow chips */
