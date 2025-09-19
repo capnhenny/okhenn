@@ -515,18 +515,18 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .floaty  { animation: float 4s ease-in-out infinite; }
 .center  { text-align: center; }
 
-/* ===== Small screens: header nav becomes a horizontal slidey rail ===== */
+/* ===== Small screens: slidey nav WITHOUT changing box sizes ===== */
 @media (max-width: 720px){
   header.site-header .main-nav{
-    display: flex;                 /* switch grid -> row */
-    gap: .6rem;                    /* keep your existing gap */
-    overflow-x: auto;              /* enable horizontal scroll */
+    display: flex;                 /* switch grid -> row for swipe */
+    gap: .6rem;                    /* same gap as your base rule */
+    overflow-x: auto;
     overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     padding: 0 .75rem;
 
-    /* subtle edge fades to hint “scroll me” */
+    /* edge fades to hint “scroll me” */
     -webkit-mask-image: linear-gradient(to right,
       transparent 0,
       black 24px,
@@ -539,14 +539,16 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
       transparent 100%);
   }
 
-  /* don’t change sizes — just make each card a snap target */
+  /* keep EXACT per-card size equal to 1/6th of the row (like your grid) */
   header.site-header .nav-card{
-    flex: 0 0 auto;
+    flex: 0 0 calc((100% - (5 * .6rem)) / 6); /* same width as one grid column */
+    height: 56px;                              /* keep your original height */
+    padding: 0 .5rem;                          /* keep your original padding */
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
 
-  /* slim, visible scrollbar for discoverability */
+  /* visible, slim scrollbar */
   header.site-header .main-nav::-webkit-scrollbar{ height: 6px; }
   header.site-header .main-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
   header.site-header .main-nav::-webkit-scrollbar-thumb{
