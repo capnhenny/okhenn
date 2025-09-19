@@ -139,11 +139,6 @@ header.site-header{
 }
 
 }
-
-<div class="nav-rail">
-  <nav class="main-nav">
-    <a class="nav-card" href="/journal">Captain’s Log</a>
-    <!-- rest of your nav-card links -->
 .main-nav::-webkit-scrollbar { height: 6px; }
 .main-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 999px; }
 
@@ -190,67 +185,6 @@ header.site-header{
   background-color: rgba(255,255,255,.10);
   background-blend-mode: lighten;
 }
-/* ===== Mobile slidey top nav ===== */
-.nav-rail {
-  position: relative;
-}
-
-/* subtle edge fades to hint “scroll me” */
-.nav-rail::before,
-.nav-rail::after {
-  content: "";
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 36px;
-  pointer-events: none;
-  z-index: 5;
-}
-.nav-rail::before {
-  left: 0;
-  background: linear-gradient(to right, rgba(0,0,0,.45), rgba(0,0,0,0));
-}
-.nav-rail::after {
-  right: 0;
-  background: linear-gradient(to left, rgba(0,0,0,.45), rgba(0,0,0,0));
-}
-
-/* ===== Mobile slidey nav (large cards) ===== */
-@media (max-width: 720px) {
-  .main-nav {
-    display: flex;
-    gap: 1rem; /* bigger spacing for big cards */
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding: .5rem 1rem;
-  }
-
-  .nav-card {
-    flex: 0 0 auto;       /* let the card size itself, not forced small */
-    min-width: 220px;     /* ensures each card is nice & wide */
-    height: auto;         /* grow with padding/text, not locked to 64px */
-    padding: 1.2rem .8rem;
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-    font-size: clamp(.9rem, 3.5vw, 1.1rem); /* slightly larger text */
-  }
-
-  .main-nav::-webkit-scrollbar { height: 6px; }
-  .main-nav::-webkit-scrollbar-track { background: rgba(255,255,255,.06); }
-  .main-nav::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,.28);
-    border-radius: 999px;
-  }
-}
-
-/* optional: extra squeeze on very small phones */
-@media (max-width: 380px){
-  .nav-card{ flex-basis: 160px; }
-}
-
-  </nav>
-</div>
 
 /* ------------------ Footer (card-style) ------------------ */
 /* Footer: transparent, single row, mini hollow chips */
