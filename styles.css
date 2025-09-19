@@ -584,3 +584,14 @@ header.site-header .nav-card:focus-visible::before {
     #ff94b8
   );
 }
+
+/* === Fix metallic border shrinkage === */
+header.site-header .nav-card {
+  min-width: 200px;   /* force breathing room */
+  min-height: 90px;   /* chunky height */
+  padding: 1.2rem 1rem; /* restore internal spacing */
+  font-size: clamp(0.9rem, 2.2vw, 1.2rem); /* keep text balanced */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
