@@ -555,24 +555,31 @@ header.site-header .nav-card {
   overflow: hidden; /* clip the pseudo-element */
 }
 
-/* metallic gradient border via pseudo-element */
+/* === Metallic peach-pink borders without shrinking === */
+header.site-header .nav-card {
+  position: relative;
+  border: none;               /* remove default solid border */
+  border-radius: 20px;        /* rounded edges */
+  padding: 1.25rem 1.5rem;    /* keep buttons chunky */
+  min-width: 200px;           /* wide enough */
+  min-height: 90px;           /* tall enough */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* gradient border layer */
 header.site-header .nav-card::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -3px;                /* expand outward so it doesn’t eat content */
   border-radius: inherit;
-  padding: 3px; /* border thickness */
   background: linear-gradient(180deg,
-    #ffc9b9,  /* light peach */
-    #ff99bb,  /* pink */
-    #ff7ea5   /* deeper rose */
+    #ffc9b9,
+    #ff99bb,
+    #ff7ea5
   );
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  pointer-events: none; /* border doesn’t block clicks */
+  z-index: -1;                /* sit behind card content */
 }
 
 /* hover shimmer */
@@ -583,15 +590,4 @@ header.site-header .nav-card:focus-visible::before {
     #ffb0cc,
     #ff94b8
   );
-}
-
-/* === Fix metallic border shrinkage === */
-header.site-header .nav-card {
-  min-width: 200px;   /* force breathing room */
-  min-height: 90px;   /* chunky height */
-  padding: 1.2rem 1rem; /* restore internal spacing */
-  font-size: clamp(0.9rem, 2.2vw, 1.2rem); /* keep text balanced */
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
