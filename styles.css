@@ -354,7 +354,6 @@ header.site-header{
   text-align: center;
 }
 
-
 .to-top{
   position: absolute; right: 12px; bottom: 12px;
   width: 42px; height: 42px; display: grid; place-items: center;
@@ -380,6 +379,8 @@ header.site-header{
   .copyright{ grid-area: copyright; }
   .to-top{ grid-area: top; position: static; justify-self: end; }
 }
+
+
 
 /* ------------------ Type ------------------ */
 h1, h2, h3 { font-family: "Space Grotesk", Nunito, sans-serif; letter-spacing: .2px; }
@@ -573,4 +574,27 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
     background: rgba(255,255,255,.28);
     border-radius: 999px;
   }
+}
+/* Hit counter: always occupy its own full-width row */
+.site-footer .footer-inner{
+  display: grid;
+  grid-auto-flow: row;
+}
+
+.site-footer .hit-counter{
+  display: block;
+  grid-column: 1 / -1; /* span all columns at any breakpoint */
+  width: 100%;
+}
+
+/* Wide layout keeps a dedicated row for the counter */
+@media (min-width: 720px){
+  .site-footer .footer-inner{
+    grid-template-columns: 80px 1fr 1fr 80px;
+    grid-template-areas:
+      "counter counter counter counter"
+      "logo    nav     nav     top"
+      ".       social  copyright .";
+  }
+  .site-footer .hit-counter{ grid-area: counter; }
 }
