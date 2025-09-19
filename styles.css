@@ -546,3 +546,24 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
     border-radius: 999px;
   }
 }
+
+/* ===== Metallic peach-pink borders for header nav ===== */
+header.site-header .nav-card{
+  border: 3px solid;
+  border-image: linear-gradient(180deg,
+    #ffc9b9,  /* light peach */
+    #ff99bb,  /* warm pink */
+    #ff7ea5   /* deeper rose */
+  ) 1;
+  border-radius: 20px; /* keep chunky curves */
+}
+
+/* on hover: brighten the metallic border */
+header.site-header .nav-card:hover,
+header.site-header .nav-card:focus-visible{
+  border-image: linear-gradient(180deg,
+    #ffe0d3,
+    #ffb0cc,
+    #ff94b8
+  ) 1;
+}
