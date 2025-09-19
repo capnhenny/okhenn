@@ -598,3 +598,28 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   }
   .site-footer .hit-counter{ grid-area: counter; }
 }
+/* Center the hit counter line at all sizes */
+.site-footer .hit-counter{
+  display: flex;                 /* restore flex so centering works */
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / -1;           /* span full grid width */
+  text-align: center;
+}
+
+/* Keep a dedicated row for the counter on wide screens */
+@media (min-width: 720px){
+  .site-footer .footer-inner{
+    grid-template-columns: 80px 1fr 1fr 80px;
+    grid-template-areas:
+      "counter counter counter counter"
+      "logo    nav     nav     top"
+      ".       social  copyright .";
+  }
+  .site-footer .hit-counter{ grid-area: counter; }
+}
+
+/* Center the social links row (wide layout was overriding this) */
+.site-footer .footer-social{
+  justify-content: center !important;
+}
