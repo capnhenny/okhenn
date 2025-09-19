@@ -546,3 +546,28 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
     border-radius: 999px;
   }
 }
+
+/* ===== Restore big, rounded header nav buttons ===== */
+header.site-header .nav-card{
+  /* size & shape */
+  height: auto !important;
+  min-height: 108px !important;           /* tall, chunky */
+  padding: 1.15rem 1.35rem !important;    /* roomy interior */
+  border: 3px solid #1a0b0b !important;   /* strong outline (like img #1) */
+  border-radius: 22px !important;
+
+  /* text scale like before */
+  font-size: clamp(1rem, 1.8vw, 1.25rem) !important;
+  line-height: 1.1 !important;
+
+  /* keep your existing background & shadow rules */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* nuke any gradient-border pseudo-elements we tried earlier */
+header.site-header .nav-card::before,
+header.site-header .nav-card::after{
+  content: none !important;
+}
