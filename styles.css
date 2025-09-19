@@ -547,23 +547,40 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   }
 }
 
-/* ===== Metallic peach-pink borders for header nav ===== */
-header.site-header .nav-card{
-  border: 3px solid;
-  border-image: linear-gradient(180deg,
-    #ffc9b9,  /* light peach */
-    #ff99bb,  /* warm pink */
-    #ff7ea5   /* deeper rose */
-  ) 1;
-  border-radius: 20px; /* keep chunky curves */
+/* ===== Metallic peach-pink borders with soft rounded corners ===== */
+header.site-header .nav-card {
+  position: relative;
+  border: none; /* remove the flat border */
+  border-radius: 20px; /* keep your curves */
+  overflow: hidden; /* clip the pseudo-element */
 }
 
-/* on hover: brighten the metallic border */
-header.site-header .nav-card:hover,
-header.site-header .nav-card:focus-visible{
-  border-image: linear-gradient(180deg,
+/* metallic gradient border via pseudo-element */
+header.site-header .nav-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 3px; /* border thickness */
+  background: linear-gradient(180deg,
+    #ffc9b9,  /* light peach */
+    #ff99bb,  /* pink */
+    #ff7ea5   /* deeper rose */
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none; /* border doesn’t block clicks */
+}
+
+/* hover shimmer */
+header.site-header .nav-card:hover::before,
+header.site-header .nav-card:focus-visible::before {
+  background: linear-gradient(180deg,
     #ffe0d3,
     #ffb0cc,
     #ff94b8
-  ) 1;
+  );
 }
