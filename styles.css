@@ -211,6 +211,24 @@ header.site-header{
   gap: .5rem;
   flex-wrap: wrap;
 }
+/* Always make hit counter a full-width row in the footer grid */
+.site-footer .hit-counter{
+  display: block;
+  grid-column: 1 / -1;  /* span all columns at any breakpoint */
+  width: 100%;
+}
+
+/* Wide layout: put the hit counter in its own top row */
+@media (min-width: 720px){
+  .site-footer .footer-inner{
+    grid-template-columns: 80px 1fr 1fr 80px;
+    grid-template-areas:
+      "counter counter counter counter"
+      "logo    nav     nav     top"
+      ".       social  copyright .";
+  }
+  .site-footer .hit-counter{ grid-area: counter; }
+}
 
 /* --- Hit counter row (matches copyright font; glows on hover) --- */
 .hit-counter{
