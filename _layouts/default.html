@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ page.title }} · {{ site.title }}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="{{ "/styles.css" | relative_url }}">
+  <!-- your font/icon links if needed -->
+</head>
+<body>
+  {% include header.html %}
+  <main class="wrap">
+    {{ content }}
+  </main>
+  {% include footer.html %}
+  <script defer src="{{ "include.js" | relative_url }}"></script>
+  <script defer src="{{ "assets/js/visitor-counter.js" | relative_url }}"></script>
+</body>
+</html>
