@@ -6,10 +6,15 @@ layout: default
 title: Journal
 ---
 <section class="cards">
-  {% for post in site.posts %}
+  {% assign items = site.journal | sort: "date" | reverse %}
+  {% for post in items %}
     <a class="card" href="{{ post.url | relative_url }}">
+      {% if post.thumb %}
+        <img src="{{ post.thumb | relative_url }}" alt="{{ post.title }}"
+             style="width:100%;max-height:180px;object-fit:cover;border-radius:14px;border:2px solid #1a0b0b;margin-bottom:.75rem;">
+      {% endif %}
       <h3>{{ post.title }}</h3>
-      <p class="date">{{ post.date | date: "%b %-d, %Y" }}</p>
+      {% if post.date %}<p class="date">{{ post.date | date: "%b %-d, %Y" }}</p>{% endif %}
       <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
     </a>
   {% endfor %}
