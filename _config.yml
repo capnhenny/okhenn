@@ -12,6 +12,9 @@ collections:
     permalink: /cooking/:name/
   about:
     output: false        # “sections” used to assemble About; no standalone pages
+  journal:
+    output: true
+    permalink: /journal/:name/
 
 # Use a simple post-like layout automatically
 defaults:
@@ -20,4 +23,6 @@ defaults:
   - scope: { path: "", type: adventures }
     values: { layout: post_like }
   - scope: { path: "", type: cooking }
+    values: { layout: post_like }
+  - scope: { path: "", type: journal }
     values: { layout: post_like }
