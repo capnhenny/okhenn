@@ -1,5 +1,18 @@
 <!doctype html>
 <html>
+
+  ---
+layout: default
+title: About
+---
+{% assign blocks = site.about | sort: "order" %}
+{% for b in blocks %}
+  <section class="post">
+    {% if b.title %}<h2>{{ b.title }}</h2>{% endif %}
+    {{ b.content }}
+  </section>
+{% endfor %}
+
 <head>
   <meta charset="utf-8" />
   <title>okhenn — about</title>
