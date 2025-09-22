@@ -1,3 +1,23 @@
 title: ok henn
-baseurl: ""   # if this is a user site; for project sites use "/your-repo-name"
-url: "https://<your-username>.github.io"
+baseurl: "okhenn.com"   # if this is a user site; for project sites use "/your-repo-name"
+url: "https://<capnhenny>.github.io"
+title: ok henn
+
+collections:
+  adventures:
+    output: true
+    permalink: /adventures/:name/
+  cooking:
+    output: true
+    permalink: /cooking/:name/
+  about:
+    output: false        # “sections” used to assemble About; no standalone pages
+
+# Use a simple post-like layout automatically
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post_like }
+  - scope: { path: "", type: adventures }
+    values: { layout: post_like }
+  - scope: { path: "", type: cooking }
+    values: { layout: post_like }
