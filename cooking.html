@@ -7,17 +7,6 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 
-<section class="cards">
-  {% assign items = site.cooking | sort: "date" | reverse %}
-  {% for r in items %}
-    <a class="card" href="{{ r.url | relative_url }}">
-      <h3>{{ r.title }}</h3>
-      {% if r.date %}<p class="date">{{ r.date | date: "%b %-d, %Y" }}</p>{% endif %}
-      <p>{{ r.excerpt | strip_html | truncate: 140 }}</p>
-    </a>
-  {% endfor %}
-</section>
-
 <head>
   <meta charset="utf-8" />
   <title>okhenn — cooking</title>
@@ -30,15 +19,17 @@
   <div data-include="/partials/header.html"></div>
 
   <main class="wrap">
-    <div class="card">
-      <h3>tba (trust)</h3>
-      <p class="muted">easy-peasy · chaotic good</p>
-      <p>will change your life one of these days</p>
-    </div>
-    <div class="card">
-      <h3>tba</h3>
-      <p class="muted">once ready · will share</p>
-      <p>it'll be worth it</p>
+    
+<section class="cards">
+  {% assign items = site.cooking | sort: "date" | reverse %}
+  {% for r in items %}
+    <a class="card" href="{{ r.url | relative_url }}">
+      <h3>{{ r.title }}</h3>
+      {% if r.date %}<p class="date">{{ r.date | date: "%b %-d, %Y" }}</p>{% endif %}
+      <p>{{ r.excerpt | strip_html | truncate: 140 }}</p>
+    </a>
+  {% endfor %}
+</section>
 
     </div>
   </main>
