@@ -19,6 +19,8 @@
 <body>
   <div data-include="partials/header.html"></div>
 
+    <main class="wrap">
+      
   <section class="cards">
   {% assign items = site.journal | sort: "date" | reverse %}
   {% for post in items %}
@@ -34,23 +36,8 @@
   {% endfor %}
 </section>
   
-  <main class="wrap">
-    <article class="post">
-      <div class="date">2025-09-10</div>
-      <h3>micro-joys log</h3>
-      <p>sat in a sun patch with coffee. that’s it. that’s the post.</p>
-    </article>
-    <article class="post">
-      <div class="date">2025-09-03</div>
-      <h3>productivity, but humane</h3>
-      <p>my to-do list now includes “look at clouds.” 10/10 would recommend.</p>
-    </article>
-    <article class="post">
-      <div class="date">2025-08-20</div>
-      <h3>notes from a kinder timeline</h3>
-      <p>we clap for effort here.</p>
-    </article>
   </main>
+  
   <div data-include="partials/footer.html"></div>
 
 <script defer src="include.js?v=1"></script>
