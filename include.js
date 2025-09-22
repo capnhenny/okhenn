@@ -1,4 +1,4 @@
-// include.js — partial includes + active nav + year + visitor counter via /api/visits
+// include.js — partial includes + active nav + year + sparkle
 document.addEventListener('DOMContentLoaded', () => {
   const slots = document.querySelectorAll('[data-include]');
   let done = 0;
@@ -30,54 +30,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // year
     const y = document.getElementById('y');
     if (y) y.textContent = new Date().getFullYear();
-    // --- Sparkle: only clickable on journal page ---
+
+    // Sparkle: only clickable on journal page
     try {
       const sparkle = document.querySelector('.sparkle');
       if (sparkle) {
-        // reset any prior state/listeners
         const fresh = sparkle.cloneNode(true);
         sparkle.replaceWith(fresh);
-
-        const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-        if (here === 'journal.html') {
+        const here2 = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+        if (here2 === 'journal.html') {
           fresh.classList.add('sparkle--link');
           fresh.setAttribute('role', 'link');
           fresh.setAttribute('tabindex', '0');
           fresh.setAttribute('aria-label', 'Open henntendo.com');
-
           const go = () => window.open('https://henntendo.com', '_blank', 'noopener');
           fresh.addEventListener('click', go);
-          fresh.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') go();
-          });
-        } else {
-          fresh.classList.remove('sparkle--link');
-          fresh.removeAttribute('role');
-          fresh.removeAttribute('tabindex');
-          fresh.removeAttribute('aria-label');
+          fresh.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') go(); });
         }
       }
     } catch (e) {
       console.error('Sparkle link error:', e);
     }
 
-    // visitor counter (same-origin -> /api/visits)
-    const span = document.getElementById('visits');
-    if (!span) return;
-
-    const setUI = (n) => { span.textContent = (n?.toLocaleString?.() ?? n ?? '—'); };
-
-    try {
-      // Show current value first
-      const g = await fetch('/api/visits?mode=get', { cache: 'no-store' }).then(r => r.json());
-      if (g && typeof g.value === 'number') setUI(g.value);
-
-      // Then try to increment once; API sets a cookie to avoid double-counts
-      const h = await fetch('/api/visits?mode=hit', { cache: 'no-store' }).then(r => r.json());
-      if (h && typeof h.value === 'number') setUI(h.value);
-    } catch (e) {
-      console.error('Visitor counter error:', e);
-      setUI('—');
-    }
+    // NOTE: removed the old visitor counter that hit /api/visits
+    // The new unique counter lives in assets/js/visitor-counter.js
   }
 });
