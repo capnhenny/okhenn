@@ -1,5 +1,20 @@
 <!doctype html>
 <html>
+  
+---
+layout: default
+title: Journal
+---
+<section class="cards">
+  {% for post in site.posts %}
+    <a class="card" href="{{ post.url | relative_url }}">
+      <h3>{{ post.title }}</h3>
+      <p class="date">{{ post.date | date: "%b %-d, %Y" }}</p>
+      <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
+    </a>
+  {% endfor %}
+</section>
+
 <head>
   <meta charset="utf-8" />
   <title>okhenn — journal</title>
@@ -36,17 +51,3 @@
 
 </body>
 </html>
-
----
-layout: default
-title: Journal
----
-<section class="cards">
-  {% for post in site.posts %}
-    <a class="card" href="{{ post.url | relative_url }}">
-      <h3>{{ post.title }}</h3>
-      <p class="date">{{ post.date | date: "%b %-d, %Y" }}</p>
-      <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
-    </a>
-  {% endfor %}
-</section>
