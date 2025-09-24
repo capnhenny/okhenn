@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{{ page.title | default: site.title }} · {{ site.title }}</title>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="{{ "/styles.css" | relative_url }}">
+
   <!-- Favicons -->
   <link rel="icon" href="{{ "/assets/favicon.ico" | relative_url }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ "/assets/favicon-32.png" | relative_url }}">
@@ -14,13 +16,25 @@
 </head>
 <body>
   {% include header.html %}
+{% assign here = page.url | split: '/' | last | default: 'index.html' %}
+<nav class="main-nav">
+  <a class="nav-card" href="{{ "index.html" | relative_url }}" {% if here == "index.html" %}aria-current="page"{% endif %}>home</a>
+  <a class="nav-card" href="{{ "journal.html" | relative_url }}" {% if here == "journal.html" %}aria-current="page"{% endif %}>journal</a>
+  <a class="nav-card" href="{{ "adventures.html" | relative_url }}" {% if here == "adventures.html" %}aria-current="page"{% endif %}>adventures</a>
+  <a class="nav-card" href="{{ "cooking.html"   | relative_url }}" {% if here == "cooking.html" %}aria-current="page"{% endif %}>cooking</a>
+  <a class="nav-card" href "{{ "about.html"     | relative_url }}" {% if here == "about.html" %}aria-current="page"{% endif %}>about</a>
+  <a class="nav-card" href="{{ "contact.html"   | relative_url }}" {% if here == "contact.html" %}aria-current="page"{% endif %}>contact</a>
+</nav>
+
   <main class="wrap">
     {{ content }}
   </main>
+
   {% include footer.html %}
 
-  <!-- Keep your existing JS (sparkle/nav/year) + visitor counter -->
-  <script defer src="{{ "include.js" | relative_url }}"></script>
+  <!-- JS -->
   <script defer src="{{ "assets/js/visitor-counter.js" | relative_url }}"></script>
+  <!-- If you still want sparkle JS, keep include.js (trimmed to just sparkle): -->
+  {# <script defer src="{{ "include.js" | relative_url }}"></script> #}
 </body>
 </html>
