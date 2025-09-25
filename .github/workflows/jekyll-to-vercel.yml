@@ -2,27 +2,20 @@ name: Build Jekyll for Vercel
 on:
   push:
     branches: [ main ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1'      # safe for github-pages gem
+          ruby-version: '3.1'      # matches github-pages gem
           bundler-cache: true
-
       - name: Install & Build
-        env:
-          JEKYLL_ENV: production
+        env: { JEKYLL_ENV: production }
         run: |
           bundle install --without development
           bundle exec jekyll build --trace
-
       - name: Publish _site to vercel-static branch
         uses: peaceiris/actions-gh-pages@v3
         with:
