@@ -1,8 +1,28 @@
-title: ok henn
-baseurl: "okhenn.com"   # if this is a user site; for project sites use "/your-repo-name"
-url: "https://<capnhenny>.github.io"
+# _config.yml
 title: ok henn
 
+# You’re serving at the root of okhenn.com
+url: "https://okhenn.com"
+baseurl: ""   # empty because the site is at the domain root
+
+# Markdown + plugins (this is what Vercel/Jekyll needs)
+markdown: kramdown
+kramdown:
+  input: GFM
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-redirect-from
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-default-layout
+  - jekyll-titles-from-headings
+
+# Collections
 collections:
   adventures:
     output: true
@@ -11,15 +31,13 @@ collections:
     output: true
     permalink: /cooking/:name/
   about:
-    output: false        # “sections” used to assemble About; no standalone pages
+    output: false        # used to assemble About; not standalone pages
   journal:
     output: true
     permalink: /journal/:name/
 
-# Use a simple post-like layout automatically
+# Layout defaults for those collections
 defaults:
-  - scope: { path: "", type: posts }
-    values: { layout: post_like }
   - scope: { path: "", type: adventures }
     values: { layout: post_like }
   - scope: { path: "", type: cooking }
