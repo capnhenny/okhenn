@@ -1,36 +1,44 @@
-<!-- _includes/header.html -->
+{%- assign here = page.url | split:'/' | last | default:'index.html' -%}
 <header class="site-header">
+  <!-- Floaty logo → Home -->
   <a class="home-logo" href="{{ '/' | relative_url }}" aria-label="Home">
     <img class="floaty" src="{{ '/assets/avatar-100.png' | relative_url }}" alt="">
   </a>
 
+  <!-- Tagline + sparkle (emoji). On journal listing ONLY, sparkle becomes a link -->
   <p class="site-tagline">
     come check out my interwebs while you're lying in beds
-    <span class="sparkle" aria-hidden="true">✨</span>
-  </p>
-  {% assign here = page.url | split: '/' | last | default: 'index.html' %}
-
-  <!-- Sparkle: clickable ONLY on journal listing page -->
-  <div class="site-tagline">
-    {% if here == "journal.html" %}
+    {%- if here == 'journal.html' -%}
       <a
         href="https://henntendo.com"
         class="sparkle sparkle--link"
         target="_blank"
         rel="noopener"
         aria-label="Open henntendo.com"
-      >✦</a>
-    {% else %}
-    {% endif %}
-  </div>
+      >✨</a>
+    {%- else -%}
+      <span class="sparkle" aria-hidden="true">✨</span>
+    {%- endif -%}
+  </p>
 
-  <!-- Primary nav (with aria-current set automatically) -->
+  <!-- Primary nav -->
   <nav class="main-nav" aria-label="primary">
-    <a class="nav-card" href="{{ 'index.html'   | relative_url }}" {% if here == 'index.html'   %}aria-current="page"{% endif %}>home</a>
-    <a class="nav-card" href="{{ 'journal.html' | relative_url }}" {% if here == 'journal.html' %}aria-current="page"{% endif %}>journal</a>
-    <a class="nav-card" href="{{ 'adventures.html' | relative_url }}" {% if here == 'adventures.html' %}aria-current="page"{% endif %}>adventures</a>
-    <a class="nav-card" href="{{ 'cooking.html'    | relative_url }}" {% if here == 'cooking.html'    %}aria-current="page"{% endif %}>cooking</a>
-    <a class="nav-card" href="{{ 'about.html'      | relative_url }}" {% if here == 'about.html'      %}aria-current="page"{% endif %}>about</a>
-    <a class="nav-card" href="{{ 'contact.html'    | relative_url }}" {% if here == 'contact.html'    %}aria-current="page"{% endif %}>contact</a>
+    <a class="nav-card" href="{{ 'index.html'       | relative_url }}"
+       {% if here == 'index.html' %}aria-current="page"{% endif %}>home</a>
+
+    <a class="nav-card" href="{{ 'journal.html'      | relative_url }}"
+       {% if here == 'journal.html' %}aria-current="page"{% endif %}>journal</a>
+
+    <a class="nav-card" href="{{ 'adventures.html'   | relative_url }}"
+       {% if here == 'adventures.html' %}aria-current="page"{% endif %}>adventures</a>
+
+    <a class="nav-card" href="{{ 'cooking.html'      | relative_url }}"
+       {% if here == 'cooking.html' %}aria-current="page"{% endif %}>cooking</a>
+
+    <a class="nav-card" href="{{ 'about.html'        | relative_url }}"
+       {% if here == 'about.html' %}aria-current="page"{% endif %}>about</a>
+
+    <a class="nav-card" href="{{ 'contact.html'      | relative_url }}"
+       {% if here == 'contact.html' %}aria-current="page"{% endif %}>contact</a>
   </nav>
 </header>
