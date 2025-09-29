@@ -1,5 +1,13 @@
 <!-- _includes/header.html -->
-<header class="site-header" role="banner">
+<header class="site-header">
+  <a class="home-logo" href="{{ '/' | relative_url }}" aria-label="Home">
+    <img class="floaty" src="{{ '/assets/avatar-100.png' | relative_url }}" alt="">
+  </a>
+
+  <p class="site-tagline">
+    come check out my interwebs while you're lying in beds
+    <span class="sparkle" aria-hidden="true">✨</span>
+  </p>
   {% assign here = page.url | split: '/' | last | default: 'index.html' %}
 
   <!-- Sparkle: clickable ONLY on journal listing page -->
@@ -13,7 +21,6 @@
         aria-label="Open henntendo.com"
       >✦</a>
     {% else %}
-      <span class="sparkle" aria-hidden="true">✦</span>
     {% endif %}
   </div>
 
