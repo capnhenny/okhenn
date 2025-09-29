@@ -626,3 +626,24 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 .post-hero{width:100%;max-height:420px;object-fit:cover;border-radius:16px;margin:0 0 1rem;border:2px solid #1a0b0b;
           }
+:root {
+  --gold: #e6b400;
+  --gold-glow-1: rgba(230,180,0,.95);
+  --gold-glow-2: rgba(184,121,0,.65);
+}
+
+/* base */
+.sparkle { display:inline-block; transition: transform .15s ease, text-shadow .2s ease, color .2s ease; }
+
+/* JS adds .sparkle--link only on journal.html */
+.sparkle--link { cursor: pointer; }
+.sparkle--link:hover,
+.sparkle--link:focus-visible {
+  transform: translateY(-1px) scale(1.05);
+  color: var(--gold);
+  text-shadow:
+    0 0 6px var(--gold-glow-1),
+    0 0 12px var(--gold-glow-1),
+    0 0 24px var(--gold-glow-2);
+  outline: none;
+}
