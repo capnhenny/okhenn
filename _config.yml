@@ -26,7 +26,7 @@ plugins:
 collections:
   adventures:
     output: true
-    permalink: /adventures/:name/
+    permalink: /adventures/:slug/
   cooking:
     output: true
     permalink: /cooking/:name/
