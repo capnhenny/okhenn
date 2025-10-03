@@ -200,8 +200,9 @@ header.site-header{
   }
 
   .site-nav .nav-card {
-    flex: 0 0 var(--navW); /* fixed card width */
-    height: var(--navH);
+    flex: 0 0 70%;   /* each card ~70% of screen width */
+    max-width: 300px;
+    height: 64px;    /* match --navH */
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
