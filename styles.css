@@ -118,34 +118,95 @@ header.site-header{
 .home-logo img:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 0 8px 20px rgba(0,0,0,.15);
 }
 
-/* NAV (unified) */
-.site-nav { display:grid; grid-template-columns:repeat(6,1fr); gap:.6rem; padding:0 .75rem; justify-content:center; align-items:center; margin:12px 0 22px; }
-.site-nav .nav-card{
-  display:flex; justify-content:center; align-items:center; height:56px; padding:0 .5rem;
-  background-image:url("/assets/dark-gradient.png"); background-repeat:no-repeat; background-position:center; background-size:cover;
-  border:2px solid #1a0b0b; border-radius:14px; color:#fff; text-decoration:none;
-  font-family:'Press Start 2P', monospace; font-size:clamp(.62rem,1.3vw,.8rem); letter-spacing:.05em; text-transform:uppercase;
-  box-shadow:0 6px 14px rgba(0,0,0,.35);
-  transition:transform .2s, box-shadow .2s, background-color .25s, border-color .25s;
-  text-shadow:0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
+/* NAV (unified, flex-based for centering) */
+.site-nav {
+  display: flex;
+  justify-content: center;   /* center the group */
+  flex-wrap: wrap;           /* allow wrapping if screen is narrow */
+  gap: .6rem;
+  margin: 12px 0 22px;
+  padding: 0 .75rem;
 }
-.site-nav .nav-card:hover,
-.site-nav .nav-card:focus-visible{
-  transform:translateY(-3px) scale(1.02); box-shadow:0 12px 22px rgba(0,0,0,.45);
-  background-color:rgba(255,255,255,.12); background-blend-mode:lighten; border-color:rgba(255,255,255,.25); outline:none;
-  text-shadow:0 0 6px rgba(255,70,166,.7), 0 0 12px rgba(255,70,166,.6), 0 0 24px rgba(255,70,166,.45);
-}
-.site-nav .nav-card[aria-current="page"]{ border-color:rgba(255,255,255,.35); background-color:rgba(255,255,255,.10); background-blend-mode:lighten; }
 
-@media (max-width:420px){
-  .site-nav{ display:flex; gap:.6rem; overflow-x:auto; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory; padding:0 .75rem;
-    -webkit-mask-image:linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
-            mask-image:linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+.site-nav .nav-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 56px;
+  padding: 0 .5rem;
+
+  background-image: url("/assets/dark-gradient.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  border: 2px solid #1a0b0b;
+  border-radius: 14px;
+  color: #fff;
+  text-decoration: none;
+
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(.62rem, 1.3vw, .8rem);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,.35);
+  transition: transform .2s, box-shadow .2s, background-color .25s, border-color .25s;
+  text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
+}
+
+.site-nav .nav-card:hover,
+.site-nav .nav-card:focus-visible {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 22px rgba(0,0,0,.45);
+  background-color: rgba(255,255,255,.12);
+  background-blend-mode: lighten;
+  border-color: rgba(255,255,255,.25);
+  outline: none;
+  text-shadow:
+    0 0 6px rgba(255,70,166,.7),
+    0 0 12px rgba(255,70,166,.6),
+    0 0 24px rgba(255,70,166,.45);
+}
+
+.site-nav .nav-card[aria-current="page"] {
+  border-color: rgba(255,255,255,.35);
+  background-color: rgba(255,255,255,.10);
+  background-blend-mode: lighten;
+}
+
+/* MOBILE: keep horizontal scroll row */
+@media (max-width: 420px) {
+  .site-nav {
+    display: flex;
+    gap: .6rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 0 .75rem;
+
+    -webkit-mask-image: linear-gradient(to right,
+      transparent 0,
+      black 24px,
+      black calc(100% - 24px),
+      transparent 100%);
+    mask-image: linear-gradient(to right,
+      transparent 0,
+      black 24px,
+      black calc(100% - 24px),
+      transparent 100%);
   }
-  .site-nav .nav-card{ flex:0 0 calc((100% - (5 * .6rem)) / 6); scroll-snap-align:center; scroll-snap-stop:always; }
-  .site-nav::-webkit-scrollbar{ height:6px; }
-  .site-nav::-webkit-scrollbar-track{ background:rgba(255,255,255,.06); }
-  .site-nav::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.28); border-radius:999px; }
+
+  .site-nav .nav-card {
+    flex: 0 0 calc((100% - (5 * .6rem)) / 6);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .site-nav::-webkit-scrollbar { height: 6px; }
+  .site-nav::-webkit-scrollbar-track { background: rgba(255,255,255,.06); }
+  .site-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.28); border-radius: 999px; }
 }
 
 .nav-card{
@@ -552,6 +613,15 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   display: inline-flex;
   align-items: center;
   line-height: 1;
+}
+/* When sparkle is a link (on journal page), add glow on hover/focus */
+.sparkle-link:hover .sparkle,
+.sparkle-link:focus-visible .sparkle {
+  transform: translateY(-1px) scale(1.05);
+  text-shadow:
+    0 0 6px rgba(255,70,166,.70),
+    0 0 12px rgba(255,70,166,.60),
+    0 0 24px rgba(255,70,166,.45);
 }
 .sparkle{
   display: inline-block;
