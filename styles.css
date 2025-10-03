@@ -118,107 +118,6 @@ header.site-header{
 .home-logo img:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 0 8px 20px rgba(0,0,0,.15);
 }
 
-/* ------------------ NAV ------------------ */
-.site-nav {
-  display: grid;
-  grid-template-columns: repeat(6, var(--navW)); /* 6 equal cards, fixed width */
-  gap: .6rem;
-  justify-content: center;   /* center the whole grid */
-  align-items: center;
-  margin: 12px auto 22px;
-  padding: 0 .75rem;
-  max-width: calc((var(--navW) * 6) + (5 * .6rem)); /* total width */
-}
-
-.site-nav .nav-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: var(--navW);
-  height: var(--navH);
-  padding: 0 .5rem;
-
-  background-image: url("/assets/dark-gradient.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-
-  border: 2px solid #1a0b0b;
-  border-radius: 14px;
-  color: #fff;
-  text-decoration: none;
-  font-family: 'Press Start 2P', monospace;
-  font-size: clamp(.62rem, 1.3vw, .8rem);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  box-shadow: 0 6px 14px rgba(0,0,0,.35);
-  transition: transform .2s, box-shadow .2s, background-color .25s, border-color .25s;
-  text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
-}
-
-.site-nav .nav-card:hover,
-.site-nav .nav-card:focus-visible {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 22px rgba(0,0,0,.45);
-  background-color: rgba(255,255,255,.12);
-  background-blend-mode: lighten;
-  border-color: rgba(255,255,255,.25);
-  outline: none;
-  text-shadow:
-    0 0 6px rgba(255,70,166,.70),
-    0 0 12px rgba(255,70,166,.60),
-    0 0 24px rgba(255,70,166,.45);
-}
-
-.site-nav .nav-card[aria-current="page"] {
-  border-color: rgba(255,255,255,.35);
-  background-color: rgba(255,255,255,.10);
-  background-blend-mode: lighten;
-}
-
-/* ------------------ NAV (mobile swipe) ------------------ */
-@media (max-width: 420px) {
-  .site-nav {
-    display: flex;
-    gap: .6rem;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-
-    scroll-snap-type: x mandatory;
-    scroll-padding-left: 12px;  /* first card fully visible */
-    padding: 0 12px;
-
-    -webkit-mask-image: linear-gradient(to right,
-      transparent 0,
-      black 12px,
-      black calc(100% - 12px),
-      transparent 100%);
-            mask-image: linear-gradient(to right,
-      transparent 0,
-      black 12px,
-      black calc(100% - 12px),
-      transparent 100%);
-  }
-
-  .site-nav .nav-card {
-    flex: 0 0 75%;     /* each card ~3/4 screen width */
-    max-width: 320px;
-    height: var(--navH);
-
-    scroll-snap-align: start;   /* snap left edge, not center */
-    scroll-snap-stop: always;
-  }
-}
-
-  .site-nav::-webkit-scrollbar { height: 6px; }
-  .site-nav::-webkit-scrollbar-track { background: rgba(255,255,255,.06); }
-  .site-nav::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,.28);
-    border-radius: 999px;
-  }
-}
-
 .nav-card{
   display: flex; justify-content: center; align-items: center;
   height: 56px;                             /* uniform height */
@@ -646,4 +545,93 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 /* anchors in the tagline shouldn’t get underlines by default */
 .site-tagline a{ text-decoration:none; border-bottom:0; 
+}
+
+/* ===== NAV: hard reset & lock-in (desktop + mobile) ===== */
+
+/* DESKTOP/TABLET — centered row of 6 equal blocks */
+.site-nav{
+  display: grid !important;
+  grid-template-columns: repeat(6, var(--navW)) !important; /* 6 equal cards */
+  gap: .6rem !important;
+  justify-content: center !important;    /* center the whole group */
+  align-items: center !important;
+  margin: 12px auto 22px !important;
+  padding: 0 .75rem !important;
+  max-width: calc((var(--navW) * 6) + (5 * .6rem)) !important;
+}
+
+.site-nav .nav-card{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: var(--navW) !important;         /* fixed width */
+  height: var(--navH) !important;        /* fixed height */
+  padding: 0 .5rem !important;
+  text-decoration: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(.62rem, 1.3vw, .8rem);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  background-image: url("/assets/dark-gradient.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border: 2px solid #1a0b0b;
+  border-radius: 14px;
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(0,0,0,.35);
+  transition: transform .2s, box-shadow .2s, background-color .25s, border-color .25s;
+  text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
+}
+.site-nav .nav-card:hover,
+.site-nav .nav-card:focus-visible{
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 22px rgba(0,0,0,.45);
+  background-color: rgba(255,255,255,.12);
+  background-blend-mode: lighten;
+  border-color: rgba(255,255,255,.25);
+  outline: none;
+  text-shadow:
+    0 0 6px rgba(255,70,166,.70),
+    0 0 12px rgba(255,70,166,.60),
+    0 0 24px rgba(255,70,166,.45);
+}
+.site-nav .nav-card[aria-current="page"]{
+  border-color: rgba(255,255,255,.35);
+  background-color: rgba(255,255,255,.10);
+  background-blend-mode: lighten;
+}
+
+/* MOBILE — swipe row, first card fully visible, no “half-hidden” start */
+@media (max-width: 420px){
+  .site-nav{
+    display: flex !important;
+    gap: .6rem !important;
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain !important;
+    -webkit-overflow-scrolling: touch !important;
+
+    /* snap + padding so the first card is not tucked under the fade */
+    scroll-snap-type: x mandatory !important;
+    scroll-padding-left: 12px !important;
+    padding: 0 12px !important;
+
+    -webkit-mask-image: linear-gradient(to right,
+      transparent 0, black 12px,
+      black calc(100% - 12px), transparent 100%) !important;
+            mask-image: linear-gradient(to right,
+      transparent 0, black 12px,
+      black calc(100% - 12px), transparent 100%) !important;
+  }
+  .site-nav .nav-card{
+    flex: 0 0 75% !important;   /* chunky, tappable “slides” */
+    max-width: 320px !important;
+    height: var(--navH) !important;
+    scroll-snap-align: start !important;  /* snap left edge */
+    scroll-snap-stop: always !important;
+  }
+  .site-nav::-webkit-scrollbar{ height: 6px; }
+  .site-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
+  .site-nav::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.28); border-radius: 999px; }
 }
