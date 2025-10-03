@@ -660,6 +660,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 /* anchors in the tagline shouldn’t get underlines by default */
 .site-tagline a{ text-decoration:none; border-bottom:0; }
+
 /* NAV: row of pills on desktop */
 .site-nav{
   display:flex !important;
