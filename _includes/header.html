@@ -7,8 +7,10 @@
   <!-- Tagline + sparkle (emoji). On journal listing ONLY, sparkle becomes a link -->
   <p class="site-tagline">
     come check out my interwebs while you're lying in beds
-    {%- if here == 'journal.html' -%}
-      <a
+
+{%- comment -%} Sparkle link ONLY on the journal listing page {%- endcomment -%}
+{% if page.url == '/journal/' %}
+      <a  class="sparkle-link"
         href="https://henntendo.com"
         class="sparkle sparkle--link"
         target="_blank"
