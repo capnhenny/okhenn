@@ -33,7 +33,10 @@
 
   <a class="nav-card" href="{{ '/cooking/' | relative_url }}"
      {% if page.url contains '/cooking/' %}aria-current="page"{% endif %}>cooking</a>
-
+  
+  <a class="nav-card" href="{{ '/about/' | relative_url }}"
+     {% if page.url == '/about/' %}aria-current="page"{% endif %}>about</a>
+  
   <a class="nav-card" href="{{ '/contact/' | relative_url }}"
      {% if page.url contains '/contact/' %}aria-current="page"{% endif %}>contact</a>
 </nav>
