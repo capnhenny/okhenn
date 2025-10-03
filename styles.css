@@ -98,26 +98,6 @@ header.site-header{
   color: #fff;
 }
 
-/* default sparkle (not clickable unless JS makes it so) */
-.sparkle {
-  display: inline-block;
-  transition: transform .15s ease, text-shadow .2s ease;
-}
-
-/* linkable state (only applied on journal page) */
-.sparkle--link {
-  cursor: pointer;
-}
-.sparkle--link:hover,
-.sparkle--link:focus-visible {
-  transform: translateY(-1px) scale(1.05);
-  text-shadow:
-    0 0 6px rgba(255,70,166,.70),
-    0 0 12px rgba(255,70,166,.60),
-    0 0 24px rgba(255,70,166,.45);
-  outline: none;
-}
-
 /* Tagline centered between logo and nav */
 .site-tagline{
   margin: .15rem auto .65rem;
@@ -135,19 +115,37 @@ header.site-header{
   animation: float 4s ease-in-out infinite;
   filter: drop-shadow(0 1px 6px rgba(0,0,0,.25));
 }
-.home-logo img:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 0 8px 20px rgba(0,0,0,.15); }
+.home-logo img:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 0 8px 20px rgba(0,0,0,.15);
 }
 
+/* NAV (unified) */
+.site-nav { display:grid; grid-template-columns:repeat(6,1fr); gap:.6rem; padding:0 .75rem; justify-content:center; align-items:center; margin:12px 0 22px; }
+.site-nav .nav-card{
+  display:flex; justify-content:center; align-items:center; height:56px; padding:0 .5rem;
+  background-image:url("/assets/dark-gradient.png"); background-repeat:no-repeat; background-position:center; background-size:cover;
+  border:2px solid #1a0b0b; border-radius:14px; color:#fff; text-decoration:none;
+  font-family:'Press Start 2P', monospace; font-size:clamp(.62rem,1.3vw,.8rem); letter-spacing:.05em; text-transform:uppercase;
+  box-shadow:0 6px 14px rgba(0,0,0,.35);
+  transition:transform .2s, box-shadow .2s, background-color .25s, border-color .25s;
+  text-shadow:0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
 }
-.main-nav::-webkit-scrollbar { height: 6px; }
-.main-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 999px; }
+.site-nav .nav-card:hover,
+.site-nav .nav-card:focus-visible{
+  transform:translateY(-3px) scale(1.02); box-shadow:0 12px 22px rgba(0,0,0,.45);
+  background-color:rgba(255,255,255,.12); background-blend-mode:lighten; border-color:rgba(255,255,255,.25); outline:none;
+  text-shadow:0 0 6px rgba(255,70,166,.7), 0 0 12px rgba(255,70,166,.6), 0 0 24px rgba(255,70,166,.45);
+}
+.site-nav .nav-card[aria-current="page"]{ border-color:rgba(255,255,255,.35); background-color:rgba(255,255,255,.10); background-blend-mode:lighten; }
 
-/* One-row grid: 6 items spanning full width */
-.main-nav{
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);   /* one row */
-  gap: .6rem;
-  padding: 0 .75rem;
+@media (max-width:420px){
+  .site-nav{ display:flex; gap:.6rem; overflow-x:auto; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory; padding:0 .75rem;
+    -webkit-mask-image:linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+            mask-image:linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+  }
+  .site-nav .nav-card{ flex:0 0 calc((100% - (5 * .6rem)) / 6); scroll-snap-align:center; scroll-snap-stop:always; }
+  .site-nav::-webkit-scrollbar{ height:6px; }
+  .site-nav::-webkit-scrollbar-track{ background:rgba(255,255,255,.06); }
+  .site-nav::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.28); border-radius:999px; }
 }
 
 .nav-card{
@@ -165,25 +163,6 @@ header.site-header{
   box-shadow: 0 6px 14px rgba(0,0,0,.35);
   transition: transform .2s ease, box-shadow .2s ease, background-color .25s ease, border-color .25s ease;
   text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
-}
-
-.nav-card:hover,
-.nav-card:focus-visible{
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 22px rgba(0,0,0,.45);
-  background-color: rgba(255,255,255,.12);
-  background-blend-mode: lighten;
-  border-color: rgba(255,255,255,.25);
-  outline: none;
-  text-shadow:
-    0 0 6px rgba(255,70,166,.70),
-    0 0 12px rgba(255,70,166,.60),
-    0 0 24px rgba(255,70,166,.45);
-}
-.nav-card[aria-current="page"]{
-  border-color: rgba(255,255,255,.35);
-  background-color: rgba(255,255,255,.10);
-  background-blend-mode: lighten;
 }
 
 /* ------------------ Footer (card-style) ------------------ */
@@ -534,47 +513,6 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .floaty  { animation: float 4s ease-in-out infinite; }
 .center  { text-align: center; }
 
-/* ===== Small screens: slidey nav WITHOUT changing box sizes ===== */
-@media (max-width: 420px){
-  header.site-header .main-nav{
-    display: flex;                 /* switch grid -> row for swipe */
-    gap: .6rem;                    /* same gap as your base rule */
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding: 0 .75rem;
-
-    /* edge fades to hint “scroll me” */
-    -webkit-mask-image: linear-gradient(to right,
-      transparent 0,
-      black 24px,
-      black calc(100% - 24px),
-      transparent 100%);
-            mask-image: linear-gradient(to right,
-      transparent 0,
-      black 24px,
-      black calc(100% - 24px),
-      transparent 100%);
-  }
-
-  /* keep EXACT per-card size equal to 1/6th of the row (like your grid) */
-  header.site-header .nav-card{
-    flex: 0 0 calc((100% - (5 * .6rem)) / 6); /* same width as one grid column */
-    height: 56px;                              /* keep your original height */
-    padding: 0 .5rem;                          /* keep your original padding */
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-  }
-
-  /* visible, slim scrollbar */
-  header.site-header .main-nav::-webkit-scrollbar{ height: 6px; }
-  header.site-header .main-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
-  header.site-header .main-nav::-webkit-scrollbar-thumb{
-    background: rgba(255,255,255,.28);
-    border-radius: 999px;
-  }
-}
 /* Hit counter: always occupy its own full-width row */
 .site-footer .footer-inner{
   display: grid;
@@ -587,16 +525,6 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   width: 100%;
 }
 
-/* Wide layout keeps a dedicated row for the counter */
-@media (min-width: 720px){
-  .site-footer .footer-inner{
-    grid-template-columns: 80px 1fr 1fr 80px;
-    grid-template-areas:
-      "counter counter counter counter"
-      "logo    nav     nav     top"
-      ".       social  copyright .";
-  }
-  .site-footer .hit-counter{ grid-area: counter; }
 }
 /* Center the hit counter line at all sizes */
 .site-footer .hit-counter{
@@ -607,81 +535,35 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   text-align: center;
 }
 
-/* Keep a dedicated row for the counter on wide screens */
-@media (min-width: 720px){
-  .site-footer .footer-inner{
-    grid-template-columns: 80px 1fr 1fr 80px;
-    grid-template-areas:
-      "counter counter counter counter"
-      "logo    nav     nav     top"
-      ".       social  copyright .";
-  }
-  .site-footer .hit-counter{ grid-area: counter; }
-}
-
 /* Center the social links row (wide layout was overriding this) */
 .site-footer .footer-social{
   justify-content: center !important;
 }
 
 .post-hero{width:100%;max-height:420px;object-fit:cover;border-radius:16px;margin:0 0 1rem;border:2px solid #1a0b0b;
-          }
-:root {
-  --gold: #e6b400;
-  --gold-glow-1: rgba(230,180,0,.95);
-  --gold-glow-2: rgba(184,121,0,.65);
-}
-
-/* base */
-.sparkle { display:inline-block; transition: transform .15s ease, text-shadow .2s ease, color .2s ease; }
-
-/* clickable sparkle: no underline/line-height weirdness */
-.sparkle-link{
-  text-decoration:none; 
-  border:0;
-  display:inline-flex;
-  align-items:center;
-  line-height:1;
-}
-
-/* keep the sparkle look even inside an <a> */
-.sparkle{
-  display:inline-block;
-  margin-left:.25rem;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,.6));
-  animation: twinkle 1.2s ease-in-out infinite alternate;
-}
-
-/* if you lost the keyframes somewhere, re-add */
-@keyframes twinkle{
-  from{ transform: translateY(0) scale(1); opacity:.85; }
-  to{   transform: translateY(-1px) scale(1.08); opacity:1; }
 }
 
 /* anchors in the tagline shouldn’t get underlines by default */
 .site-tagline a{ text-decoration:none; border-bottom:0; }
-
-/* NAV: row of pills on desktop */
-.site-nav{
-  display:flex !important;
-  flex-wrap:wrap;
-  gap: 12px;
-  justify-content:center;
-  align-items:center;
-  margin: 12px 0 22px;
+/* Sparkle styles */
+.sparkle-link{
+  text-decoration: none;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
 }
-
-/* individual pills */
-.site-nav .nav-card{
-  display:inline-flex !important;
-  align-items:center;
-  justify-content:center;
-  width:auto !important;          /* kill any 100% width */
-  min-width:auto;
-  padding: .7rem 1.15rem;
+.sparkle{
+  display: inline-block;
+  margin-left: .25rem;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.6));
+  animation: twinkle 1.2s ease-in-out infinite alternate;
+  transition: transform .15s ease, text-shadow .2s ease;
 }
-
-/* (optional) stack on small screens only */
-@media (max-width: 640px){
-  .site-nav .nav-card{ width:100% !important; }
+@keyframes twinkle{
+  from { transform: translateY(0) scale(1); opacity:.85; }
+  to   { transform: translateY(-1px) scale(1.08); opacity:1; }
+}
+/* anchors in the tagline shouldn’t get underlines by default */
+.site-tagline a{ text-decoration:none; border-bottom:0; 
 }
