@@ -1,5 +1,7 @@
 ---
-title:
+layout: default
+title: Contact
+permalink: /contact/
 ---
 
 <!doctype html>
