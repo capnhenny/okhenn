@@ -4,23 +4,21 @@
     <img class="floaty" src="{{ '/assets/logo.png' | relative_url }}" alt="okhenn logo" width="64" height="64" decoding="async">
   </a>
 
-  <!-- Tagline + sparkle (emoji). On journal listing ONLY, sparkle becomes a link -->
-  <p class="site-tagline">
-    come check out my interwebs while you're lying in beds
-
-{%- comment -%} Sparkle link ONLY on the journal listing page {%- endcomment -%}
-{% if page.url == '/journal/' %}
-      <a  class="sparkle-link"
-        href="https://henntendo.com"
-        class="sparkle sparkle--link"
-        target="_blank"
-        rel="noopener"
-        aria-label="Open henntendo.com"
-      >✨</a>
-    {%- else -%}
+<!-- Tagline + sparkle (emoji). On journal listing ONLY, sparkle becomes a link -->
+<p class="site-tagline">
+  come check out my interwebs while you're lying in beds
+  {% if page.url == '/journal/' %}
+    <a class="sparkle-link"
+       href="https://henntendo.com"
+       target="_blank"
+       rel="noopener"
+       aria-label="Open henntendo.com (new tab)">
       <span class="sparkle" aria-hidden="true">✨</span>
-    {%- endif -%}
-  </p>
+    </a>
+  {% else %}
+    <span class="sparkle" aria-hidden="true">✨</span>
+  {% endif %}
+</p>
 
   <!-- Primary nav -->
 <nav class="site-nav">
