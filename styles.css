@@ -635,15 +635,52 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 /* base */
 .sparkle { display:inline-block; transition: transform .15s ease, text-shadow .2s ease, color .2s ease; }
 
-/* JS adds .sparkle--link only on journal.html */
-.sparkle--link { cursor: pointer; }
-.sparkle--link:hover,
-.sparkle--link:focus-visible {
-  transform: translateY(-1px) scale(1.05);
-  color: var(--gold);
-  text-shadow:
-    0 0 6px var(--gold-glow-1),
-    0 0 12px var(--gold-glow-1),
-    0 0 24px var(--gold-glow-2);
-  outline: none;
+/* clickable sparkle: no underline/line-height weirdness */
+.sparkle-link{
+  text-decoration:none; 
+  border:0;
+  display:inline-flex;
+  align-items:center;
+  line-height:1;
+}
+
+/* keep the sparkle look even inside an <a> */
+.sparkle{
+  display:inline-block;
+  margin-left:.25rem;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.6));
+  animation: twinkle 1.2s ease-in-out infinite alternate;
+}
+
+/* if you lost the keyframes somewhere, re-add */
+@keyframes twinkle{
+  from{ transform: translateY(0) scale(1); opacity:.85; }
+  to{   transform: translateY(-1px) scale(1.08); opacity:1; }
+}
+
+/* anchors in the tagline shouldn’t get underlines by default */
+.site-tagline a{ text-decoration:none; border-bottom:0; }
+/* NAV: row of pills on desktop */
+.site-nav{
+  display:flex !important;
+  flex-wrap:wrap;
+  gap: 12px;
+  justify-content:center;
+  align-items:center;
+  margin: 12px 0 22px;
+}
+
+/* individual pills */
+.site-nav .nav-card{
+  display:inline-flex !important;
+  align-items:center;
+  justify-content:center;
+  width:auto !important;          /* kill any 100% width */
+  min-width:auto;
+  padding: .7rem 1.15rem;
+}
+
+/* (optional) stack on small screens only */
+@media (max-width: 640px){
+  .site-nav .nav-card{ width:100% !important; }
 }
