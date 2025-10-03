@@ -24,17 +24,19 @@ plugins:
 
 # Collections
 collections:
+collections:
+  journal:
+    output: true
+    permalink: /journal/:slug/
   adventures:
     output: true
     permalink: /adventures/:slug/
   cooking:
     output: true
-    permalink: /cooking/:name/
+    permalink: /cooking/:slug/
   about:
     output: false        # used to assemble About; not standalone pages
-  journal:
-    output: true
-    permalink: /journal/:name/
+
 
 # Layout defaults for those collections
 defaults:
