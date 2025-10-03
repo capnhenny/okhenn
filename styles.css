@@ -548,102 +548,84 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .site-tagline a{ text-decoration:none; border-bottom:0; 
 }
 
-/* ===== NAV (final) — centered, uniform, responsive ===== */
+/* ===== NAV: final, enforced (put at END of file) ===== */
 
-/* desktop/tablet: 6 equal cards, centered */
+/* Desktop/Tablet — centered 6 uniform cards */
 .site-nav{
-  display: grid;
-  grid-template-columns: repeat(6, var(--navW));    /* six fixed tracks */
-  gap: var(--navGap);
-  justify-content: center;                           /* center the whole grid */
-  align-items: center;
-  margin: 12px auto 22px;
-  padding: 0 .75rem;
-  max-width: calc((var(--navW) * 6) + (5 * var(--navGap)));
+  display: grid !important;
+  grid-template-columns: repeat(6, var(--navW)) !important;
+  gap: var(--navGap) !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 12px auto 22px !important;
+  padding: 0 .75rem !important;
+  max-width: calc((var(--navW) * 6) + (5 * var(--navGap))) !important;
 }
 
 .site-nav .nav-card{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: var(--navW);
-  height: var(--navH);
-  padding: 0 .5rem;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: var(--navW) !important;
+  height: var(--navH) !important;
+  padding: 0 .5rem !important;
 
-  background-image: url("/assets/dark-gradient.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-image: url("/assets/dark-gradient.png") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: cover !important;
 
-  border: 2px solid #1a0b0b;
-  border-radius: 14px;
-  color: #fff;
-  text-decoration: none;
+  border: 2px solid #1a0b0b !important;
+  border-radius: 14px !important;
+  color: #fff !important;
+  text-decoration: none !important;
 
-  font-family: 'Press Start 2P', monospace;
-  font-size: clamp(.62rem, 1.3vw, .8rem);
-  letter-spacing: .05em;
-  text-transform: uppercase;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: clamp(.62rem, 1.3vw, .8rem) !important;
+  letter-spacing: .05em !important;
+  text-transform: uppercase !important;
 
-  box-shadow: 0 6px 14px rgba(0,0,0,.35);
-  transition: transform .2s, box-shadow .2s, background-color .25s, border-color .25s;
-  text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
-}
-
-.site-nav .nav-card:hover,
-.site-nav .nav-card:focus-visible{
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 22px rgba(0,0,0,.45);
-  background-color: rgba(255,255,255,.12);
-  background-blend-mode: lighten;
-  border-color: rgba(255,255,255,.25);
-  outline: none;
-  text-shadow:
-    0 0 6px rgba(255,70,166,.70),
-    0 0 12px rgba(255,70,166,.60),
-    0 0 24px rgba(255,70,166,.45);
+  box-shadow: 0 6px 14px rgba(0,0,0,.35) !important;
+  transition: transform .2s, box-shadow .2s, background-color .25s, border-color .25s !important;
+  text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35) !important;
 }
 
 .site-nav .nav-card[aria-current="page"]{
-  border-color: rgba(255,255,255,.35);
-  background-color: rgba(255,255,255,.10);
-  background-blend-mode: lighten;
+  border-color: rgba(255,255,255,.35) !important;
+  background-color: rgba(255,255,255,.10) !important;
+  background-blend-mode: lighten !important;
 }
 
-/* phones: swipe row, equal cards, first one fully visible */
+/* Mobile — swipe row, equal-width cards, first one fully visible */
 @media (max-width: 480px){
   .site-nav{
-    /* create a horizontal list of equal columns */
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: var(--navW);               /* each column same width */
-    gap: var(--navGap);
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: var(--navW) !important;
+    gap: var(--navGap) !important;
 
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain !important;
+    -webkit-overflow-scrolling: touch !important;
 
-    /* snap + padding so first card isn’t hidden */
-    scroll-snap-type: x mandatory;
-    scroll-padding-left: 12px;
-    padding: 0 12px;
+    scroll-snap-type: x mandatory !important;
+    scroll-padding-left: 12px !important;
+    padding: 0 12px !important;
 
-    /* subtle edge fade matching the 12px padding */
     -webkit-mask-image: linear-gradient(to right,
       transparent 0, black 12px,
-      black calc(100% - 12px), transparent 100%);
+      black calc(100% - 12px), transparent 100%) !important;
             mask-image: linear-gradient(to right,
       transparent 0, black 12px,
-      black calc(100% - 12px), transparent 100%);
+      black calc(100% - 12px), transparent 100%) !important;
   }
-
   .site-nav .nav-card{
-    width: var(--navW);                            /* keep equal width */
-    height: var(--navH);
-    scroll-snap-align: start;                      /* align left edge */
-    scroll-snap-stop: always;
+    width: var(--navW) !important;
+    height: var(--navH) !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
   }
-
+}
   .site-nav::-webkit-scrollbar{ height: 6px; }
   .site-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
   .site-nav::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.28); border-radius: 999px; }
