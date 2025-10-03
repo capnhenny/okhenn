@@ -1,19 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-   {% include head.html %}
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>{{ page.title | default: site.title }} · {{ site.title }}</title>
+  <!-- Base head: keep these first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
+  <link rel="stylesheet" href="/styles.css">
 
-  <!-- Favicons (load on every page) -->
-  <link rel="icon" href="{{ '/assets/favicon.png' | relative_url }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicon.png' | relative_url }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/favicon.png' | relative_url }}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/favicon.png' | relative_url }}">
+  <!-- Favicons -->
+  <link rel="icon" href="/assets/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+
+  <!-- Extra head bits (fonts, meta tags, etc). Make sure this file contains ONLY head *contents*. -->
+  {% include head.html %}
 </head>
 <body>
   {% include header.html %}
@@ -25,7 +29,7 @@
   {% include footer.html %}
 
   <!-- Site scripts -->
-  <script defer src="{{ '/include.js?v=8' | relative_url }}"></script>
-  <script defer src="{{ '/assets/js/visitor-counter.js?v=2' | relative_url }}"></script>
+  <script defer src="/include.js?v=8"></script>
+  <script defer src="/assets/js/visitor-counter.js?v=2"></script>
 </body>
 </html>
