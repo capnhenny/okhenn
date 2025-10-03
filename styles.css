@@ -118,21 +118,23 @@ header.site-header{
 .home-logo img:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 0 8px 20px rgba(0,0,0,.15);
 }
 
-/* NAV (unified, flex-based for centering) */
+/* NAV (final unified) */
 .site-nav {
-  display: flex;
-  justify-content: center;   /* center the group */
-  flex-wrap: wrap;           /* allow wrapping if screen is narrow */
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 equal blocks */
   gap: .6rem;
-  margin: 12px 0 22px;
   padding: 0 .75rem;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0 22px;
 }
 
 .site-nav .nav-card {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 56px;
+  width: 100%;                 /* fill its grid cell fully */
+  height: 56px;                /* consistent height */
   padding: 0 .5rem;
 
   background-image: url("/assets/dark-gradient.png");
@@ -155,6 +157,7 @@ header.site-header{
   text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
 }
 
+/* hover + focus glow */
 .site-nav .nav-card:hover,
 .site-nav .nav-card:focus-visible {
   transform: translateY(-3px) scale(1.02);
@@ -169,13 +172,14 @@ header.site-header{
     0 0 24px rgba(255,70,166,.45);
 }
 
+/* highlight current page */
 .site-nav .nav-card[aria-current="page"] {
   border-color: rgba(255,255,255,.35);
   background-color: rgba(255,255,255,.10);
   background-blend-mode: lighten;
 }
 
-/* MOBILE: keep horizontal scroll row */
+/* Mobile: swipe row with equal block sizing */
 @media (max-width: 420px) {
   .site-nav {
     display: flex;
@@ -191,7 +195,7 @@ header.site-header{
       black 24px,
       black calc(100% - 24px),
       transparent 100%);
-    mask-image: linear-gradient(to right,
+            mask-image: linear-gradient(to right,
       transparent 0,
       black 24px,
       black calc(100% - 24px),
@@ -199,14 +203,17 @@ header.site-header{
   }
 
   .site-nav .nav-card {
-    flex: 0 0 calc((100% - (5 * .6rem)) / 6);
+    flex: 0 0 calc((100% - (5 * .6rem)) / 6); /* each block still equal */
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
 
   .site-nav::-webkit-scrollbar { height: 6px; }
   .site-nav::-webkit-scrollbar-track { background: rgba(255,255,255,.06); }
-  .site-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.28); border-radius: 999px; }
+  .site-nav::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.28);
+    border-radius: 999px;
+  }
 }
 
 .nav-card{
