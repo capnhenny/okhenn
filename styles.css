@@ -613,3 +613,20 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   .site-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
   .site-nav::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.28); border-radius: 999px; }
 }
+
+.nav-card{
+  display: flex; justify-content: center; align-items: center;
+  height: 56px;                             /* uniform height */
+  padding: 0 .5rem;
+  /* keep your dark-gradient style */
+  background-image: url("/assets/dark-gradient.png");
+  background-repeat: no-repeat; background-position: center; background-size: cover;
+  border: 2px solid #1a0b0b; border-radius: 14px;
+  color:#fff; text-decoration:none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(.62rem, 1.3vw, .8rem);   /* scales with page size */
+  letter-spacing:.05em; text-transform:uppercase;
+  box-shadow: 0 6px 14px rgba(0,0,0,.35);
+  transition: transform .2s ease, box-shadow .2s ease, background-color .25s ease, border-color .25s ease;
+  text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
+}
