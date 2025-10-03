@@ -534,99 +534,110 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 /* ===== NAV: final, enforced (put at END of file) ===== */
 
 /* Desktop/Tablet — centered 6 uniform cards */
-.site-nav{
-  display: grid !important;
-  grid-template-columns: repeat(6, var(--navW)) !important;
-  gap: var(--navGap) !important;
-  justify-content: center !important;
-  align-items: center !important;
-  margin: 12px auto 22px !important;
-  padding: 0 .75rem !important;
-  max-width: calc((var(--navW) * 6) + (5 * var(--navGap))) !important;
+/* ===== Lock in "big peach buttons" header nav ===== */
+:root{
+  /* tweak if you want to nudge the gradient later */
+  --btn-grad-1: #ffe3c6;   /* light peach */
+  --btn-grad-2: #f5b0c2;   /* warm pink */
+  --btn-border: #1a0b0b;   /* dark outline */
 }
 
-.site-nav .nav-card{
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: var(--navW) !important;
-  height: var(--navH) !important;
-  padding: 0 .5rem !important;
+/* Desktop: 6 big tiles */
+header .main-nav{
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr) !important;
+  gap: 1rem !important;
+  padding: 0 .75rem !important;
+}
 
-  background-image: url("/assets/dark-gradient.png") !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-size: cover !important;
+header .nav-card{
+  /* shape & size */
+  min-height: 96px !important;
+  padding: 1.1rem 1.25rem !important;
+  border: 3px solid var(--btn-border) !important;
+  border-radius: 22px !important;
 
-  border: 2px solid #1a0b0b !important;
-  border-radius: 14px !important;
+  /* the peachy look */
+  background: linear-gradient(180deg, var(--btn-grad-1), var(--btn-grad-2)) !important;
   color: #fff !important;
   text-decoration: none !important;
 
+  /* type: big, chunky, pixel vibe */
   font-family: 'Press Start 2P', monospace !important;
-  font-size: clamp(.62rem, 1.3vw, .8rem) !important;
-  letter-spacing: .05em !important;
-  text-transform: uppercase !important;
+  font-size: clamp(1rem, 1.7vw, 1.25rem) !important;
+  letter-spacing: .04em !important;
 
-  box-shadow: 0 6px 14px rgba(0,0,0,.35) !important;
-  transition: transform .2s, box-shadow .2s, background-color .25s, border-color .25s !important;
-  text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35) !important;
+  /* depth */
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.28),
+    inset 0 0 0 2px rgba(255,255,255,.28) !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,.22) !important;
+
+  /* motion */
+  transition: transform .18s ease, box-shadow .18s ease, background .25s ease, border-color .25s ease !important;
 }
 
-.site-nav .nav-card[aria-current="page"]{
-  border-color: rgba(255,255,255,.35) !important;
-  background-color: rgba(255,255,255,.10) !important;
-  background-blend-mode: lighten !important;
+header .nav-card:hover,
+header .nav-card:focus-visible{
+  transform: translateY(-3px) scale(1.01) !important;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.35),
+    inset 0 0 0 2px rgba(255,255,255,.32) !important;
+
+  /* subtle brighten but KEEP WHITE TEXT (no pink neon) */
+  background: linear-gradient(180deg, #ffe9d1, #f7bdd0) !important;
+  border-color: #000 !important;
+  outline: none !important;
+}
+
+/* Active press */
+header .nav-card:active{
+  transform: translateY(-1px) !important;
+}
+
+/* Mobile: keep them BIG (2-row grid, no shrink) */
+@media (max-width: 720px){
+  header .main-nav{
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    padding: .75rem 1rem !important;
+  }
+  header .nav-card{
+    min-height: 120px !important;
+    font-size: clamp(1.05rem, 4.6vw, 1.35rem) !important;
+    line-height: 1.1 !important;
+  }
 }
 
 /* Mobile — swipe row, equal-width cards, first one fully visible */
-@media (max-width: 480px){
-  .site-nav{
-    display: grid !important;
-    grid-auto-flow: column !important;
-    grid-auto-columns: var(--navW) !important;
-    gap: var(--navGap) !important;
-
-    overflow-x: auto !important;
-    overscroll-behavior-x: contain !important;
-    -webkit-overflow-scrolling: touch !important;
-
-    scroll-snap-type: x mandatory !important;
-    scroll-padding-left: 12px !important;
-    padding: 0 12px !important;
-
-    -webkit-mask-image: linear-gradient(to right,
-      transparent 0, black 12px,
-      black calc(100% - 12px), transparent 100%) !important;
-            mask-image: linear-gradient(to right,
-      transparent 0, black 12px,
-      black calc(100% - 12px), transparent 100%) !important;
+/* ===== Small screens: make header nav slide horizontally ===== */
+@media (max-width: 720px){
+  /* turn the 6-col grid into a scroll rail */
+  header.site-header .main-nav{
+    display: flex;
+    gap: .9rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 0 .75rem;
+    /* subtle edge fades to hint 'scroll me' (no extra HTML needed) */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
   }
-  .site-nav .nav-card{
-    width: var(--navW) !important;
-    height: var(--navH) !important;
-    scroll-snap-align: start !important;
-    scroll-snap-stop: always !important;
-  }
-}
-  .site-nav::-webkit-scrollbar{ height: 6px; }
-  .site-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
-  .site-nav::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.28); border-radius: 999px; }
-}
 
-.nav-card{
-  display: flex; justify-content: center; align-items: center;
-  height: 56px;                             /* uniform height */
-  padding: 0 .5rem;
-  /* keep your dark-gradient style */
-  background-image: url("/assets/dark-gradient.png");
-  background-repeat: no-repeat; background-position: center; background-size: cover;
-  border: 2px solid #1a0b0b; border-radius: 14px;
-  color:#fff; text-decoration:none;
-  font-family: 'Press Start 2P', monospace;
-  font-size: clamp(.62rem, 1.3vw, .8rem);   /* scales with page size */
-  letter-spacing:.05em; text-transform:uppercase;
-  box-shadow: 0 6px 14px rgba(0,0,0,.35);
-  transition: transform .2s ease, box-shadow .2s ease, background-color .25s ease, border-color .25s ease;
-  text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
+  /* keep your current card size/looks; just make each item a snap */
+  header.site-header .nav-card{
+    flex: 0 0 auto;           /* no wrapping; each card keeps its size */
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  /* small, visible scrollbar = discoverable swipe */
+  header.site-header .main-nav::-webkit-scrollbar{ height: 6px; }
+  header.site-header .main-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
+  header.site-header .main-nav::-webkit-scrollbar-thumb{
+    background: rgba(255,255,255,.28);
+    border-radius: 999px;
+  }
 }
