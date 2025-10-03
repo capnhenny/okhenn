@@ -118,23 +118,24 @@ header.site-header{
 .home-logo img:hover { transform: scale(1.08) rotate(-3deg); box-shadow: 0 8px 20px rgba(0,0,0,.15);
 }
 
-/* NAV (final unified) */
+/* ------------------ NAV ------------------ */
 .site-nav {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 equal blocks */
+  grid-template-columns: repeat(6, var(--navW)); /* 6 equal cards, fixed width */
   gap: .6rem;
-  padding: 0 .75rem;
-  justify-content: center;
+  justify-content: center;   /* center the whole grid */
   align-items: center;
-  margin: 12px 0 22px;
+  margin: 12px auto 22px;
+  padding: 0 .75rem;
+  max-width: calc((var(--navW) * 6) + (5 * .6rem)); /* total width */
 }
 
 .site-nav .nav-card {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;                 /* fill its grid cell fully */
-  height: 56px;                /* consistent height */
+  width: var(--navW);
+  height: var(--navH);
   padding: 0 .5rem;
 
   background-image: url("/assets/dark-gradient.png");
@@ -146,18 +147,15 @@ header.site-header{
   border-radius: 14px;
   color: #fff;
   text-decoration: none;
-
   font-family: 'Press Start 2P', monospace;
   font-size: clamp(.62rem, 1.3vw, .8rem);
   letter-spacing: .05em;
   text-transform: uppercase;
-
   box-shadow: 0 6px 14px rgba(0,0,0,.35);
   transition: transform .2s, box-shadow .2s, background-color .25s, border-color .25s;
   text-shadow: 0 0 3px rgba(255,211,105,.5), 0 0 6px rgba(184,110,0,.35);
 }
 
-/* hover + focus glow */
 .site-nav .nav-card:hover,
 .site-nav .nav-card:focus-visible {
   transform: translateY(-3px) scale(1.02);
@@ -167,19 +165,18 @@ header.site-header{
   border-color: rgba(255,255,255,.25);
   outline: none;
   text-shadow:
-    0 0 6px rgba(255,70,166,.7),
-    0 0 12px rgba(255,70,166,.6),
+    0 0 6px rgba(255,70,166,.70),
+    0 0 12px rgba(255,70,166,.60),
     0 0 24px rgba(255,70,166,.45);
 }
 
-/* highlight current page */
 .site-nav .nav-card[aria-current="page"] {
   border-color: rgba(255,255,255,.35);
   background-color: rgba(255,255,255,.10);
   background-blend-mode: lighten;
 }
 
-/* Mobile: swipe row with equal block sizing */
+/* --- Mobile: scrollable row --- */
 @media (max-width: 420px) {
   .site-nav {
     display: flex;
@@ -195,7 +192,7 @@ header.site-header{
       black 24px,
       black calc(100% - 24px),
       transparent 100%);
-            mask-image: linear-gradient(to right,
+    mask-image: linear-gradient(to right,
       transparent 0,
       black 24px,
       black calc(100% - 24px),
@@ -203,7 +200,8 @@ header.site-header{
   }
 
   .site-nav .nav-card {
-    flex: 0 0 calc((100% - (5 * .6rem)) / 6); /* each block still equal */
+    flex: 0 0 var(--navW); /* fixed card width */
+    height: var(--navH);
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
