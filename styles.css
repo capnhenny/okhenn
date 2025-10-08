@@ -577,8 +577,8 @@ header .nav-card{
   transition: transform .18s ease, box-shadow .18s ease, background .25s ease, border-color .25s ease !important;
 }
 
-header .nav-card:hover,
-header .nav-card:focus-visible{
+header.site-header .nav-card:hover,
+header.site-header .nav-card:focus-visible{
   transform: translateY(-3px) scale(1.01) !important;
   box-shadow:
     0 16px 34px rgba(0,0,0,.35),
@@ -591,20 +591,20 @@ header .nav-card:focus-visible{
 }
 
 /* Active press */
-header .nav-card:active{
+header.site-header .nav-card:active{
   transform: translateY(-1px) !important;
 }
 
 /* Mobile: keep them BIG (2-row grid, no shrink) */
-@media (max-width: 720px){
-  header .main-nav{
-    grid-template-columns: repeat(2, 1fr) !important;
+@media (max-width: 1023px) and (min-width: 721px){
+  header.site-header .main-nav{
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 1rem !important;
     padding: .75rem 1rem !important;
   }
   header .nav-card{
-    min-height: 120px !important;
-    font-size: clamp(1.05rem, 4.6vw, 1.35rem) !important;
+    min-height: 108px !important;
+    font-size: clamp(1rem, 2.4vw, 1.3rem) !important;
     line-height: 1.1 !important;
   }
 }
@@ -612,25 +612,34 @@ header .nav-card:active{
 /* Mobile — swipe row, equal-width cards, first one fully visible */
 /* ===== Small screens: make header nav slide horizontally ===== */
 @media (max-width: 720px){
-  /* turn the 6-col grid into a scroll rail */
+/* keep tagline below the rail; rail on top so they don't overlap */
+.site-tagline( position:relative; z-index:1; }
+/* turn the 6-col grid into a scroll rail */
   header.site-header .main-nav{
-    display: flex;
-    gap: .9rem;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding: 0 .75rem;
-    /* subtle edge fades to hint 'scroll me' (no extra HTML needed) */
-    -webkit-mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    gap:.9rem !important;
+    overflow-x:auto !important;
+    overscroll-behavior-x:contain !important;
+    -webkit-overflow-scrolling:touch !important;
+    scroll-snap-type:x mandatory !important;
+    padding:.5rem .75rem .75rem !important;
+    margin-top:.25rem !important;
+    position:relative; z-index:2;
+    /* show a hint to scroll without clipping the first/last chip */
+    -webkit-mask-image:linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+            mask-image:linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+    scroll-padding-inline:.75rem; /* centers first/last on snap */
   }
 
-  /* keep your current card size/looks; just make each item a snap */
+  /* equal sizes in the rail (one big card at a time) */
   header.site-header .nav-card{
-    flex: 0 0 auto;           /* no wrapping; each card keeps its size */
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
+    flex:0 0 clamp(220px, 80vw, 280px) !important; /* equal width */
+    min-height:120px !important;
+    font-size:clamp(1.05rem,5vw,1.35rem) !important;
+    line-height:1.1 !important;
+    scroll-snap-align:center !important;
+    scroll-snap-stop:always !important;
   }
 
   /* small, visible scrollbar = discoverable swipe */
