@@ -3,13 +3,6 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Nunito:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@700&display=swap');
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-9usAa8mY30s5s+SO1zp+M9Uz+Xb8U0H+x3A3lM2LX2jTZGi4ZLJdkvRjt8WcN6iYG8YEMwRya6LL+k6qV0N/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      integrity="sha512-9usAa8mY30s5s+SO1zp+M9Uz+Xb8U0H+x3A3lM2LX2jTZGi4ZLJdkvRjt8WcN6iYG8YEMwRya6LL+k6qV0N/A=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
 
 
 /* ------------------ Design Tokens ------------------ */
@@ -143,24 +136,6 @@ header.site-header{
   align-items: center;
   gap: .5rem;
   flex-wrap: wrap;
-}
-/* Always make hit counter a full-width row in the footer grid */
-.site-footer .hit-counter{
-  display: block;
-  grid-column: 1 / -1;  /* span all columns at any breakpoint */
-  width: 100%;
-}
-
-/* Wide layout: put the hit counter in its own top row */
-@media (min-width: 720px){
-  .site-footer .footer-inner{
-    grid-template-columns: 80px 1fr 1fr 80px;
-    grid-template-areas:
-      "counter counter counter counter"
-      "logo    nav     nav     top"
-      ".       social  copyright .";
-  }
-  .site-footer .hit-counter{ grid-area: counter; }
 }
 
 /* --- Hit counter row (matches copyright font; glows on hover) --- */
@@ -473,12 +448,6 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   grid-auto-flow: row;
 }
 
-.site-footer .hit-counter{
-  display: block;
-  grid-column: 1 / -1; /* span all columns at any breakpoint */
-  width: 100%;
-}
-
 }
 /* Center the hit counter line at all sizes */
 .site-footer .hit-counter{
@@ -487,6 +456,9 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   align-items: center;
   grid-column: 1 / -1;           /* span full grid width */
   text-align: center;
+}
+
+  .site-footer .hit-counter{ grid-area: counter; }
 }
 
 /* Center the social links row (wide layout was overriding this) */
@@ -526,9 +498,6 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 @keyframes twinkle{
   from { transform: translateY(0) scale(1); opacity:.85; }
   to   { transform: translateY(-1px) scale(1.08); opacity:1; }
-}
-/* anchors in the tagline shouldn’t get underlines by default */
-.site-tagline a{ text-decoration:none; border-bottom:0; 
 }
 
 /* ===== NAV: final, enforced (put at END of file) ===== */
@@ -602,7 +571,7 @@ header.site-header .nav-card:active{
     gap: 1rem !important;
     padding: .75rem 1rem !important;
   }
-  header .nav-card{
+  header.site-header .nav-card{
     min-height: 108px !important;
     font-size: clamp(1rem, 2.4vw, 1.3rem) !important;
     line-height: 1.1 !important;
@@ -613,7 +582,7 @@ header.site-header .nav-card:active{
 /* ===== Small screens: make header nav slide horizontally ===== */
 @media (max-width: 720px){
 /* keep tagline below the rail; rail on top so they don't overlap */
-.site-tagline( position:relative; z-index:1; }
+.site-tagline{ position:relative; z-index:1; }
 /* turn the 6-col grid into a scroll rail */
   header.site-header .main-nav{
     display:flex !important;
