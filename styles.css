@@ -123,11 +123,12 @@ header.site-header{
   max-width: 1000px;
   margin: 0 auto;
   padding: 0.75rem 0.75rem 1rem;
-  background: transparent;   /* no big box so skeletons show */
+  background: transparent;
   border: 0;
   box-shadow: none;
   display: grid;
-  gap: .6rem;                /* spacing between rows */
+  gap: .6rem;
+  grid-auto-flow: row;
 }
 
 .footer-row{
@@ -273,14 +274,17 @@ header.site-header{
 }
 .to-top:hover{ transform: translateY(-2px); background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.28); }
 
+/* Wide screens: put hit counter in its own top row */
 @media (min-width: 720px){
   .site-footer .footer-inner{
     grid-template-columns: 80px 1fr 1fr 80px;
     grid-template-areas:
-      "logo nav nav top"
-      ". social copyright .";
+      "counter counter counter counter"
+      "logo    nav     nav     top"
+      ".       social  copyright .";
     text-align: left;
   }
+  
   .footer-logo{ grid-area: logo; justify-self: center; }
   .footer-nav{ grid-area: nav; justify-content: flex-start; }
   .footer-social{ grid-area: social; justify-content: flex-start; }
@@ -451,19 +455,20 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 /* Center the hit counter line at all sizes */
 .site-footer .hit-counter{
-  display: flex;                 /* restore flex so centering works */
+  grid-column: 1 / -1;
+  display: flex;
   justify-content: center;
   align-items: center;
-  grid-column: 1 / -1;           /* span full grid width */
   text-align: center;
 }
 
-  .site-footer .hit-counter{ grid-area: counter; }
-}
-
 /* Center the social links row (wide layout was overriding this) */
-.site-footer .footer-social{
-  justify-content: center !important;
+  .site-footer .hit-counter{ grid-area: counter; }
+  .footer-logo{ grid-area: logo; justify-self: center; }
+  .footer-nav{ grid-area: nav; justify-content: flex-start; }
+  .footer-social{ grid-area: social; justify-content: flex-start; }
+  .copyright{ grid-area: copyright; }
+  .to-top{ grid-area: top; position: static; justify-self: end; }
 }
 
 .post-hero{width:100%;max-height:420px;object-fit:cover;border-radius:16px;margin:0 0 1rem;border:2px solid #1a0b0b;
