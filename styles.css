@@ -461,20 +461,6 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   text-align: center;
 }
 
-/* Center the social links row (wide layout was overriding this) */
-.site-footer .footer-social{
-  justify-content: center !important;
-}
-
-/* Center the social links row (wide layout was overriding this) */
-  .site-footer .hit-counter{ grid-area: counter; }
-  .footer-logo{ grid-area: logo; justify-self: center; }
-  .footer-nav{ grid-area: nav; justify-content: flex-start; }
-  .footer-social{ grid-area: social; justify-content: flex-start; }
-  .copyright{ grid-area: copyright; }
-  .to-top{ grid-area: top; position: static; justify-self: end; }
-}
-
 .post-hero{width:100%;max-height:420px;object-fit:cover;border-radius:16px;margin:0 0 1rem;border:2px solid #1a0b0b;
 }
 
@@ -511,13 +497,11 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 /* ===== NAV: final, enforced (put at END of file) ===== */
 
-/* Desktop/Tablet — centered 6 uniform cards */
-/* ===== Lock in "big peach buttons" header nav ===== */
+/* Peach button tokens */
 :root{
-  /* tweak if you want to nudge the gradient later */
-  --btn-grad-1: #ffe3c6;   /* light peach */
-  --btn-grad-2: #f5b0c2;   /* warm pink */
-  --btn-border: #1a0b0b;   /* dark outline */
+  --btn-grad-1: #ffe3c6;
+  --btn-grad-2: #f5b0c2;
+  --btn-border: #1a0b0b;
 }
 
 /* Desktop: 6 big tiles */
@@ -529,56 +513,59 @@ header .main-nav{
 }
 
 header .nav-card{
-  /* shape & size */
   min-height: 96px !important;
   padding: 1.1rem 1.25rem !important;
   border: 3px solid var(--btn-border) !important;
   border-radius: 22px !important;
-
-  /* the peachy look */
   background: linear-gradient(180deg, var(--btn-grad-1), var(--btn-grad-2)) !important;
   color: #fff !important;
   text-decoration: none !important;
-
-  /* type: big, chunky, pixel vibe */
   font-family: 'Press Start 2P', monospace !important;
   font-size: clamp(1rem, 1.7vw, 1.25rem) !important;
   letter-spacing: .04em !important;
-
-  /* depth */
-  box-shadow:
-    0 12px 28px rgba(0,0,0,.28),
-    inset 0 0 0 2px rgba(255,255,255,.28) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.28), inset 0 0 0 2px rgba(255,255,255,.28) !important;
   text-shadow: 0 1px 0 rgba(0,0,0,.22) !important;
-
-  /* motion */
   transition: transform .18s ease, box-shadow .18s ease, background .25s ease, border-color .25s ease !important;
 }
-
 header.site-header .nav-card:hover,
 header.site-header .nav-card:focus-visible{
   transform: translateY(-3px) scale(1.01) !important;
-  box-shadow:
-    0 16px 34px rgba(0,0,0,.35),
-    inset 0 0 0 2px rgba(255,255,255,.32) !important;
-
-  /* subtle brighten but KEEP WHITE TEXT (no pink neon) */
+  box-shadow: 0 16px 34px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.32) !important;
   background: linear-gradient(180deg, #ffe9d1, #f7bdd0) !important;
   border-color: #000 !important;
   outline: none !important;
 }
+header.site-header .nav-card:active{ transform: translateY(-1px) !important; }
 
-/* Active press */
-header.site-header .nav-card:active{
-  transform: translateY(-1px) !important;
+/* Keep the tagline from getting overlapped */
+header.site-header .site-tagline{
+  position: relative;
+  z-index: 1;
+  margin-bottom: 1rem !important;
+}
+header.site-header .main-nav{
+  position: relative;
+  z-index: 2;
+  margin-top: 0 !important;
 }
 
-/* ===== Small screens (and tablets): horizontal slidey rail ===== */
-@media (max-width: 1024px){
-  /* keep tagline below the rail; nav doesn’t cover it */
-  header.site-header .site-tagline{ margin-bottom: 1rem !important; }
+/* Tablets: 3-up grid (optional) */
+@media (min-width: 721px) and (max-width: 1024px){
+  header.site-header .main-nav{
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem !important;
+    padding: .75rem 1rem !important;
+  }
+  header.site-header .nav-card{
+    min-height: 108px !important;
+    font-size: clamp(1rem, 2.4vw, 1.3rem) !important;
+    line-height: 1.1 !important;
+  }
+}
 
-  /* turn grid into a horizontal scroll rail */
+/* Small screens: horizontal slidey rail */
+@media (max-width: 720px){
+  /* rail */
   header.site-header > .main-nav{
     display: flex !important;
     flex-wrap: nowrap !important;
@@ -593,11 +580,10 @@ header.site-header .nav-card:active{
     /* soft edge fade hint */
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
             mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-
     scroll-padding-inline: .75rem; /* centers first/last on snap */
   }
 
-  /* equal, chunky cards in the rail */
+  /* equal wide cards (no shrink) */
   header.site-header > .main-nav .nav-card{
     flex: 0 0 clamp(220px, 80vw, 280px) !important;
     min-height: 120px !important;
@@ -607,48 +593,11 @@ header.site-header .nav-card:active{
     scroll-snap-stop: always !important;
   }
 
-  /* small visible scrollbar */
+  /* visible scrollbar */
   header.site-header > .main-nav::-webkit-scrollbar{ height: 6px; }
   header.site-header > .main-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
   header.site-header > .main-nav::-webkit-scrollbar-thumb{
     background: rgba(255,255,255,.28);
     border-radius: 999px;
   }
-}
-
-    /* edge fade hint */
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-    scroll-padding-inline: .75rem;
-  }
-
-  /* keep your big equal-width cards; no shrink */
-  header.site-header .nav-card{
-    flex: 0 0 min(80vw, 280px) !important; /* equals your clamp(220px,80vw,280px), but safer */
-    min-height: 120px !important;
-    font-size: clamp(1.05rem, 5vw, 1.35rem) !important;
-    line-height: 1.1 !important;
-    scroll-snap-align: center !important;
-    scroll-snap-stop: always !important;
-  }
-
-  header.site-header .main-nav::-webkit-scrollbar{ height: 6px; }
-  header.site-header .main-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
-  header.site-header .main-nav::-webkit-scrollbar-thumb{
-    background: rgba(255,255,255,.28);
-    border-radius: 999px;
-  }
-}
-
-/* -- Keep tagline above the nav and add breathing room -- */
-header.site-header .site-tagline{
-  position: relative;
-  z-index: 1;
-  margin-bottom: 0.85rem !important; /* space under the tagline */
-}
-
-header.site-header .main-nav{
-  position: relative;
-  z-index: 2;            /* sits above background effects only */
-  margin-top: 0 !important;
 }
