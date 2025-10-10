@@ -698,3 +698,61 @@ header.site-header > nav.main-nav{
 header.site-header > nav.main-nav .nav-card{
   flex: 0 0 auto !important;         /* respect existing width/height */
 }
+
+/* === HEADER NAV: one-row rail under the tagline (no overlap/wrap) === */
+
+/* if two taglines are rendered back-to-back, hide the second one (CSS-only guard) */
+header.site-header .site-tagline + .site-tagline { display: none !important; }
+
+/* put some breathing room below the tagline so nav never sits on top of it */
+header.site-header .site-tagline {
+  margin-bottom: 1rem !important;
+}
+
+/* the rail: always a single horizontal row */
+header.site-header > nav.main-nav{
+  display: flex !important;
+  flex-wrap: nowrap !important;     /* never wrap to two lines */
+  gap: 1rem !important;
+
+  width: 100% !important;           /* <= critical: enables overflow scrolling */
+  max-width: 100% !important;
+  overflow-x: auto !important;      /* scroll only if it doesn’t fit */
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+
+  align-items: center;
+  justify-content: center;          /* centered on wide screens */
+  padding: 0 .75rem !important;
+  margin: 0 !important;
+
+  /* soft edge hint (optional) */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+}
+
+/* keep each button’s current size — don’t let flex shrink them */
+header.site-header > nav.main-nav .nav-card{
+  flex: 0 0 auto !important;
+}
+
+/* small screens: left-align so the first chip starts at the edge; keep snapping */
+@media (max-width: 720px){
+  header.site-header > nav.main-nav{
+    justify-content: flex-start !important;
+    scroll-snap-type: x mandatory;
+  }
+  header.site-header > nav.main-nav .nav-card{
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+}
+
+/* large screens: no edge fade (not needed) and no scrollbars */
+@media (min-width: 721px){
+  header.site-header > nav.main-nav{
+    overflow-x: visible !important;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+}
