@@ -665,3 +665,36 @@ header.site-header > nav.main-nav{
     background: rgba(255,255,255,.28); border-radius: 999px;
   }
 }
+
+/* === Header nav: force one-row rail (no wrap), keep sizes === */
+header.site-header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header.site-header .site-tagline{
+  margin: .5rem 0 1rem !important;   /* space so nav never overlaps */
+}
+
+/* one row across ALL breakpoints */
+header.site-header > nav.main-nav{
+  display: flex !important;          /* win over any grid rules */
+  flex-wrap: nowrap !important;      /* no wrapping — ever */
+  gap: 1rem !important;
+  max-width: 100%;
+  overflow-x: auto;                   /* scroll if viewport is too small */
+  -webkit-overflow-scrolling: touch; /* smooth on iOS */
+  justify-content: center;           /* center on wide screens */
+  padding: 0 .75rem !important;
+  margin: 0 !important;
+
+  /* optional: soft edge hint; remove if you don’t want it */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+}
+
+/* keep each button’s current size; don’t shrink */
+header.site-header > nav.main-nav .nav-card{
+  flex: 0 0 auto !important;         /* respect existing width/height */
+}
