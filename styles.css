@@ -454,11 +454,16 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 /* Center the hit counter line at all sizes */
 .site-footer .hit-counter{
-  grid-column: 1 / -1;
-  display: flex;
+  display: flex;                 /* restore flex so centering works */
   justify-content: center;
   align-items: center;
+  grid-column: 1 / -1;           /* span full grid width */
   text-align: center;
+}
+
+/* Center the social links row (wide layout was overriding this) */
+.site-footer .footer-social{
+  justify-content: center !important;
 }
 
 /* Center the social links row (wide layout was overriding this) */
@@ -568,32 +573,46 @@ header.site-header .nav-card:active{
   transform: translateY(-1px) !important;
 }
 
-/* ===== Mobile (≤1200px): slidey nav rail, same big cards ===== */
-@media (max-width: 1200px){
-  header.site-header .site-tagline{ margin-bottom: .9rem !important; }
+/* ===== Small screens (and tablets): horizontal slidey rail ===== */
+@media (max-width: 1024px){
+  /* keep tagline below the rail; nav doesn’t cover it */
+  header.site-header .site-tagline{ margin-bottom: 1rem !important; }
 
-  header.site-header .main-nav{
-    display:flex !important;
-    flex-wrap:nowrap !important;
-    gap:.9rem !important;
-    overflow-x:auto !important;
-    overscroll-behavior-x:contain !important;
-    -webkit-overflow-scrolling:touch !important;
-    scroll-snap-type:x mandatory !important;
-    padding:.5rem .75rem .75rem !important;
-    margin-top:0 !important;
-    -webkit-mask-image:linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-            mask-image:linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-    scroll-padding-inline:.75rem;
+  /* turn grid into a horizontal scroll rail */
+  header.site-header > .main-nav{
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: .9rem !important;
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    padding: .5rem .75rem .75rem !important;
+    margin-top: 0 !important;
+
+    /* soft edge fade hint */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+
+    scroll-padding-inline: .75rem; /* centers first/last on snap */
   }
 
-  header.site-header .nav-card{
-    flex:0 0 clamp(220px, 80vw, 280px) !important;
-    min-height:120px !important;
-    font-size:clamp(1.05rem,5vw,1.35rem) !important;
-    line-height:1.1 !important;
-    scroll-snap-align:center !important;
-    scroll-snap-stop:always !important;
+  /* equal, chunky cards in the rail */
+  header.site-header > .main-nav .nav-card{
+    flex: 0 0 clamp(220px, 80vw, 280px) !important;
+    min-height: 120px !important;
+    font-size: clamp(1.05rem, 5vw, 1.35rem) !important;
+    line-height: 1.1 !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
+  }
+
+  /* small visible scrollbar */
+  header.site-header > .main-nav::-webkit-scrollbar{ height: 6px; }
+  header.site-header > .main-nav::-webkit-scrollbar-track{ background: rgba(255,255,255,.06); }
+  header.site-header > .main-nav::-webkit-scrollbar-thumb{
+    background: rgba(255,255,255,.28);
+    border-radius: 999px;
   }
 }
 
