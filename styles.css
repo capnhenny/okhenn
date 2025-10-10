@@ -601,3 +601,6 @@ header.site-header .main-nav{
     border-radius: 999px;
   }
 }
+
+/* TEMP: prove we’re live */
+html{ outline: 4px solid lime !important; }
