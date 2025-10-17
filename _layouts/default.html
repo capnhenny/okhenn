@@ -40,7 +40,7 @@ header.site-header .main-nav{ order:3; }
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
 
   <!-- CSS -->
-<link rel="stylesheet" href="{{ '/styles.css?v=22' | relative_url }}">
+<link rel="stylesheet" href="/styles.css?v={{ site.time | date: '%s' }}">
 
   <!-- Include favicons -->
   {% include favicon.html %}
