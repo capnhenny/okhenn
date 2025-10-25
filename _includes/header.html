@@ -23,22 +23,34 @@
   <!-- Primary nav -->
 <nav class="site-nav">
   <a class="nav-card" href="{{ '/' | relative_url }}"
-     {% if page.url == '/' or page.url == '/index.html' %}aria-current="page"{% endif %}>home</a>
+     {% if page.url == '/' or page.url == '/index.html' %}aria-current="page"{% endif %}>
+    <span class="label">home</span>
+  </a>
 
   <a class="nav-card" href="{{ '/journal/' | relative_url }}"
-     {% if page.url contains '/journal/' %}aria-current="page"{% endif %}>journal</a>
+     {% if page.url contains '/journal/' %}aria-current="page"{% endif %}>
+    <span class="label">journal</span>
+  </a>
 
   <a class="nav-card" href="{{ '/adventures/' | relative_url }}"
-     {% if page.url contains '/adventures/' %}aria-current="page"{% endif %}>adventures</a>
+     {% if page.url contains '/adventures/' %}aria-current="page"{% endif %}>
+    <span class="label">adventures</span>
+  </a>
 
   <a class="nav-card" href="{{ '/cooking/' | relative_url }}"
-     {% if page.url contains '/cooking/' %}aria-current="page"{% endif %}>cooking</a>
-  
+     {% if page.url contains '/cooking/' %}aria-current="page"{% endif %}>
+    <span class="label">cooking</span>
+  </a>
+
   <a class="nav-card" href="{{ '/about/' | relative_url }}"
-     {% if page.url == '/about/' %}aria-current="page"{% endif %}>about</a>
-  
+     {% if page.url == '/about/' %}aria-current="page"{% endif %}>
+    <span class="label">about</span>
+  </a>
+
   <a class="nav-card" href="{{ '/contact/' | relative_url }}"
-     {% if page.url contains '/contact/' %}aria-current="page"{% endif %}>contact</a>
+     {% if page.url contains '/contact/' %}aria-current="page"{% endif %}>
+    <span class="label">contact</span>
+  </a>
 </nav>
 
 </header>
