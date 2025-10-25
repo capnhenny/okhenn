@@ -113,26 +113,24 @@ html,body { overflow-x: hidden; }
 }
 
 /* Buttons — compact, equal width, container-sized text */
+/* Compact header buttons */
 .nav-card{
-  container-type: inline-size;     /* allow cqi-based sizing */
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;                    /* let content shrink instead of overflow */
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  container-type: inline-size;
 
-  border: 2px solid currentColor;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.35));
-  color: var(--on-wall);
-  text-decoration: none;
-  box-shadow: 0 6px 12px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.7);
+  display:inline-flex; justify-content:center; align-items:center;
+  min-width:0; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;
 
-  line-height: 1;
-  height: clamp(34px, 5.2vw, 48px);   /* hard cap total height */
-  padding: .45em .6em;                /* compact padding */
+  border:2px solid currentColor;
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.32));
+  color:var(--on-wall); text-decoration:none;
+  box-shadow:0 6px 12px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.7);
+
+  line-height:1;
+  /* ↓ shorter, hard-capped height + smaller padding */
+  height: clamp(30px, 3.4vw, 40px);
+  padding: .35em .55em;
+
   transition: transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
 }
 .nav-card:hover,
@@ -144,21 +142,21 @@ html,body { overflow-x: hidden; }
 
 /* Fallback label sizing (for browsers without container units) */
 .nav-card .label{
-  font-family: 'Press Start 2P', monospace;
-  letter-spacing: .02em;
-  line-height: 1;
-  font-size: clamp(.46rem, 1vw, .82rem);
+  font-family:'Press Start 2P', monospace;
+  letter-spacing:.02em;
+  /* slightly smaller base so text doesn’t force height */
+  font-size: clamp(.42rem, .85vw, .74rem);
 }
 
 /* Container-query sizing when supported */
 @supports (font-size: 1cqi){
   .nav-card .label{
     /* 1cqi = 1% of this card’s width */
-    font-size: clamp(12px, 9cqi, 22px);
+    font-size: clamp(11px, 8cqi, 18px);
   }
   .nav-card{
-    padding-block: clamp(.4em, 3cqi, .75em);
-    height: clamp(32px, 12cqi, 48px);
+    padding-block: clamp(.32em, 2cqi, .55em);
+    height: clamp(28px, 9cqi, 40px);
   }
   @container (max-width: 160px){ .nav-card .label{ letter-spacing:.01em; } }
   @container (max-width: 130px){ .nav-card .label{ letter-spacing:0; } }
@@ -171,8 +169,8 @@ html,body { overflow-x: hidden; }
     gap: .6rem;
   }
   .nav-card{
-    height: clamp(32px, 8vw, 44px);
-    padding: .5em .6em;
+    height: clamp(28px, 7.5vw, 38px);
+    padding: .4em .5em;
   }
 }
 
