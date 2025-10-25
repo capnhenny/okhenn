@@ -131,17 +131,35 @@ header.site-header{
 }
 
 .footer-chip{
-  /* make every chip take equal share of the row */
   flex:1 1 0;
-  min-width:0;                /* allow text to shrink instead of overflow */
-  width:auto;                 /* equalize, don’t hard-cap width */
+  min-width:0;
+  width:auto;
   text-align:center;
+
+  /* keep the button look */
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  border:2px solid currentColor;
+  border-radius:12px;
+  background:transparent;
+  color:var(--on-wall);
+  text-decoration:none;
+  font-family:'Press Start 2P', monospace;
+  font-size:clamp(.36rem,1.3vw,.70rem);
+  letter-spacing:clamp(.01em,.22vw,.06em);
+  line-height:1;
+  text-shadow:0 1px 4px rgba(0,0,0,.25);
+  padding-block:clamp(.35em,1vw,.8em);
+  min-height:clamp(28px,4.2vw,44px);
+  transition:transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
 }
-.footer-chip{
-  /* keep your existing styles… */
-  font-size: clamp(.36rem, 1.3vw, .70rem);  /* small tweak: slightly lower mid value */
-  padding-block: clamp(.35em, 1vw, .8em);
-  min-height: clamp(28px, 4.2vw, 44px);
+
+.footer-chip:hover,
+.footer-chip:focus-visible{
+  transform:translateY(-2px);
+  background-color:rgba(255,255,255,.08);
+  outline:none;
 }
 
 /* row 2: socials */
