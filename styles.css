@@ -101,77 +101,75 @@ body::before {
 *,*::before,*::after { box-sizing: border-box; }
 html,body { overflow-x: hidden; }
 
+/* === Header nav: one row, equal columns (no sideways scroll) === */
 .site-nav{
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr)); /* exactly 6 equal columns */
-  gap: var(--navGap);
-  align-items: center;
-  justify-items: stretch;
-  max-width: min(1100px, 95vw);
-  width: 100%;
-  margin: .25rem auto 0; /* sits under the tagline */
+  display:grid;
+  grid-template-columns:repeat(6, minmax(0,1fr));
+  gap:var(--navGap);
+  align-items:center;
+  justify-items:stretch;
+  max-width:min(1100px,95vw);
+  width:100%;
+  margin:.25rem auto 0;
 }
 
-/* Buttons — compact, equal width, container-sized text */
-/* Compact header buttons */
+/* === Compact nav button === */
 .nav-card{
-  container-type: inline-size;
+  /* make text size relative to each card */
+  container-type:inline-size;
 
-  display:inline-flex; justify-content:center; align-items:center;
-  min-width:0; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  vertical-align:middle;
+
+  min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 
   border:2px solid currentColor;
-  border-radius:16px;
+  border-radius:14px;
   background:linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.32));
-  color:var(--on-wall); text-decoration:none;
-  box-shadow:0 6px 12px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.7);
+  color:var(--on-wall);
+  text-decoration:none;
+  box-shadow:0 5px 10px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.7);
 
+  /* the height controls (short!) */
   line-height:1;
-  /* ↓ shorter, hard-capped height + smaller padding */
-  height: clamp(30px, 3.4vw, 40px);
-  padding: .35em .55em;
+  block-size:clamp(28px, 3vw, 36px);      /* <= real height cap */
+  padding-inline:.5em;                     /* tiny horizontal padding */
+  padding-block:clamp(.22em, .5vw, .38em); /* tiny vertical padding */
 
-  transition: transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+  transition:transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
 }
+
+/* if you forgot the <span class="label">, this prevents tall chips anyway */
+.nav-card{ font-size:clamp(.42rem, .85vw, .72rem); }
+
 .nav-card:hover,
 .nav-card:focus-visible{
-  transform: translateY(-2px);
-  background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.45));
-  outline: none;
+  transform:translateY(-2px);
+  background:linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.45));
+  outline:none;
 }
 
-/* Fallback label sizing (for browsers without container units) */
+/* Label scales to the card when present */
 .nav-card .label{
   font-family:'Press Start 2P', monospace;
   letter-spacing:.02em;
-  /* slightly smaller base so text doesn’t force height */
-  font-size: clamp(.42rem, .85vw, .74rem);
+  line-height:1;
+  font-size:clamp(.42rem, .85vw, .72rem); /* fallback */
 }
-
-/* Container-query sizing when supported */
-@supports (font-size: 1cqi){
-  .nav-card .label{
-    /* 1cqi = 1% of this card’s width */
-    font-size: clamp(11px, 8cqi, 18px);
-  }
+@supports (font-size:1cqi){
+  .nav-card .label{ font-size:clamp(11px, 7.5cqi, 17px); }
   .nav-card{
-    padding-block: clamp(.32em, 2cqi, .55em);
-    height: clamp(28px, 9cqi, 40px);
+    padding-block:clamp(.20em, 1.8cqi, .36em);
+    block-size:clamp(26px, 9cqi, 36px);
   }
-  @container (max-width: 160px){ .nav-card .label{ letter-spacing:.01em; } }
-  @container (max-width: 130px){ .nav-card .label{ letter-spacing:0; } }
 }
 
-/* Small screens: two rows, equal widths, still no horizontal scroll */
+/* phones: 2 rows, still compact */
 @media (max-width:560px){
-  .site-nav{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .6rem;
-  }
-  .nav-card{
-    height: clamp(28px, 7.5vw, 38px);
-    padding: .4em .5em;
-  }
+  .site-nav{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:.6rem; }
+  .nav-card{ block-size:clamp(28px, 7vw, 34px); }
 }
 
 /* ------------------ Footer ------------------ */
