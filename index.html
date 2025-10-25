@@ -1,35 +1,13 @@
 ---
 layout: default
-title: home   # change per page
+title: home
 ---
 
-<!doctype html>
-<html lang="en">
-
-  <head>
-  <meta charset="utf-8" />
-  <title>okhenn — home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Preload the hero background for faster first paint -->
-  <link rel="preload" as="image" href="/assets/skeleton-gradient.jpg">
-
-  <!-- Cache-busted stylesheet so new .home rules apply -->
-  <link rel="stylesheet" href="styles.css?v=2.2">
-  <link rel="icon" href="/assets/favicon.png" type="image/png">
-
-  <script src="include.js?v=8" defer></script>
-</head>
-
-<!-- IMPORTANT: this class enables the skeleton wallpaper -->
-<body>
-  
-<main class="wrap">
-  <!-- remove the duplicate tagline from here if you had it -->
-  <svg class="squig" viewBox="0 0 200 40" aria-hidden="true">
-    <path d="M5 20c15-20 35 20 50 0s35 20 50 0 35 20 50 0 35 20 40 0"
-          fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-  </svg>
+<!-- Page content only (layout wraps this in <main class="wrap">) -->
+<svg class="squig" viewBox="0 0 200 40" aria-hidden="true">
+  <path d="M5 20c15-20 35 20 50 0s35 20 50 0 35 20 50 0 35 20 40 0"
+        fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+</svg>
 
 <div class="cards">
   <a class="card" href="{{ '/journal/' | relative_url }}">
@@ -57,11 +35,3 @@ title: home   # change per page
     <p>send fun facts, choose my next recipe, or tell my bf he's pretty</p>
   </a>
 </div>
-
-</main>
-
-<script defer src="include.js?v=1"></script>
-<script defer src="assets/js/visitor-counter.js?v=2"></script>
-
-</body>
-</html>
