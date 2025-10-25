@@ -86,25 +86,81 @@ body::before {
 @keyframes fade { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
 @keyframes riseIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
-/* ------------------ Header ------------------ */
-header.site-header{
+/* ---------- Header layout ---------- */
+.site-header{
   position:relative; z-index:10; text-align:center;
-  background:transparent; box-shadow:none; backdrop-filter:none; border-block:0;
-  padding:1rem 1rem .75rem; color:var(--on-wall);
+  padding: 1rem 1rem .5rem;
+  color: var(--on-wall);
 }
 .site-tagline{
-  margin:.15rem auto .65rem; max-width:900px; padding:0 .5rem;
-  color:var(--on-wall); font-weight:400;
-  text-shadow:0 1px 6px rgba(0,0,0,.18);
+  margin: .25rem auto 1rem;   /* <- space ABOVE the nav */
+  max-width: 900px;
+  padding: 0 .5rem;
+  color: var(--on-wall);
+  font-weight: 400;
+  text-shadow: 0 1px 6px rgba(0,0,0,.18);
 }
-.home-logo{ display:block; margin:0 auto .25rem; }
-.home-logo img{
-  width:100px; height:auto; border-radius:20%;
-  filter:drop-shadow(0 1px 6px rgba(0,0,0,.25));
-  transition:transform var(--t-med), box-shadow var(--t-med);
-  animation: float 4s ease-in-out infinite;
+
+/* ---------- Header nav: one-row, equal buttons ---------- */
+.site-nav{
+  /* desktop/tablet: single row, equal shares */
+  display:flex;
+  flex-wrap:nowrap;
+  gap: var(--navGap);
+  justify-content:center;
+  align-items:stretch;
+
+  width: min(1100px, 92vw);
+  margin: 0 auto;             /* center the row */
 }
-.home-logo img:hover{ transform:scale(1.08) rotate(-3deg); box-shadow:var(--shadow-lg); }
+
+/* Button look (match your footer vibe) */
+.nav-chip{
+  flex: 1 1 0;        /* equal width */
+  min-width: 0;       /* allow text to scale */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  border: 2px solid currentColor;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.35));
+  color: var(--on-wall);
+  text-decoration: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(.42rem, 1.3vw, .85rem);
+  letter-spacing: .02em;
+  line-height: 1;
+  padding-block: clamp(.5em, 1.1vw, .9em);
+  min-height: clamp(34px, 5vw, 56px);
+  box-shadow: 0 10px 18px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.7);
+  transition: transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast), box-shadow var(--t-fast);
+}
+.nav-chip:hover,
+.nav-chip:focus-visible{
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.45));
+  outline: none;
+}
+
+/* ---------- Mobile: keep it ONE row via swipe ---------- */
+@media (max-width: 720px){
+  .site-nav{
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-inline: .5rem;
+    gap: .6rem;
+  }
+  .nav-chip{
+    /* fixed min width so they don’t crush; still equal height */
+    flex: 0 0 auto;
+    min-width: clamp(120px, 38vw, 200px);
+    scroll-snap-align: center;
+  }
+}
 
 /* ------------------ Footer ------------------ */
 .site-footer{ margin-top:2rem; color:var(--on-wall); }
