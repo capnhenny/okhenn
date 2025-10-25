@@ -116,22 +116,33 @@ header.site-header{
 .footer-row{ display:flex; justify-content:center; align-items:center; gap:.5rem; flex-wrap:wrap; }
 
 /* row 1: nav chips */
+/* Footer nav: one-line desktop, 2-up on mobile */
 .footer-nav{
-  width:100%; display:grid; gap:clamp(.25rem,1vw,.6rem);
-  grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
+  /* one row, equal-width chips */
+  display:flex;
+  flex-wrap:nowrap;
+  gap:var(--navGap);
+  justify-content:center;
+  align-items:stretch;
+
+  /* keep it centered & responsive */
+  width:min(1100px, 92vw);
+  margin-inline:auto;
+}
+
+.footer-chip{
+  /* make every chip take equal share of the row */
+  flex:1 1 0;
+  min-width:0;                /* allow text to shrink instead of overflow */
+  width:auto;                 /* equalize, don’t hard-cap width */
+  text-align:center;
 }
 .footer-chip{
-  min-width:0; width:100%; text-align:center; white-space:nowrap;
-  padding-block:clamp(.35em,1vw,.8em); padding-inline:clamp(.25rem,.9vw,.9rem);
-  min-height:clamp(28px,4.2vw,44px);
-  background:transparent; color:var(--on-wall);
-  border:2px solid currentColor; border-radius:12px; text-decoration:none;
-  font-family:'Press Start 2P', monospace;
-  font-size:clamp(.36rem,1.35vw,.70rem); letter-spacing:clamp(.01em,.22vw,.06em); line-height:1;
-  text-shadow:0 1px 4px rgba(0,0,0,.25);
-  transition:transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+  /* keep your existing styles… */
+  font-size: clamp(.36rem, 1.3vw, .70rem);  /* small tweak: slightly lower mid value */
+  padding-block: clamp(.35em, 1vw, .8em);
+  min-height: clamp(28px, 4.2vw, 44px);
 }
-.footer-chip:hover,.footer-chip:focus-visible{ transform:translateY(-2px); background-color:rgba(255,255,255,.08); outline:none; }
 
 /* row 2: socials */
 .footer-social{ gap:.75rem; }
@@ -175,6 +186,16 @@ header.site-header{
     font-size:clamp(.34rem,1.2vw,.62rem);
     padding-inline:clamp(.18rem,.7vw,.6rem);
     min-height:clamp(26px,5vw,36px);
+  }
+/* Mobile: two centered rows */
+@media (max-width:720px){
+  .footer-nav{
+    flex-wrap:wrap;           /* now allow wrapping */
+    justify-content:center;   /* keep the grid centered */
+  }
+  .footer-chip{
+    flex:1 1 calc(50% - var(--navGap));
+    /* ensures ~two columns; the gap subtraction keeps rows tidy */
   }
 }
 
