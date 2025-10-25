@@ -187,6 +187,8 @@ header.site-header{
     padding-inline:clamp(.18rem,.7vw,.6rem);
     min-height:clamp(26px,5vw,36px);
   }
+}  /* ← close 600px block */
+
 /* Mobile: two centered rows */
 @media (max-width:720px){
   .footer-nav{
