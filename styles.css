@@ -89,52 +89,39 @@ body::before {
 /* ---------- Header layout ---------- */
 .site-header{
   position:relative; z-index:10; text-align:center;
-  padding: 1rem 1rem .5rem;
-  color: var(--on-wall);
+  padding: 1rem 1rem .5rem; color: var(--on-wall);
 }
 .site-tagline{
-  margin: .25rem auto 1rem;   /* <- space ABOVE the nav */
-  max-width: 900px;
-  padding: 0 .5rem;
-  color: var(--on-wall);
-  font-weight: 400;
+  margin: .25rem auto .8rem;   /* sits ABOVE nav */
+  max-width: 900px; padding: 0 .5rem; font-weight: 400;
   text-shadow: 0 1px 6px rgba(0,0,0,.18);
 }
 
-/* ---------- Header nav: one-row, equal buttons ---------- */
+/* ---------- Header nav: single row, equal widths ---------- */
 .site-nav{
-  /* desktop/tablet: single row, equal shares */
-  display:flex;
-  flex-wrap:nowrap;
+  display:flex; flex-wrap:nowrap; justify-content:center; align-items:stretch;
   gap: var(--navGap);
-  justify-content:center;
-  align-items:stretch;
-
   width: min(1100px, 92vw);
-  margin: 0 auto;             /* center the row */
+  margin: 0 auto;
+  overflow: visible;      /* ensure no scrollbar at this size */
 }
 
-/* Button look (match your footer vibe) */
+/* Buttons — smaller padding/height, real fluid font */
 .nav-chip{
-  flex: 1 1 0;        /* equal width */
-  min-width: 0;       /* allow text to scale */
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  flex: 1 1 0; min-width:0; width:auto; /* equal-share row */
+  display:inline-flex; justify-content:center; align-items:center; text-align:center;
 
-  border: 2px solid currentColor;
-  border-radius: 20px;
+  border: 2px solid currentColor; border-radius: 18px;
   background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.35));
-  color: var(--on-wall);
-  text-decoration: none;
-  font-family: 'Press Start 2P', monospace;
-  font-size: clamp(.42rem, 1.3vw, .85rem);
-  letter-spacing: .02em;
-  line-height: 1;
-  padding-block: clamp(.5em, 1.1vw, .9em);
-  min-height: clamp(34px, 5vw, 56px);
-  box-shadow: 0 10px 18px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.7);
+  color: var(--on-wall); text-decoration:none; font-family:'Press Start 2P', monospace;
+
+  /* key tweaks ↓ */
+  line-height: 1;                      /* remove extra vertical slack */
+  font-size: clamp(.40rem, .95vw, .82rem);
+  padding-block: clamp(.35em, .8vw, .7em);
+  min-height: clamp(28px, 4.2vw, 48px);
+
+  box-shadow: 0 8px 16px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.7);
   transition: transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast), box-shadow var(--t-fast);
 }
 .nav-chip:hover,
@@ -144,21 +131,14 @@ body::before {
   outline: none;
 }
 
-/* ---------- Mobile: keep it ONE row via swipe ---------- */
-@media (max-width: 720px){
-  .site-nav{
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding-inline: .5rem;
-    gap: .6rem;
-  }
+/* ---------- Small screens: wrap to two rows (no sliding) ---------- */
+@media (max-width: 560px){
+  .site-nav{ flex-wrap: wrap; gap: .6rem; }
   .nav-chip{
-    /* fixed min width so they don’t crush; still equal height */
-    flex: 0 0 auto;
-    min-width: clamp(120px, 38vw, 200px);
-    scroll-snap-align: center;
+    flex: 1 1 calc(50% - .6rem);
+    font-size: clamp(.52rem, 3.2vw, .74rem);
+    min-height: clamp(34px, 8vw, 46px);
+    padding-block: .55em;
   }
 }
 
