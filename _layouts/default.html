@@ -1,50 +1,12 @@
 <!doctype html>
-<style>
-/* Header stack so nothing overlaps, regardless of external CSS */
-header.site-header{ display:flex; flex-direction:column; align-items:center; }
-header.site-header .site-tagline{ order:2; margin-bottom:1rem; }
-header.site-header .main-nav{ order:3; }
-
-/* Force the mobile rail no matter what else tries to win */
-@media (max-width: 720px){
-  header.site-header > nav.main-nav{
-    display:flex !important;
-    flex-wrap:nowrap !important;
-    gap:.9rem !important;
-    overflow-x:auto !important;
-    -webkit-overflow-scrolling:touch !important;
-    scroll-snap-type:x mandatory !important;
-    padding:.5rem .75rem .75rem !important;
-    margin-top:0 !important;
-    -webkit-mask-image:linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-            mask-image:linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
-    scroll-padding-inline:.75rem;
-  }
-  header.site-header > nav.main-nav .nav-card{
-    flex:0 0 clamp(220px, 80vw, 280px) !important;
-    min-height:120px !important;
-    font-size:clamp(1.05rem, 5vw, 1.35rem) !important;
-    line-height:1.1 !important;
-    scroll-snap-align:center !important;
-    scroll-snap-stop:always !important;
-  }
-}
-</style>
-
 <html lang="en">
 <head>
-  <!-- Base head: keep these first -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
 
-  <!-- CSS -->
-<link rel="stylesheet" href="/styles.css?v={{ site.time | date: '%s' }}">
-
-  <!-- Include favicons -->
+  <link rel="stylesheet" href="/styles.css?v={{ site.time | date: '%s' }}">
   {% include favicon.html %}
-
 </head>
 <body>
   {% include header.html %}
@@ -55,7 +17,6 @@ header.site-header .main-nav{ order:3; }
 
   {% include footer.html %}
 
-  <!-- Site scripts -->
   <script defer src="/include.js?v=8"></script>
   <script defer src="/assets/js/visitor-counter.js?v=2"></script>
 </body>
