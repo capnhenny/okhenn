@@ -98,31 +98,43 @@ body::before {
 }
 
 /* ---------- Header nav: single row, equal widths ---------- */
+/* Safety: sizing + no sideways scroll */
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ overflow-x:hidden; }
+
+/* ---------- Header nav: one row, equal-width, no overflow ---------- */
 .site-nav{
-  display:flex; flex-wrap:nowrap; justify-content:center; align-items:stretch;
+  display:grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr)); /* exactly 6 equal columns */
   gap: var(--navGap);
-  width: min(1100px, 92vw);
-  margin: 0 auto;
-  overflow: visible;      /* ensure no scrollbar at this size */
+  align-items: center;
+  justify-items: stretch;
+
+  max-width: min(1100px, 95vw);
+  width: 100%;
+  margin: .25rem auto 0;      /* sits under the tagline */
 }
 
-/* Buttons — smaller padding/height, real fluid font */
+/* Buttons — compact height, shrinkable text, no wrapping overflow */
 .nav-chip{
-  flex: 1 1 0; min-width:0; width:auto; /* equal-share row */
-  display:inline-flex; justify-content:center; align-items:center; text-align:center;
+  display:inline-flex; justify-content:center; align-items:center;
+  min-width:0;                 /* allow shrink without overflow */
+  white-space:nowrap;          /* keep labels on one line */
+  text-overflow:ellipsis;      /* if it ever gets too tight */
 
-  border: 2px solid currentColor; border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.35));
-  color: var(--on-wall); text-decoration:none; font-family:'Press Start 2P', monospace;
+  border:2px solid currentColor;
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.35));
+  color:var(--on-wall); text-decoration:none;
+  font-family:'Press Start 2P', monospace;
 
-  /* key tweaks ↓ */
-  line-height: 1;                      /* remove extra vertical slack */
-  font-size: clamp(.40rem, .95vw, .82rem);
-  padding-block: clamp(.35em, .8vw, .7em);
-  min-height: clamp(28px, 4.2vw, 48px);
+  line-height:1;
+  font-size: clamp(.36rem, .9vw, .78rem);   /* smaller + fluid */
+  padding: .45em .6em;                      /* trimmed padding */
+  height: clamp(34px, 5.2vw, 48px);         /* hard cap the total height */
 
-  box-shadow: 0 8px 16px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.7);
-  transition: transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast), box-shadow var(--t-fast);
+  box-shadow: 0 6px 12px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.7);
+  transition: transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
 }
 .nav-chip:hover,
 .nav-chip:focus-visible{
@@ -131,14 +143,16 @@ body::before {
   outline: none;
 }
 
-/* ---------- Small screens: wrap to two rows (no sliding) ---------- */
-@media (max-width: 560px){
-  .site-nav{ flex-wrap: wrap; gap: .6rem; }
+/* Small screens: switch to two rows (still equal widths), no sliding */
+@media (max-width:560px){
+  .site-nav{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .6rem;
+  }
   .nav-chip{
-    flex: 1 1 calc(50% - .6rem);
-    font-size: clamp(.52rem, 3.2vw, .74rem);
-    min-height: clamp(34px, 8vw, 46px);
-    padding-block: .55em;
+    font-size: clamp(.5rem, 3vw, .72rem);
+    height: clamp(32px, 8vw, 44px);
+    padding: .5em .6em;
   }
 }
 
@@ -524,20 +538,6 @@ header.site-header .main-nav{
   }
 }
 
-/* Small screens: horizontal slidey rail */
-@media (max-width: 720px){
-  /* rail */
-  header.site-header > .main-nav{
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    gap: .9rem !important;
-    overflow-x: auto !important;
-    overscroll-behavior-x: contain !important;
-    -webkit-overflow-scrolling: touch !important;
-    scroll-snap-type: x mandatory !important;
-    padding: .5rem .75rem .75rem !important;
-    margin-top: 0 !important;
-
     /* soft edge fade hint */
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
             mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
@@ -591,20 +591,6 @@ header.site-header > nav.main-nav{
   }
 }
 
-/* Mobile: horizontal scroll rail + snap (the “slidey” bit) */
-@media (max-width: 720px){
-  header.site-header > nav.main-nav{
-    display:flex !important;                    /* override grid */
-    flex-wrap:nowrap !important;
-    gap:.9rem !important;
-    overflow-x:auto !important;
-    -webkit-overflow-scrolling:touch !important;
-    overscroll-behavior-x:contain !important;
-    scroll-snap-type:x mandatory !important;
-    width:100%;
-    padding:.5rem .75rem .75rem !important;
-    margin-top:0 !important;
-
     /* subtle edge fade hint */
     -webkit-mask-image:linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
             mask-image:linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
@@ -638,18 +624,6 @@ header.site-header .site-tagline{
   margin: .5rem 0 1rem !important;   /* space so nav never overlaps */
 }
 
-/* one row across ALL breakpoints */
-header.site-header > nav.main-nav{
-  display: flex !important;          /* win over any grid rules */
-  flex-wrap: nowrap !important;      /* no wrapping — ever */
-  gap: 1rem !important;
-  max-width: 100%;
-  overflow-x: auto;                   /* scroll if viewport is too small */
-  -webkit-overflow-scrolling: touch; /* smooth on iOS */
-  justify-content: center;           /* center on wide screens */
-  padding: 0 .75rem !important;
-  margin: 0 !important;
-
   /* optional: soft edge hint; remove if you don’t want it */
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
           mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
@@ -670,23 +644,6 @@ header.site-header .site-tagline {
   margin-bottom: 1rem !important;
 }
 
-/* the rail: always a single horizontal row */
-header.site-header > nav.main-nav{
-  display: flex !important;
-  flex-wrap: nowrap !important;     /* never wrap to two lines */
-  gap: 1rem !important;
-
-  width: 100% !important;           /* <= critical: enables overflow scrolling */
-  max-width: 100% !important;
-  overflow-x: auto !important;      /* scroll only if it doesn’t fit */
-  overflow-y: hidden !important;
-  -webkit-overflow-scrolling: touch;
-
-  align-items: center;
-  justify-content: center;          /* centered on wide screens */
-  padding: 0 .75rem !important;
-  margin: 0 !important;
-
   /* soft edge hint (optional) */
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
           mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
@@ -706,14 +663,5 @@ header.site-header > nav.main-nav .nav-card{
   header.site-header > nav.main-nav .nav-card{
     scroll-snap-align: center;
     scroll-snap-stop: always;
-  }
-}
-
-/* large screens: no edge fade (not needed) and no scrollbars */
-@media (min-width: 721px){
-  header.site-header > nav.main-nav{
-    overflow-x: visible !important;
-    -webkit-mask-image: none;
-            mask-image: none;
   }
 }
