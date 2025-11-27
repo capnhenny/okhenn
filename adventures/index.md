@@ -11,8 +11,9 @@ permalink: /adventures/
     <h1>stamp collection 🌍</h1>
     <p>
       it's fun to know where you've been, so this is where my own little
-      interactive map will live. 
-      <p>
+      interactive map will live.
+    </p>
+    <p>
       zoom around, poke the glowing bits, and
       soon you'll be able to hop straight into the journal entries tied to each place.
     </p>
@@ -25,14 +26,74 @@ permalink: /adventures/
       id="travel-map"
       class="travel-map"
       aria-describedby="map-note"
-    >
-      <p class="map-placeholder">
-        [ future interactive map of henn’s wanderings goes here ✈️ ]
-      </p>
-    </div>
+    ></div>
+
     <p id="map-note" class="map-note">
       someday soon: click a glowing spot to see journal entries from that adventure.
     </p>
+
+    <!-- expose adventures to JS -->
+    <script>
+      window.adventuresMapData = [
+        {% assign items = site.adventures | sort: "date" %}
+        {% for trip in items %}
+        {
+          "title": {{ trip.title | jsonify }},
+          "url": {{ trip.url | relative_url | jsonify }},
+          "lat": {{ trip.lat | default: "null" }},
+          "lng": {{ trip.lng | default: "null" }}
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ];
+    </script>
+
+    <!-- Leaflet CSS & JS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    >
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+
+    <script>
+      (function () {
+        var el = document.getElementById('travel-map');
+        if (!el || !window.adventuresMapData || !window.adventuresMapData.length) return;
+
+        // base map
+        var map = L.map('travel-map', {
+          scrollWheelZoom: false,
+          worldCopyJump: true
+        }).setView([20, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 10,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        var bounds = [];
+
+        (window.adventuresMapData || []).forEach(function (a) {
+          if (typeof a.lat !== 'number' || typeof a.lng !== 'number') return;
+
+          var marker = L.marker([a.lat, a.lng]).addTo(map);
+          marker.bindPopup(
+            '<strong>' + a.title + '</strong><br>' +
+            '<a href="' + a.url + '">read this adventure →</a>'
+          );
+          bounds.push([a.lat, a.lng]);
+        });
+
+        if (bounds.length) {
+          map.fitBounds(bounds, { padding: [30, 30] });
+        }
+      })();
+    </script>
   </section>
 
   <!-- intro paragraph under the map -->
@@ -40,7 +101,6 @@ permalink: /adventures/
     <h2>away missions</h2>
     <p>
       sometimes i leave the house. this is where those quests get logged:
-      <p></p>
       road trips, plane rides, walks that went a little too far, and
       all the little moments i don’t want to forget.
     </p>
