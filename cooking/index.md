@@ -1,45 +1,20 @@
 ---
 layout: default
-title: cooking   # change per page
+title: cooking
 ---
 
-<!doctype html>
-<html>
-
-<!-- Use relative paths (no leading /) so it works in project sites too -->
-<link rel="icon" href="assets/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
-
-<head>
-  <meta charset="utf-8" />
-  <title>okhenn — cooking</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="assets/favicon.png" type="image/png">
-  <script src="include.js?v=8" defer></script>
-</head>
-<body>
-
-  <main class="wrap">
-    
+<!-- Cooking index: list all cooking entries -->
 <section class="cards">
   {% assign items = site.cooking | sort: "date" | reverse %}
   {% for r in items %}
     <a class="card" href="{{ r.url | relative_url }}">
       <h3>{{ r.title }}</h3>
-      {% if r.date %}<p class="date">{{ r.date | date: "%b %-d, %Y" }}</p>{% endif %}
+
+      {% if r.date %}
+      <p class="date">{{ r.date | date: "%b %-d, %Y" }}</p>
+      {% endif %}
+
       <p>{{ r.excerpt | strip_html | truncate: 140 }}</p>
     </a>
   {% endfor %}
 </section>
-
-    </div>
-  </main>
-
-<script defer src="include.js?v=1"></script>
-<script defer src="assets/js/visitor-counter.js?v=2"></script>
-
-</body>
-</html>
