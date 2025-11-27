@@ -662,18 +662,57 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   80%  { opacity: .9; transform: translate(-10px, 22px) scale(1.45); }
   100% { opacity: 0; transform: translate(-16px, 32px) scale(.4); }
 }
-.travel-map{
-  margin-top:1rem;
-  border-radius:18px;
-  border:2px solid #1a0b0b;
-  overflow:hidden;
-  height:min(420px,60vh);
-  box-shadow:0 8px 18px rgba(0,0,0,.45);
+
+/* === Adventures Map — Pink Sparkly Border === */
+.travel-map {
+  width: 100%;
+  height: 420px;
+  border-radius: 22px;
+
+  /* Pink sparkle border (same thickness as black header buttons) */
+  border: 3px solid #ff73d2; /* soft neon pink */
+
+  /* Soft shadow so it floats a bit */
+  box-shadow:
+    0 0 12px rgba(255, 115, 210, 0.35),
+    0 0 28px rgba(255, 115, 210, 0.15);
+
+  overflow: hidden;
+  position: relative;
 }
 
-/* optional: tiny note styling */
-.map-note{
-  margin-top:.5rem;
-  font-size:.8rem;
-  opacity:.9;
+/* OPTIONAL but delicious: animated sparkle overlay */
+.travel-map::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  /* faint star noise texture */
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.22) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.18) 0%, transparent 50%),
+    radial-gradient(circle at 40% 90%, rgba(255,255,255,0.12) 0%, transparent 45%);
+
+  opacity: 0.35;
+  animation: sparkleFlow 7s linear infinite;
+}
+
+/* Slow drifting sparkle movement */
+@keyframes sparkleFlow {
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(6px, -6px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* Make Leaflet controls match aesthetic */
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 2px solid #ff73d2 !important;
+  color: #000 !important;
+  font-weight: 700;
+  border-radius: 8px !important;
+  box-shadow: 0 0 6px rgba(255, 115, 210, 0.45);
 }
