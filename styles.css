@@ -518,16 +518,147 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 .about-section{ margin-top:1.75rem; }
 
-.travel-map{
-  margin-top:1rem;
-  padding:1.5rem;
-  border-radius:18px;
-  border:2px dashed rgba(255,255,255,.5);
-  background:rgba(0,0,0,.18);
-  text-align:center;
-  font-size:.9rem;
-  font-style:italic;
-}
-
 .about-link-list{ list-style:disc; padding-left:1.25rem; }
 .about-link-list a{ text-decoration:underline; }
+
+/* --- Pixel Achievement Badges w/ Hover Sparkle Particles --- */
+
+.about-badge-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0;
+  display: grid;
+  gap: .85rem;
+}
+
+.badge {
+  position: relative;
+  overflow: visible;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: .75rem;
+
+  padding: .9rem 1rem;
+  background: #111;
+  border: 2px solid #fff;
+  border-radius: 10px;
+
+  font-family: 'Press Start 2P', monospace;
+  color: #fff;
+  text-decoration: none;
+
+  box-shadow:
+    0 0 0 4px #000 inset,
+    0 4px 10px rgba(0,0,0,.35);
+
+  text-shadow:
+    0 1px 0 rgba(0,0,0,.4);
+
+  transition:
+    transform .15s ease,
+    box-shadow .20s ease,
+    border-color .20s ease,
+    background .20s ease;
+}
+
+/* icon */
+.badge-icon {
+  grid-row: span 2;
+  font-size: 1.4rem;
+  align-self: center;
+}
+
+/* main title */
+.badge-title {
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  margin-bottom: .25rem;
+}
+
+/* subtext */
+.badge-desc {
+  font-size: .55rem;
+  opacity: .8;
+  line-height: 1.35;
+}
+
+/* hover appearance */
+.badge:hover,
+.badge:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--hot);
+  background: #1d0f15;
+  box-shadow:
+    0 0 0 4px var(--hot) inset,
+    0 6px 16px rgba(0,0,0,.45);
+  outline: none;
+}
+
+/* --- SPARKLE PARTICLES --- */
+
+/* 3 separate pixel sparkles using pseudo-elements */
+.badge::before,
+.badge::after,
+.badge .sparkle {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+
+  background: var(--hot);
+  box-shadow:
+      0 0 4px var(--hot),
+      0 0 8px rgba(255,70,166,.8);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transform: translate(0,0) scale(1);
+}
+
+/* sparkle #1 */
+.badge:hover::before {
+  top: 50%;
+  left: 8%;
+  animation: sparkle-pop-1 .6s ease-out;
+}
+
+/* sparkle #2 */
+.badge:hover::after {
+  top: 20%;
+  right: 10%;
+  animation: sparkle-pop-2 .7s ease-out;
+}
+
+/* sparkle #3 (extra) */
+.badge:hover .sparkle {
+  bottom: 15%;
+  left: 40%;
+  animation: sparkle-pop-3 .65s ease-out;
+}
+
+/* KEYFRAMES – chaotic lil pixel explosions */
+
+@keyframes sparkle-pop-1 {
+  0%   { opacity: 0; transform: translate(0,0) scale(.5); }
+  20%  { opacity: 1; }
+  80%  { opacity: .9; transform: translate(-18px, -14px) scale(1.4); }
+  100% { opacity: 0; transform: translate(-28px, -20px) scale(.4); }
+}
+
+@keyframes sparkle-pop-2 {
+  0%   { opacity: 0; transform: translate(0,0) scale(.5); }
+  20%  { opacity: 1; }
+  80%  { opacity: .9; transform: translate(22px, -20px) scale(1.35); }
+  100% { opacity: 0; transform: translate(32px, -28px) scale(.4); }
+}
+
+@keyframes sparkle-pop-3 {
+  0%   { opacity: 0; transform: translate(0,0) scale(.5); }
+  20%  { opacity: 1; }
+  80%  { opacity: .9; transform: translate(-10px, 22px) scale(1.45); }
+  100% { opacity: 0; transform: translate(-16px, 32px) scale(.4); }
+}
