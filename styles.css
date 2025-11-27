@@ -662,3 +662,18 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   80%  { opacity: .9; transform: translate(-10px, 22px) scale(1.45); }
   100% { opacity: 0; transform: translate(-16px, 32px) scale(.4); }
 }
+.travel-map{
+  margin-top:1rem;
+  border-radius:18px;
+  border:2px solid #1a0b0b;
+  overflow:hidden;
+  height:min(420px,60vh);
+  box-shadow:0 8px 18px rgba(0,0,0,.45);
+}
+
+/* optional: tiny note styling */
+.map-note{
+  margin-top:.5rem;
+  font-size:.8rem;
+  opacity:.9;
+}
