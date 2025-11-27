@@ -3,43 +3,23 @@ layout: default
 title: journal
 ---
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>okhenn — journal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<section class="cards">
+  {% assign items = site.journal | sort: "date" | reverse %}
+  {% for post in items %}
 
-  <!-- CSS (one link) -->
-  <link rel="stylesheet" href="{{ "/styles.css" | relative_url }}">
+    <a class="card" href="{{ post.url | relative_url }}">
+      {% if post.thumb %}
+        <img src="{{ post.thumb | relative_url }}" alt="" class="post-thumb" />
+      {% endif %}
 
-  <!-- Favicon (inside <head>, paths made robust) -->
-  <link rel="icon" href="{{ "/assets/favicon.ico" | relative_url }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ "/assets/favicon-32.png" | relative_url }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ "/assets/favicon-16.png" | relative_url }}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ "/assets/favicon-180.png" | relative_url }}">
-</head>
-<body>
+      <h3>{{ post.title }}</h3>
 
-  <main class="wrap">
-    <section class="cards">
-      {% assign items = site.journal | sort: "date" | reverse %}
-      {% for post in items %}
-        <a class="card" href="{{ post.url | relative_url }}">
-          {% if post.thumb %}
-            <img src="{{ post.thumb | relative_url }}" alt="{{ post.title }}"
-                 style="width:100%;max-height:180px;object-fit:cover;border-radius:14px;border:2px solid #1a0b0b;margin-bottom:.75rem;">
-          {% endif %}
-          <h3>{{ post.title }}</h3>
-          {% if post.date %}<p class="date">{{ post.date | date: "%b %-d, %Y" }}</p>{% endif %}
-          <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
-        </a>
-      {% endfor %}
-    </section>
-  </main>
+      {% if post.date %}
+        <p class="date">{{ post.date | date: "%b %-d, %Y" }}</p>
+      {% endif %}
 
-  <!-- Scripts (once, at the end; relative paths) -->
-  <script defer src="include.js"></script>
-  <script defer src="assets/js/visitor-counter.js"></script>
-</body>
-</html>
+      <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
+    </a>
+
+  {% endfor %}
+</section>
