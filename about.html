@@ -1,43 +1,16 @@
 ---
 layout: default
-title: about   # change per page
+title: about
+permalink: /about/
 ---
 
-<!doctype html>
-<html>
+<p>eat, play, love</p>
 
-<!-- Use relative paths (no leading /) so it works in project sites too -->
-<link rel="icon" href="assets/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
-
-<head>
-  <meta charset="utf-8" />
-  <title>okhenn — about</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css">
-  <script src="include.js" defer></script>
-  <link rel="icon" href="assets/favicon.png" type="image/png">
-  <script src="include.js?v=8" defer></script>
-
-</head>
-<body>
-
-<main class="wrap">
-  <p>eat, play, love</p>
-  <h3>site map</h3>
-  <ul>
-    <li><a href="index.html">home — quick links + highlights</a></li>
-    <li><a href="journal.html">journal for gratitudes</a></li>
-    <li><a href="adventures.html">adventures & travel guides</a></li>
-    <li><a href="cooking.html">chef's notes</a></li>
-    <li><a href="contact.html">contact — say hi</a></li>
-  </ul>
-</main>
-
-<script defer src="include.js?v=1"></script>
-<script defer src="assets/js/visitor-counter.js?v=2"></script>
-
-</body>
-</html>
+<h3>site map</h3>
+<ul>
+  <li><a href="{{ '/' | relative_url }}">home — quick links + highlights</a></li>
+  <li><a href="{{ '/journal/' | relative_url }}">journal for gratitudes</a></li>
+  <li><a href="{{ '/adventures/' | relative_url }}">adventures &amp; travel guides</a></li>
+  <li><a href="{{ '/cooking/' | relative_url }}">chef's notes</a></li>
+  <li><a href="{{ '/contact/' | relative_url }}">contact — say hi</a></li>
+</ul>
