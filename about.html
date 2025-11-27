@@ -4,13 +4,146 @@ title: about
 permalink: /about/
 ---
 
-<p>eat, play, love</p>
+<section class="about">
 
-<h3>site map</h3>
-<ul>
-  <li><a href="{{ '/' | relative_url }}">home — quick links + highlights</a></li>
-  <li><a href="{{ '/journal/' | relative_url }}">journal for gratitudes</a></li>
-  <li><a href="{{ '/adventures/' | relative_url }}">adventures &amp; travel guides</a></li>
-  <li><a href="{{ '/cooking/' | relative_url }}">chef's notes</a></li>
-  <li><a href="{{ '/contact/' | relative_url }}">contact — say hi</a></li>
-</ul>
+  <!-- 8-bit avatar + intro -->
+  <div class="about-hero">
+    <!-- swap src for whatever cute 8-bit you want -->
+    <img
+      class="about-avatar"
+      src="/assets/avatar.png"
+      alt="8-bit-ish portrait of ok henn"
+      width="96"
+      height="96"
+    >
+
+    <div class="about-intro">
+      <h1>hi, i’m henn 👋</h1>
+      <p>
+        eat, play, love. lie in beds. overshare on the interwebs.
+        welcome to my little brain dump corner
+        please enjoy my thoughts, adventures, rations, and the occasional feral life update.
+      </p>
+    </div>
+  </div>
+
+  <!-- cute divider (you can style this or swap for your squig SVG) -->
+  <div class="about-divider">
+    <svg class="squig" viewBox="0 0 200 40" aria-hidden="true">
+      <path d="M5 20c15-20 35 20 50 0s35 20 50 0 35 20 50 0 35 20 40 0"
+            fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- Stats + inventory -->
+  <section class="about-section about-stats">
+    <h2>species info</h2>
+
+    <div class="about-stats-grid">
+      <div class="about-stat-block">
+        <h3>stats</h3>
+        <ul>
+          <li><strong>HP:</strong> ✨ thick</li>
+          <li><strong>Aura:</strong> chaotic cozy</li>
+          <li><strong>Current quest:</strong> imprinting on interwebs one oversharing thought at a time</li>
+        </ul>
+      </div>
+
+      <div class="about-stat-block">
+        <h3>inventory</h3>
+        <ul>
+          <li>1 enchanted notebook</li>
+          <li>4 half-finished hobbies</li>
+          <li>2 cats (temporary gods)</li>
+          <li>a suspicious number of browser tabs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vibe paragraph -->
+  <section class="about-section">
+    <h2>what this place is</h2>
+    <p>
+      okhenn is my captain’s log: part scrapbook, part dev playground,
+      part “i swear i’m going to remember that thing next time.” i like to make
+      things that feel like late-night internet circa 2007, but with better fonts
+      and fewer pop-ups.
+    </p>
+    <p>
+      if you’re here, you’re either a friend, a future friend, or someone who
+      clicked a link by accident and is now too polite to close the tab.
+      welcome all. grab a snack, scroll around, and let the skeletons watch over you.
+    </p>
+  </section>
+
+  <!-- Map idea / interactive travel log -->
+  <section class="about-section about-map">
+    <h2>stamp collection 🌍</h2>
+    <p>
+      it's fun to know where you've been, so this is where my own little
+      interactive map will live: feel free to check out the completed side quests.
+    </p>
+    <p>
+      the dream: click a highlighted place on the map &rarr; jump straight to the journal. 
+      someday you’ll be able to zoom in, poke around, and read what happened when i got found.
+    </p>
+
+    <!-- map container – you can wire this up with JS later -->
+    <div
+      id="travel-map"
+      class="travel-map"
+      aria-describedby="map-note"
+    >
+      <!-- placeholder text so it’s not empty while we build the JS later -->
+      <p class="map-placeholder">
+        [ future interactive map of henn’s wanderings goes here ✈️ ]
+      </p>
+    </div>
+    <p id="map-note" class="map-note">
+      someday soon: click a glowing spot to see journal entries from that adventure.
+    </p>
+  </section>
+
+  <!-- Site map (but cuter) -->
+  <section class="about-section about-sitemap">
+    <h2>where to poke around</h2>
+
+    <ul class="about-link-list">
+      <li>
+        <a href="{{ '/' | relative_url }}">
+          home — quick links + highlights
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/journal/' | relative_url }}">
+          journal — gratitudes, brain dumps, special interests
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/adventures/' | relative_url }}">
+          adventures — travel logs, away missions, side quests
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/cooking/' | relative_url }}">
+          rations — recipes, experiments, “damn that smells good”
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/contact/' | relative_url }}">
+          contact — send fun facts, dev requests, or compliments for my bf
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- cozy sign-off -->
+  <section class="about-section about-signoff">
+    <p>
+      thanks for stopping by my corner of the internet.
+      may your tabs be organized, your snacks be fantastic, and your wifi be strong.
+    </p>
+  </section>
+
+</section>
