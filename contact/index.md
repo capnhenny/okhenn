@@ -4,36 +4,14 @@ title: Contact
 permalink: /contact/
 ---
 
-<!doctype html>
-<html>
+<form action="#" method="post">
+  <label for="message">Your message</label>
+  <textarea
+    id="message"
+    name="message"
+    rows="6"
+    placeholder="your message (low pressure zone)"
+  ></textarea>
 
-  <!-- Use relative paths (no leading /) so it works in project sites too -->
-<link rel="icon" href="assets/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
-
-<head>
-  <meta charset="utf-8" />
-  <title>okhenn — contact</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="assets/favicon.png" type="image/png">
-  <script src="include.js?v=8" defer></script>
-
-</head>
-<body>
-
-  <main class="wrap">
-    <form onsubmit="event.preventDefault(); alert('message sent (spiritually) ✨');">
-      <input placeholder="your email (promise i’ll read it)" required />
-      <textarea rows="6" placeholder="your message (low pressure zone)"></textarea>
-      <button type="submit">send it</button>
-    </form>
-  </main>
-
-<script defer src="include.js?v=1"></script>
-<script defer src="assets/js/visitor-counter.js?v=2"></script>
-
-</body>
-</html>
+  <button type="submit">send it</button>
+</form>
