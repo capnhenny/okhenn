@@ -32,6 +32,15 @@
     </nav>
 
     <!-- Row 3: copyright -->
-    <div class="footer-row copyright">© {{ site.time | date: "%Y" }} </span> ok henn</div>
-  </div>
+<div class="footer-row copyright">
+  © {{ site.time | date: "%Y" }} ok
+  {% if page.url == '/adventures/' %}
+    <a href="{{ '/cockpit/' | relative_url }}" class="secret-cockpit-link">
+      henn <span class="secret-sparkle">✨</span>
+    </a>
+  {% else %}
+    henn
+  {% endif %}
+</div>
+
 </footer>
