@@ -15,7 +15,7 @@ permalink: /contact/
     type="text"
     id="name"
     name="name"
-    placeholder="ur name (or alias 😎)"
+    placeholder="government name"
     required
   />
 
@@ -25,7 +25,7 @@ permalink: /contact/
     type="email"
     id="email"
     name="_replyto"
-    placeholder="how i can reply to you"
+    placeholder="preferred response address"
     required
   />
 
