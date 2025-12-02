@@ -1,7 +1,6 @@
 // assets/js/visitor-counter.js
 (function () {
-  const IDS = ['visitsCounter', 'visits']; // whichever you wired in the footer
-  const STORAGE_KEY = 'ohhenn_local_visits_v1';
+  const IDS = ['visitsCounter', 'visits']; // whichever id you wired in footer
 
   function findEl() {
     for (const id of IDS) {
@@ -11,22 +10,44 @@
     return null;
   }
 
-  function init(el) {
-    let count = 0;
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored != null) {
-        const n = Number(stored);
-        if (Number.isFinite(n) && n >= 0) count = n;
-      }
-      count += 1; // this visit
-      localStorage.setItem(STORAGE_KEY, String(count));
-    } catch (_e) {
-      // if localStorage explodes for some reason, just show 1
-      count = 1;
-    }
+  function updateSparkline() {
+    const el = document.getElementById('visitSparkline');
+    if (!el) return;
 
-    el.textContent = count.toLocaleString();
+    // Placeholder “last 14 days” data for now; later we can swap to real history.
+    const data = [2, 4, 3, 6, 5, 8, 7, 9, 4, 3, 5, 7, 6, 8];
+    const max = Math.max(...data, 1);
+
+    el.innerHTML = '';
+
+    data.forEach((v, idx) => {
+      const bar = document.createElement('span');
+      bar.className = 'visit-sparkline-bar';
+
+      const h = 6 + (v / max) * 14; // between ~6–20px tall
+      bar.style.height = `${h}px`;
+
+      // slight stagger in animation via CSS nth-child; no JS timing needed
+      el.appendChild(bar);
+    });
+  }
+
+  function init(el) {
+    fetch('/api/visits?mode=hit')
+      .then((r) => r.json())
+      .then((data) => {
+        const num = Number(data && data.value);
+        if (Number.isFinite(num) && num >= 0) {
+          el.textContent = num.toLocaleString();
+        } else {
+          el.textContent = '...';
+        }
+        updateSparkline();
+      })
+      .catch(() => {
+        el.textContent = '...';
+        updateSparkline();
+      });
   }
 
   // Footer is injected by include.js → wait for the element to appear
