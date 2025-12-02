@@ -6,9 +6,30 @@ permalink: /contact/
 
 <form
   id="contact-form"
-  action="https://formspree.io/f/mnnevlzw"
+  action="https://formspree.io/f/mnnevlzw" 
   method="POST"
 >
+  <!-- Name -->
+  <label for="name">Your name</label>
+  <input
+    type="text"
+    id="name"
+    name="name"
+    placeholder="ur name (or alias 😎)"
+    required
+  />
+
+  <!-- Email -->
+  <label for="email">Your email</label>
+  <input
+    type="email"
+    id="email"
+    name="_replyto"
+    placeholder="how i can reply to you"
+    required
+  />
+
+  <!-- Message -->
   <label for="message">Your message</label>
   <textarea
     id="message"
@@ -29,7 +50,7 @@ permalink: /contact/
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
-      // show the cute popup
+      // Cute popup BEFORE the email sends
       alert('message sent (spiritually) ✨');
 
       const formData = new FormData(form);
@@ -41,11 +62,10 @@ permalink: /contact/
           headers: { 'Accept': 'application/json' }
         });
 
-        // silently clear the form; no “it sent!” message
+        // reset silently
         form.reset();
       } catch (err) {
         console.error('contact form failed:', err);
-        // we stay silent to the user; just log it
       }
     });
   });
