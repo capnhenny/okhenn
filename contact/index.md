@@ -10,7 +10,7 @@ permalink: /contact/
     id="message"
     name="message"
     rows="6"
-    placeholder="your message (low pressure zone)"
+    placeholder="your message (promise i'll read it)"
   ></textarea>
 
   <button type="submit">send it</button>
