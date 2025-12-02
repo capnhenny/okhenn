@@ -181,6 +181,46 @@ html,body { overflow-x: hidden; }
 }
 .footer-row{ display:flex; justify-content:center; align-items:center; gap:.5rem; flex-wrap:wrap; }
 
+/* === Neon pixel sparkline under visitor counter === */
+.visit-sparkline{
+  margin-top:.15rem;
+  display:flex;
+  justify-content:center;
+  gap:2px;
+}
+
+.visit-sparkline-bar{
+  width:4px;
+  height:10px;                    /* base height, JS will override */
+  border-radius:2px;
+  background:
+    linear-gradient(180deg,#ffd6ff,#ff46a6);
+  box-shadow:
+    0 0 4px rgba(255,70,166,.85),
+    0 0 8px rgba(255,70,166,.55);
+  opacity:.85;
+  transform-origin:bottom;
+}
+
+/* tiny animation on load */
+.visit-sparkline-bar:nth-child(odd){
+  animation: sparkPop .5s ease-out forwards;
+}
+.visit-sparkline-bar:nth-child(even){
+  animation: sparkPop .5s ease-out .05s forwards;
+}
+
+@keyframes sparkPop{
+  from{
+    transform:scaleY(.2) translateY(2px);
+    opacity:.0;
+  }
+  to{
+    transform:scaleY(1) translateY(0);
+    opacity:.85;
+  }
+}
+
 /* row 1: nav chips */
 /* Footer nav: one-line desktop, 2-up on mobile */
 .footer-nav{
