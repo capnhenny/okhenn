@@ -4,7 +4,8 @@ title: Contact
 permalink: /contact/
 ---
 
-<form action="#" method="post">
+<form onsubmit="event.preventDefault(); alert('message sent (spiritually) ✨');" action="#" method="post">
+
   <label for="message">Your message</label>
   <textarea
     id="message"
