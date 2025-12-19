@@ -111,27 +111,36 @@ permalink: /adventures/
     <h2>mission log</h2>
 
     <div class="cards">
-      {% assign items = site.adventures | sort: "date" | reverse %}
-      {% for trip in items %}
-        <a class="card" href="{{ trip.url | relative_url }}">
+{% assign items = site.adventures | sort: "date" | reverse %}
+{% for trip in items %}
 
-          {% if trip.thumb %}
-            <img
-              src="{{ trip.thumb | relative_url }}"
-              alt=""
-              class="post-thumb"
-            >
-          {% endif %}
+<a class="card" href="{{ trip.url | relative_url }}">
 
-          <h3>{{ trip.title }}</h3>
+  {% if trip.thumb %}
+    <img src="{{ trip.thumb | relative_url }}" alt="" class="post-thumb">
+  {% elsif trip.photo %}
+    <img src="{{ trip.photo | relative_url }}" alt="" class="post-thumb">
+  {% endif %}
 
-          {% if trip.date %}
-            <p class="date">{{ trip.date | date: "%b %-d, %Y" }}</p>
-          {% endif %}
+  <h3>{{ trip.title }}</h3>
 
-          <p>{{ trip.excerpt | strip_html | truncate: 160 }}</p>
-        </a>
-      {% endfor %}
+  {% if trip.date %}
+    <p class="date">{{ trip.date | date: "%b %-d, %Y · %-I:%M %p" }}</p>
+  {% endif %}
+
+  {% if trip.location %}
+    <p class="meta">📍 {{ trip.location }}</p>
+  {% endif %}
+
+  {% if trip.itinerary %}
+    <p class="meta">🗺️ {{ trip.itinerary | strip_html | truncate: 90 }}</p>
+  {% endif %}
+
+  <p>{{ trip.excerpt | strip_html | truncate: 160 }}</p>
+</a>
+
+{% endfor %}
+
     </div>
   </section>
 
