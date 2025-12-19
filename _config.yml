@@ -24,7 +24,6 @@ plugins:
 
 # Collections
 collections:
-collections:
   journal:
     output: true
     permalink: /journal/:year-:month-:day/:title/
