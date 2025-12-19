@@ -27,7 +27,7 @@ collections:
 collections:
   journal:
     output: true
-    permalink: /journal/:slug/
+    permalink: /journal/:year-:month-:day/:title/
   adventures:
     output: true
     permalink: /adventures/:slug/
