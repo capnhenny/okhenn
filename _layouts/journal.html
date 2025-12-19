@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<article class="post">
+  <header class="post-head">
+    <h1>{{ page.title }}</h1>
+
+    {% if page.date %}
+      <p class="date">{{ page.date | date: "%b %-d, %Y · %-I:%M %p" }}</p>
+    {% endif %}
+
+    {% if page.location %}
+      <p class="meta">📍 {{ page.location }}</p>
+    {% endif %}
+
+    {% if page.view %}
+      <p class="meta">👁️ {{ page.view }}</p>
+    {% endif %}
+  </header>
+
+  {% if page.media %}
+    <figure class="post-media">
+      <img src="{{ page.media | relative_url }}" alt="">
+    </figure>
+  {% endif %}
+
+  <div class="post-body">
+    {{ content }}
+  </div>
+</article>
