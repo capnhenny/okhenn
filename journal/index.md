@@ -1,6 +1,7 @@
 ---
-layout: journal
+layout: default
 title: journal
+permalink: /journal/
 ---
 
 <section class="cards">
