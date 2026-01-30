@@ -34,4 +34,31 @@ layout: default
   </div>
 
   {{ content }}
+  
+  {% if page.photos and page.photos.size > 0 %}
+  <section class="post-gallery">
+    {% for img in page.photos %}
+      <a class="gallery-item" href="{{ img | relative_url }}">
+        <img src="{{ img | relative_url }}" alt="">
+      </a>
+    {% endfor %}
+  </section>
+{% endif %}
+
+{% if page.videos and page.videos.size > 0 %}
+  <section class="post-videos">
+    {% for vid in page.videos %}
+      {% if vid contains "youtube.com/embed" or vid contains "player.vimeo.com/video" %}
+        <div class="post-video-embed">
+          <iframe src="{{ vid }}" title="video" frameborder="0" allowfullscreen></iframe>
+        </div>
+      {% else %}
+        <video class="post-video" controls playsinline preload="metadata">
+          <source src="{{ vid | relative_url }}">
+        </video>
+      {% endif %}
+    {% endfor %}
+  </section>
+{% endif %}
+
 </article>
