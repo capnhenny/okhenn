@@ -932,3 +932,228 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   font-size:.85rem;
   opacity:.9;
 }
+      
+/* =========================
+    POST FRAME (full article)
+   ========================= */
+      
+      .post{
+        /* layout */
+        position: relative;
+        overflow: hidden; /* keeps shimmer edges clean */
+        
+        /* frame */
+        border-radius: 22px;
+        border: 2px solid rgba(255,255,255,.55);           /* shimmery white */
+        background: rgba(255,255,255,.08);                 /* glassy over wallpaper */
+        box-shadow:
+          0 18px 42px rgba(0,0,0,.28),
+          inset 0 1px 0 rgba(255,255,255,.22);
+        backdrop-filter: blur(6px);
+      }
+      
+      /* subtle shimmer ring */
+      .post::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        padding:2px;
+        border-radius: inherit;
+        pointer-events:none;
+      
+        /* iridescent edge tint */
+        background: linear-gradient(
+          135deg,
+          rgba(255,70,166,.55),
+          rgba(0,210,255,.55),
+          rgba(255,211,105,.55),
+          rgba(155,100,255,.55)
+        );
+      
+        /* makes it a “border” */
+        -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+                mask-composite: exclude;
+      
+        opacity:.55;
+        filter: blur(.2px);
+      }
+      
+      /* optional: tiny sparkle dust in the frame corners */
+      .post::after{
+        content:"";
+        position:absolute;
+        inset:-40%;
+        pointer-events:none;
+        background:
+          radial-gradient(circle at 20% 30%, rgba(255,255,255,.14), transparent 30%),
+          radial-gradient(circle at 70% 40%, rgba(255,255,255,.10), transparent 28%),
+          radial-gradient(circle at 55% 75%, rgba(255,255,255,.12), transparent 32%);
+        opacity:.45;
+      }
+      
+/* =========================
+   MEDIA FRAMES (photos/videos)
+    ========================= */
+      
+      :root{
+        /* deep iridescent “dark” rim */
+        --media-rim: linear-gradient(
+          135deg,
+          rgba(90, 20, 140, .95),   /* deep purple */
+          rgba(15, 70, 160, .95),   /* deep blue */
+          rgba(190, 40, 120, .92),  /* magenta-red */
+          rgba(230, 140, 40, .90)   /* warm orange */
+        );
+      }
+      
+      .post-hero,
+      .post-gallery img,
+      .post-video{
+        display:block;
+        width:100%;
+        border-radius:16px;
+      
+        /* “double frame” effect */
+        border: 2px solid rgba(255,255,255,.20); /* inner shimmer line */
+        box-shadow:
+          0 10px 22px rgba(0,0,0,.35),
+          inset 0 1px 0 rgba(255,255,255,.22);
+      
+        /* keeps any overflow clean */
+        background: rgba(0,0,0,.08);
+      }
+      
+      /* outer iridescent rim using a pseudo-border */
+      .post-hero,
+      .post-gallery img,
+      .post-video{
+        position:relative;
+      }
+      
+      .post-hero::before,
+      .post-gallery img::before,
+      .post-video::before{
+        content:"";
+        position:absolute;
+        inset:-2px;                 /* makes rim sit just outside */
+        border-radius: inherit;
+        pointer-events:none;
+        background: var(--media-rim);
+        z-index:-1;
+        filter: blur(.1px);
+        opacity:.9;
+      }
+      
+      /* embeds need the rim on the wrapper, not the iframe */
+      .post-video-embed{
+        position:relative;
+        border-radius:16px;
+        overflow:hidden;
+      
+        border: 2px solid rgba(255,255,255,.20);
+        box-shadow:
+          0 10px 22px rgba(0,0,0,.35),
+          inset 0 1px 0 rgba(255,255,255,.22);
+      }
+      
+      .post-video-embed::before{
+        content:"";
+        position:absolute;
+        inset:-2px;
+        border-radius: inherit;
+        pointer-events:none;
+        background: var(--media-rim);
+        z-index:0;
+        opacity:.9;
+      }
+      
+      .post-video-embed iframe{
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        border:0;
+        z-index:1; /* sits above rim */
+      }
+
+              /* =========================
+                 PIXEL MEDIA FRAME
+                 ========================= */
+              
+              .gallery-item,
+              .post-hero,
+              .post-video,
+              .post-video-embed{
+                position: relative;
+                border-radius: 14px;
+                overflow: hidden;
+              
+                /* inner glass */
+                background: rgba(0,0,0,.08);
+                border: 2px solid rgba(255,255,255,.25);
+              
+                box-shadow:
+                  0 10px 22px rgba(0,0,0,.35),
+                  inset 0 1px 0 rgba(255,255,255,.22);
+              }
+              
+              :root{
+                --media-rim-dark: linear-gradient(
+                  135deg,
+                  #4b1a73,
+                  #1a4fa8,
+                  #b0306a,
+                  #d47a1c
+                );
+              }
+              
+              .gallery-item::before,
+              .post-hero::before,
+              .post-video::before,
+              .post-video-embed::before{
+                content:"";
+                position:absolute;
+                inset:-2px;
+                border-radius: inherit;
+                pointer-events:none;
+                background: var(--media-rim-dark);
+                z-index:-1;
+              }
+              
+              /* pixel corner dots */
+              .gallery-item::after,
+              .post-hero::after,
+              .post-video::after,
+              .post-video-embed::after{
+                content:"";
+                position:absolute;
+                inset:0;
+                pointer-events:none;
+              
+                background:
+                  linear-gradient(#ff46a6 0 0) top left,
+                  linear-gradient(#ff46a6 0 0) top right,
+                  linear-gradient(#ff46a6 0 0) bottom left,
+                  linear-gradient(#ff46a6 0 0) bottom right;
+              
+                background-size: 6px 6px;
+                background-repeat:no-repeat;
+                opacity:.85;
+              }
+              
+              /* HOT PINK GLOW ON HOVER */
+              .gallery-item:hover,
+              .post-hero:hover,
+              .post-video:hover,
+              .post-video-embed:hover{
+                box-shadow:
+                  0 0 0 1px rgba(255,70,166,.45),
+                  0 0 18px rgba(255,70,166,.45),
+                  0 0 32px rgba(255,70,166,.25),
+                  0 10px 22px rgba(0,0,0,.35);
+                transform: translateY(-2px);
+                transition: box-shadow .2s ease, transform .15s ease;
+              }
