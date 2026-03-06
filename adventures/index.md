@@ -129,13 +129,16 @@ permalink: /adventures/
       }
 
       if (typeof a.lat === 'number' && typeof a.lng === 'number') {
-        var marker = L.circleMarker([a.lat, a.lng], {
-          radius: 6,
-          weight: 2,
-          color: '#ffd6f4',
-          fillColor: '#ff78c8',
-          fillOpacity: 0.9
-        }).addTo(map);
+                  var starIcon = L.divIcon({
+                    className: 'travel-pin',
+                    html: '<span class="travel-star"></span>',
+                    iconSize: [18,18],
+                    iconAnchor: [9,9]
+                  });
+                  
+                  var marker = L.marker([a.lat, a.lng], {
+                    icon: starIcon
+                  }).addTo(map);
 
         marker.bindPopup(
           '<strong>' + a.title + '</strong><br>' +
