@@ -76,13 +76,14 @@ permalink: /adventures/
       worldCopyJump: true
     }).setView([20, 0], 2);
 
-    L.tileLayer(
-      'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-      {
-        maxZoom: 10,
-        attribution: '&copy; OpenStreetMap &copy; CARTO'
-      }
-    ).addTo(map);
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    maxZoom: 10,
+    opacity: 0.55,
+    attribution: '&copy; OpenStreetMap contributors'
+  }
+).addTo(map);
 
     function normalizeCountry(name) {
       if (!name) return '';
