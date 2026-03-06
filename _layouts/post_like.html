@@ -3,38 +3,44 @@ layout: default
 ---
 
 <article class="post">
-
-  {% assign hero = page.photo | default: page.image %}
+  {% assign hero = page.media | default: page.photo | default: page.image %}
   {% if hero %}
     <a class="gallery-item post-hero" href="{{ hero | relative_url }}">
       <img
         src="{{ hero | relative_url }}"
-        alt="{{ page.image_alt | default: page.title }}"
-      >
+        alt="{{ page.image_alt | default: page.title }}">
     </a>
   {% endif %}
 
-  <h1>{{ page.title }}</h1>
+  <header class="post-head">
+    <h1>{{ page.title }}</h1>
 
-  <div class="post-meta">
-    {% if page.date %}
-      <p class="date">{{ page.date | date: "%b %-d, %Y · %-I:%M %p" }}</p>
-    {% endif %}
+    <div class="post-meta">
+      {% if page.date %}
+        <p class="date">{{ page.date | date: "%b %-d, %Y · %-I:%M %p" }}</p>
+      {% endif %}
 
-    {% if page.location %}
-      <p class="meta">📍 {{ page.location }}</p>
-    {% endif %}
+      {% if page.location %}
+        <p class="meta">📍 {{ page.location }}</p>
+      {% endif %}
 
-    {% if page.view %}
-      <p class="meta">👁️ {{ page.view }}</p>
-    {% endif %}
+      {% if page.view %}
+        <p class="meta">👁️ {{ page.view }}</p>
+      {% endif %}
 
-    {% if page.itinerary %}
-      <p class="meta">🗺️ {{ page.itinerary }}</p>
-    {% endif %}
+      {% if page.lat and page.lng %}
+        <p class="meta">🧭 {{ page.lat }}, {{ page.lng }}</p>
+      {% endif %}
+
+      {% if page.itinerary %}
+        <p class="meta">🗺️ {{ page.itinerary }}</p>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="post-body">
+    {{ content }}
   </div>
-
-  {{ content }}
 
   {% if page.photos and page.photos.size > 0 %}
     <section class="post-gallery">
@@ -67,5 +73,4 @@ layout: default
       {% endfor %}
     </section>
   {% endif %}
-
 </article>
