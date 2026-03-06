@@ -812,7 +812,15 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
                             
                               animation: travelStarPulse 2.2s ease-in-out infinite;
                             }
-                            
+
+                            .travel-star:hover {
+                              transform: scale(1.8);
+                              box-shadow:
+                                0 0 12px #ffb3e6,
+                                0 0 24px #ff78c8,
+                                0 0 36px #ff78c8;
+                            }
+
                             /* glowing pulse */
                             @keyframes travelStarPulse {
                             
