@@ -494,6 +494,260 @@ main { padding: 2rem 1rem; }
 /* ------------------ Cooking ------------------ */
 .muted { color:var(--muted); }
 
+/* =========================
+   COOKING SECTION
+========================= */
+
+.cooking-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.cooking-main {
+  min-width: 0;
+}
+
+.cooking-intro {
+  margin-bottom: 1.5rem;
+}
+
+.cooking-intro h1 {
+  margin-bottom: 0.5rem;
+}
+
+.cooking-chip-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.cooking-chip {
+  display: inline-block;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cooking-chip:hover {
+  transform: translateY(-2px);
+}
+
+.cooking-featured,
+.all-recipes {
+  margin-top: 2rem;
+}
+
+.cooking-featured h2,
+.all-recipes h2,
+.chaos-rating h2 {
+  margin-bottom: 1rem;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.featured-card,
+.recipe-card {
+  display: block;
+  text-decoration: none;
+  overflow: hidden;
+  border-radius: 20px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.featured-card:hover,
+.recipe-card:hover {
+  transform: translateY(-4px);
+}
+
+.featured-thumb,
+.recipe-thumb,
+.recipe-hero-image {
+  overflow: hidden;
+}
+
+.featured-thumb img,
+.recipe-thumb img,
+.recipe-hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.featured-thumb img {
+  aspect-ratio: 16 / 10;
+}
+
+.recipe-thumb img {
+  aspect-ratio: 16 / 10;
+}
+
+.featured-content,
+.recipe-card-body {
+  padding: 1rem;
+}
+
+.recipe-category-block {
+  margin-top: 2.5rem;
+}
+
+.recipe-category-title {
+  margin-bottom: 1rem;
+  text-transform: lowercase;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.recipe-card h4,
+.featured-card h3 {
+  margin: 0 0 0.5rem;
+}
+
+.recipe-card p,
+.featured-card p,
+.recipe-dek {
+  margin: 0 0 0.85rem;
+}
+
+.recipe-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.recipe-meta-top {
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.recipe-tag,
+.recipe-pill {
+  display: inline-block;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.cooking-sidebar {
+  position: sticky;
+  top: 110px;
+}
+
+.henn-pantry {
+  padding: 1.15rem;
+  border-radius: 20px;
+}
+
+.henn-pantry h3 {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+.pantry-subhead {
+  margin-top: 0;
+  opacity: 0.8;
+}
+
+.pantry-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.pantry-list li {
+  margin-bottom: 0.55rem;
+  padding-left: 1.4rem;
+  position: relative;
+}
+
+.pantry-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.pantry-note {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.recipe-post {
+  min-width: 0;
+}
+
+.recipe-header {
+  margin-bottom: 1.5rem;
+}
+
+.recipe-hero-image {
+  margin-bottom: 1.5rem;
+  border-radius: 22px;
+}
+
+.chaos-rating {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.15rem;
+  border-radius: 18px;
+}
+
+.chaos-grid p {
+  margin: 0.5rem 0;
+}
+
+.recipe-content h2,
+.recipe-content h3 {
+  margin-top: 1.75rem;
+}
+
+.recipe-content ul,
+.recipe-content ol {
+  padding-left: 1.4rem;
+}
+
+.recipe-content strong {
+  font-weight: 700;
+}
+
+/* responsive */
+@media (max-width: 1000px) {
+  .cooking-page {
+    grid-template-columns: 1fr;
+  }
+
+  .cooking-sidebar {
+    position: static;
+    order: -1;
+  }
+
+  .featured-grid,
+  .recipe-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .featured-grid,
+  .recipe-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ------------------ Contact / Forms ------------------ */
 form { background:#fff; border:var(--border); border-radius:var(--radius); padding:1rem; display:grid; gap:.75rem; box-shadow:var(--shadow); }
 input, textarea { padding:.8rem; border:var(--border); border-radius:12px; font:inherit; }
