@@ -41,7 +41,11 @@ collections:
 defaults:
   - scope: { path: "", type: adventures }
     values: { layout: post_like }
-  - scope: { path: "", type: cooking }
-    values: { layout: cooking-post }
+  - scope:
+      path: ""
+      type: cooking
+    values:
+      layout: cooking-post
+      body_class: cooking-theme
   - scope: { path: "", type: journal }
     values: { layout: post_like }
