@@ -498,6 +498,27 @@ main { padding: 2rem 1rem; }
    COOKING SECTION
 ========================= */
 
+body.cooking-theme {
+  background-image: url("/assets/backgrounds/cooking-skeletons.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body.cooking-theme::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,0,140,0.25),
+    rgba(150,80,255,0.25)
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
 .cooking-page {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
