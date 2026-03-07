@@ -1,6 +1,7 @@
 ---
 layout: default
 title: cooking
+body_class: cooking-theme
 ---
 
 {% assign items = site.cooking | sort: "date" | reverse %}
