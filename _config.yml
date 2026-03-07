@@ -42,6 +42,6 @@ defaults:
   - scope: { path: "", type: adventures }
     values: { layout: post_like }
   - scope: { path: "", type: cooking }
-    values: { layout: post_like }
+    values: { layout: cooking-post }
   - scope: { path: "", type: journal }
     values: { layout: post_like }
