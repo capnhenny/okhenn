@@ -1,0 +1,65 @@
+---
+layout: default
+---
+
+<section class="cooking-page cooking-post-page">
+  <div class="cooking-main">
+    <article class="recipe-post">
+
+      <header class="recipe-header">
+        <h1>{{ page.title }}</h1>
+
+        {% if page.blurb %}
+          <p class="recipe-dek">{{ page.blurb }}</p>
+        {% endif %}
+
+        <div class="recipe-meta recipe-meta-top">
+          {% if page.category %}
+            <span class="recipe-tag">{{ page.category }}</span>
+          {% endif %}
+          {% if page.time %}
+            <span class="recipe-pill">{{ page.time }}</span>
+          {% endif %}
+          {% if page.freezer %}
+            <span class="recipe-pill">freezer-friendly</span>
+          {% endif %}
+          {% if page.vegan %}
+            <span class="recipe-pill">vegan</span>
+          {% endif %}
+        </div>
+      </header>
+
+      {% if page.thumb %}
+        <div class="recipe-hero-image">
+          <img src="{{ page.thumb | relative_url }}" alt="{{ page.title }}">
+        </div>
+      {% endif %}
+
+      {% if page.brainpower or page.mess_level or page.worth_it %}
+      <section class="chaos-rating">
+        <h2>chaos rating</h2>
+        <div class="chaos-grid">
+          {% if page.brainpower %}
+            <p><strong>brainpower:</strong> {{ page.brainpower }}</p>
+          {% endif %}
+          {% if page.mess_level %}
+            <p><strong>mess level:</strong> {{ page.mess_level }}</p>
+          {% endif %}
+          {% if page.worth_it %}
+            <p><strong>worth it:</strong> {{ page.worth_it }}</p>
+          {% endif %}
+        </div>
+      </section>
+      {% endif %}
+
+      <div class="recipe-content">
+        {{ content }}
+      </div>
+
+    </article>
+  </div>
+
+  <aside class="cooking-sidebar">
+    {% include henn-pantry.html %}
+  </aside>
+</section>
