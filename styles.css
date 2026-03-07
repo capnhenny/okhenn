@@ -499,11 +499,16 @@ main { padding: 2rem 1rem; }
 ========================= */
 
 body.cooking-theme {
-  background-image: url("/assets/backgrounds/cooking-skeletons.jpg");
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  background-size: cover;
-  background-attachment: fixed;
+  position: relative;
+  background: url("/assets/backgrounds/cooking-skeletons.jpg") bottom center / cover no-repeat fixed;
+}
+
+body.cooking-theme main.wrap,
+body.cooking-theme .wrap,
+body.cooking-theme footer,
+body.cooking-theme .site-shell,
+body.cooking-theme .page-shell {
+  background: transparent !important;
 }
 
 body.cooking-theme::before {
@@ -512,11 +517,16 @@ body.cooking-theme::before {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(255,0,140,0.25),
-    rgba(150,80,255,0.25)
+    rgba(255, 0, 140, 0.18),
+    rgba(150, 80, 255, 0.18)
   );
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
+}
+
+body.cooking-theme > * {
+  position: relative;
+  z-index: 1;
 }
 
 .cooking-page {
