@@ -500,7 +500,7 @@ main { padding: 2rem 1rem; }
 
 body.cooking-theme {
   position: relative;
-  background: url("/assets/backgrounds/cooking-skeletons.jpg") bottom center / cover no-repeat fixed;
+  background: url("/assets/cooking-skeletons.jpg") bottom center / cover no-repeat fixed;
 }
 
 body.cooking-theme main.wrap,
