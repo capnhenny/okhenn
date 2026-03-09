@@ -181,6 +181,41 @@ html,body { overflow-x: hidden; }
 }
 .footer-row{ display:flex; justify-content:center; align-items:center; gap:.5rem; flex-wrap:wrap; }
 
+/* ======================
+   Footer Social Icons
+====================== */
+
+.footer-social {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.social-icon i {
+  font-size: 1.3rem;
+  color: white;
+}
+
+.social-icon:hover {
+  transform: translateY(-2px) scale(1.08);
+}
+
+.footer-social i {
+  display: inline-block;
+}
+
 /* === Neon pixel sparkline under visitor counter === */
 .visit-sparkline{
   margin-top:.15rem;
