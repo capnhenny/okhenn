@@ -331,6 +331,35 @@ html,body { overflow-x: hidden; }
   transform:translateY(-2px); color:var(--hot); border-color:var(--hot); background-color:rgba(255,255,255,.08); outline:none;
 }
 
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.social-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: #fff;
+  display: block;
+}
+
+.social-icon:hover {
+  transform: translateY(-2px) scale(1.06);
+}
+
 /* row 3: meta */
 .copyright{ opacity:.9; font-size:.9rem; text-align:center; }
 .hit-counter{
