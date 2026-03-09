@@ -216,6 +216,19 @@ html,body { overflow-x: hidden; }
   display: inline-block;
 }
 
+.footer-social,
+.footer-social a,
+.footer-social i {
+  color: #fff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.footer-social i {
+  font-size: 1.4rem;
+  display: inline-block;
+}
+
 /* === Neon pixel sparkline under visitor counter === */
 .visit-sparkline{
   margin-top:.15rem;
