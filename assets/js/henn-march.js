@@ -11,13 +11,13 @@ const SPRITES = [
 
 function makeRunner(sprite, index) {
   const el = document.createElement("div");
-  el.className = `henn-sprite-runner ${sprite.name}`;
+  el.className = `henn-sprite-runner ${sprite.name}${index % 2 ? " alt-step" : ""}`;
   el.style.backgroundImage = `url("${sprite.file}")`;
   el.style.width = `${sprite.width}px`;
   el.style.height = `${sprite.name === "cat-henn" ? 64 : 56}px`;
-  el.style.top = `${sprite.name === "cat-henn" ? 2 : 6}px`;
-  el.style.animationDuration = `0.38s, ${sprite.duration}s`;
-  el.style.animationDelay = `0s, ${sprite.delay}s`;
+  el.style.top = `${sprite.name === "cat-henn" ? 6 : 10}px`;
+  el.style.animationDuration = `${sprite.duration}s, 0.32s`;
+  el.style.animationDelay = `${sprite.delay}s, 0s`;
   el.dataset.name = sprite.name;
   return el;
 }
@@ -50,7 +50,11 @@ function bonkOneOccasionally() {
     // force reflow
     void victim.offsetHeight;
     const sprite = SPRITES.find(s => s.name === victim.dataset.name);
-    victim.style.animation = `henn-bob 0.38s steps(2) infinite, henn-march ${sprite.duration}s linear infinite`;
+    victim.style.animation = "none";
+    void victim.offsetHeight;
+    
+    const walkAnim = victim.classList.contains("alt-step") ? "henn-walk-b" : "henn-walk-a";
+    victim.style.animation = `henn-march ${sprite.duration}s linear infinite, ${walkAnim} 0.32s steps(2) infinite`;
     victim.style.animationDelay = `0s, 0s`;
   }, 2200);
 }
