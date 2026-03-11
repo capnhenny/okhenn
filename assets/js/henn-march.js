@@ -146,12 +146,12 @@ function chaosRoll() {
               }
             });
           
-            // ninja leap
-            document.querySelectorAll(".ninja-henn").forEach(ninja => {
-              if (Math.random() < 0.07 && !ninja.classList.contains("henn-leap")) {
-                ninja.classList.add("henn-leap");
+            // dino stomp
+            document.querySelectorAll(".dino-henn").forEach(dino => {
+              if (Math.random() < 0.14 && !dino.classList.contains("henn-leap")) {
+                dino.classList.add("henn-leap");
                 setTimeout(() => {
-                  ninja.classList.remove("henn-leap");
+                  dino.classList.remove("henn-leap");
                 }, 900);
               }
             });
