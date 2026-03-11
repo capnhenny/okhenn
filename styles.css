@@ -1707,15 +1707,13 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   width: 56px;
   height: 56px;
   image-rendering: pixelated;
-  image-rendering: crisp-edges;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   will-change: transform;
-  animation:
-    henn-march linear infinite,
-    henn-walk-a 0.32s steps(2) infinite;
   transform-origin: center bottom;
+
+  animation: henn-walk-a 0.32s steps(2) infinite;
 }
 
 .henn-sprite-runner.alt-step {
@@ -1757,31 +1755,56 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   opacity: 0;
 }
 
-/* marching henn sprite */
-.henn {
+ /* SPRITE UPGRADES */
+
+.henn-bullet {
   position: absolute;
-  top: 8px;
-  width: 64px;
-  height: 64px;
-  image-rendering: pixelated;
-
-  animation: hennWalk 0.6s steps(2) infinite;
+  width: 6px;
+  height: 2px;
+  background: #ffd86b;
+  animation: bullet 0.8s linear forwards;
 }
 
-/* sprite walking bounce */
-@keyframes hennWalk {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-2px); }
-  100% { transform: translateY(0px); }
+@keyframes bullet {
+  from { transform: translateX(0); }
+  to { transform: translateX(80px); }
 }
 
-#henn-banner {
-  position: relative;
-  height: 72px;
-  overflow: hidden;
-  margin-bottom: 16px;
+.henn-sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #7ffcff;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle 0.8s ease-out forwards;
 }
 
+@keyframes sparkle {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.2);
+  }
+}
+
+.henn-cat-run {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url("/assets/henn-sprites/cat-run.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: catDash 1.2s linear forwards;
+}
+
+@keyframes catDash {
+  from { transform: translateX(0); }
+  to { transform: translateX(120px); }
+}
                   /* breathing room under parade */
                   body {
                     padding-top: 88px;
