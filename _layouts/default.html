@@ -9,6 +9,11 @@
   {% include favicon.html %}
 </head>
 <body class="{{ page.body_class }}">
+
+  <div class="henn-march" aria-hidden="true">
+    <div class="henn-march-track" id="hennMarchTrack"></div>
+  </div>
+
   {% include header.html %}
 
   <main class="wrap">
@@ -18,5 +23,6 @@
   {% include footer.html %}
 
   <script defer src="/assets/js/visitor-counter.js?v=2"></script>
+  <script defer src="/assets/js/henn-march.js"></script>
 </body>
 </html>
