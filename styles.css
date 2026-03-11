@@ -1712,7 +1712,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .henn-sprite-runner {
   position: absolute;
   left: -90px;
-  top: -4px;
+  top: -6px;
   width: 48px;
   height: 48px;
   image-rendering: pixelated;
@@ -1735,7 +1735,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .henn-sprite-runner.cat-henn {
   width: 54px;
   height: 54px;
-  top: -6px;
+  top: -8px;
 }
 
 @keyframes henn-march {
@@ -1761,8 +1761,30 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 .henn-sprite-runner.bonked {
   animation-play-state: paused;
-  transition: transform 0.45s ease, opacity 0.45s ease;
-  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+  opacity: 0.8;
+  filter: brightness(1.15);
+}
+
+.henn-bonk-star {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #ffe36b;
+  clip-path: polygon(50% 0%, 62% 35%, 100% 50%, 62% 65%, 50% 100%, 38% 65%, 0% 50%, 38% 35%);
+  pointer-events: none;
+  animation: bonkStar 0.5s ease-out forwards;
+}
+
+@keyframes bonkStar {
+  0% {
+    opacity: 1;
+    transform: scale(0.6) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4) rotate(90deg) translateY(-8px);
+  }
 }
 
  /* SPRITE UPGRADES */
