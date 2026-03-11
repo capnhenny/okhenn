@@ -39,28 +39,39 @@ function bonkOneOccasionally() {
   const runners = Array.from(document.querySelectorAll(".henn-sprite-runner"));
   if (!runners.length) return;
 
-  const live = runners.filter(el => !el.classList.contains("bonked"));
-  if (live.length < 2) return;
+  const visible = runners.filter(el => {
+    if (el.classList.contains("bonked")) return false;
 
-  const victim = live[Math.floor(Math.random() * live.length)];
+    const rect = el.getBoundingClientRect();
+    return rect.right > 0 && rect.left < window.innerWidth;
+  });
+
+  if (visible.length < 1) return;
+
+  const victim = visible[Math.floor(Math.random() * visible.length)];
+
+    spawnEffect(
+    victim.parentElement,
+    "henn-bonk-star",
+  victim.offsetLeft + rect.width * 0.45,
+  victim.offsetTop + rect.height * 0.35,
+    500
+  );
+  
   victim.classList.add("bonked");
-  victim.style.transform = "translateX(40px) translateY(-18px) rotate(18deg)";
+  victim.style.transform = "translateX(26px) translateY(-10px) rotate(14deg)";
 
   setTimeout(() => {
     victim.classList.remove("bonked");
     victim.style.transform = "";
-    // restart march animation by reflow
     victim.style.animation = "none";
-    // force reflow
     void victim.offsetHeight;
+
     const sprite = SPRITES.find(s => s.name === victim.dataset.name);
-    victim.style.animation = "none";
-    void victim.offsetHeight;
-    
     const walkAnim = victim.classList.contains("alt-step") ? "henn-walk-b" : "henn-walk-a";
-    victim.style.animation = `henn-march ${sprite.duration}s linear infinite, ${walkAnim} 0.32s steps(2) infinite`;
+    victim.style.animation = `henn-march ${sprite.duration}s linear infinite, ${walkAnim} 0.32s ease-in-out infinite`;
     victim.style.animationDelay = `0s, 0s`;
-  }, 2200);
+  }, 900);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
