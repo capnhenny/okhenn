@@ -109,7 +109,7 @@ function chaosRoll() {
           
             // wizard sparkle
             document.querySelectorAll(".wizard-henn").forEach(wizard => {
-              if (Math.random() < 0.05) {
+              if (Math.random() < 0.15) {
                 spawnEffect(
                   wizard.parentElement,
                   "henn-sparkle",
@@ -122,7 +122,7 @@ function chaosRoll() {
           
             // cowboy bullet
             document.querySelectorAll(".cowboy-henn").forEach(cowboy => {
-              if (Math.random() < 0.13) {
+              if (Math.random() < 0.16) {
                 spawnEffect(
                   cowboy.parentElement,
                   "henn-bullet",
@@ -135,7 +135,7 @@ function chaosRoll() {
           
             // cat chaos
             document.querySelectorAll(".cat-henn").forEach(catLady => {
-              if (Math.random() < 0.03) {
+              if (Math.random() < 0.12) {
                 spawnEffect(
                   catLady.parentElement,
                   "henn-cat-run",
@@ -158,7 +158,7 @@ function chaosRoll() {
           
             // explorer compass confusion
             document.querySelectorAll(".explorer-henn").forEach(explorer => {
-              if (Math.random() < 0.04) {
+              if (Math.random() < 0.14) {
                 spawnEffect(
                   explorer.parentElement,
                   "henn-compass",
@@ -171,7 +171,7 @@ function chaosRoll() {
           
             // chef pancake flip
             document.querySelectorAll(".chef-henn").forEach(chef => {
-              if (Math.random() < 0.04) {
+              if (Math.random() < 0.14) {
                 spawnEffect(
                   chef.parentElement,
                   "henn-pancake",
