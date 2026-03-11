@@ -87,7 +87,7 @@ setInterval(() => {
   
   // wizard sparkle
   document.querySelectorAll(".wizard-henn").forEach(wizard => {
-    if (Math.random() < 0.15) {
+    if (Math.random() < 0.05) {
       const sparkle = document.createElement("div");
       sparkle.className = "henn-sparkle";
 
@@ -117,7 +117,7 @@ setInterval(() => {
 
   // cat chaos
   document.querySelectorAll(".cat-henn").forEach(catLady => {
-    if (Math.random() < 0.12) {
+    if (Math.random() < 0.03) {
       const cat = document.createElement("div");
       cat.className = "henn-cat-run";
 
@@ -131,8 +131,8 @@ setInterval(() => {
   });
 
   // ninja leap
-  document.querySelectorAll(".nin-henn").forEach(ninja => {
-    if (Math.random() < 0.14) {
+  document.querySelectorAll(".ninja-henn").forEach(ninja => {
+    if (Math.random() < 0.07) {
   
       ninja.classList.add("henn-leap");
   
