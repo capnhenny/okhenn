@@ -1712,8 +1712,9 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   background-size: contain;
   will-change: transform;
   transform-origin: center bottom;
-
-  animation: henn-walk-a 0.32s steps(2) infinite;
+  animation:
+    henn-march linear infinite,
+    henn-walk-a 0.32s steps(2) infinite;
 }
 
 .henn-sprite-runner.alt-step {
@@ -1899,3 +1900,24 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
                   header {
                     margin-top: 10px;
                   }
+
+      /* mobile sprite repairs */
+    
+      @media (max-width: 768px) {
+        .henn-march {
+          height: 56px;
+          top: 4px;
+        }
+      
+        .henn-sprite-runner {
+          width: 40px !important;
+          height: 40px !important;
+          top: 8px !important;
+        }
+      
+        .henn-sprite-runner.cat-henn {
+          width: 46px !important;
+          height: 46px !important;
+          top: 6px !important;
+        }
+      }
