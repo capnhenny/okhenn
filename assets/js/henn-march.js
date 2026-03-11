@@ -169,6 +169,8 @@ function chaosRoll() {
           }
 
 // occasional chaos
+chaosRoll();
+
 setInterval(() => {
   setTimeout(() => {
     chaosRoll();
