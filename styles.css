@@ -1757,6 +1757,25 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
  /* SPRITE UPGRADES */
 
+/* JRPG party victory bounce */
+.henn-victory {
+  animation: hennVictory 0.8s ease-in-out;
+}
+
+@keyframes hennVictory {
+
+  0%   { transform: translateY(0); }
+
+  25%  { transform: translateY(-14px); }
+
+  50%  { transform: translateY(0); }
+
+  75%  { transform: translateY(-8px); }
+
+  100% { transform: translateY(0); }
+
+}
+
 .henn-bullet {
   position: absolute;
   width: 6px;
@@ -1804,6 +1823,71 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 @keyframes catDash {
   from { transform: translateX(0); }
   to { transform: translateX(120px); }
+}
+
+/* ninja leap */
+.henn-leap {
+  animation: ninjaLeap 0.9s ease-out forwards;
+}
+
+@keyframes ninjaLeap {
+  0%   { transform: translateY(0) rotate(0deg); }
+  40%  { transform: translateY(-24px) rotate(-8deg); }
+  70%  { transform: translateY(-12px) rotate(6deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* explorer compass */
+.henn-compass {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffd86b;
+  border-radius: 50%;
+  border: 1px solid #333;
+  pointer-events: none;
+  animation: compassSpin 1.2s ease-out forwards;
+}
+
+@keyframes compassSpin {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) translateY(0);  }
+
+  50% {
+    transform: rotate(180deg) translateY(-8px);  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(360deg) translateY(-14px);  }
+}
+
+/* chef pancake flip */
+.henn-pancake {
+  position: absolute;
+  width: 8px;
+  height: 6px;
+  background: #f6c56b;
+  border: 1px solid #8b5a2b;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pancakeFlip 1s ease-out forwards;
+}
+
+@keyframes pancakeFlip {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;  }
+
+  40% {
+    transform: translateY(-18px) rotate(180deg);  }
+
+  70% {
+    transform: translateY(-10px) rotate(300deg);  }
+
+  100% {
+    transform: translateY(0) rotate(360deg);
+    opacity: 0;  }
 }
                   /* breathing room under parade */
                   body {
