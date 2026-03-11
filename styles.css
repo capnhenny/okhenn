@@ -1687,7 +1687,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .henn-march {
   position: relative;
   width: 100%;
-  height: 56px;
+  height: 62px;
   overflow: hidden;
   pointer-events: none;
   z-index: 1;
@@ -1696,7 +1696,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .henn-march::after {
   content: "";
   position: absolute;
-  bottom: 6px;
+  bottom: 12px;
   left: 0;
   width: 100%;
   height: 2px;
@@ -1712,7 +1712,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .henn-sprite-runner {
   position: absolute;
   left: -90px;
-  top: 2px;
+  top: -4px;
   width: 48px;
   height: 48px;
   image-rendering: pixelated;
@@ -1735,7 +1735,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .henn-sprite-runner.cat-henn {
   width: 54px;
   height: 54px;
-  top: 0;
+  top: -6px;
 }
 
 @keyframes henn-march {
