@@ -62,10 +62,123 @@ function bonkOneOccasionally() {
 document.addEventListener("DOMContentLoaded", () => {
   seedRunners();
 
-  // occasional chaos
-  setInterval(() => {
-    if (Math.random() < 0.35) {
-      bonkOneOccasionally();
+// occasional chaos
+setInterval(() => {
+
+  // bonk event
+  if (Math.random() < 0.35) {
+    bonkOneOccasionally();
+  }
+
+  // wizard sparkle
+  document.querySelectorAll(".wizard-henn").forEach(wizard => {
+    if (Math.random() < 0.15) {
+      const sparkle = document.createElement("div");
+      sparkle.className = "henn-sparkle";
+
+      sparkle.style.left = wizard.offsetLeft + 20 + "px";
+      sparkle.style.top = wizard.offsetTop + 20 + "px";
+
+      wizard.parentElement.appendChild(sparkle);
+
+      setTimeout(() => sparkle.remove(), 800);
     }
-  }, 5000);
-});
+  });
+
+  // cowboy bullet
+  document.querySelectorAll(".cowboy-henn").forEach(cowboy => {
+    if (Math.random() < 0.13) {
+      const bullet = document.createElement("div");
+      bullet.className = "henn-bullet";
+
+      bullet.style.left = cowboy.offsetLeft + 40 + "px";
+      bullet.style.top = cowboy.offsetTop + 30 + "px";
+
+      cowboy.parentElement.appendChild(bullet);
+
+      setTimeout(() => bullet.remove(), 800);
+    }
+  });
+
+  // cat chaos
+  document.querySelectorAll(".cat-henn").forEach(catLady => {
+    if (Math.random() < 0.12) {
+      const cat = document.createElement("div");
+      cat.className = "henn-cat-run";
+
+      cat.style.left = catLady.offsetLeft + "px";
+      cat.style.top = catLady.offsetTop + 40 + "px";
+
+      catLady.parentElement.appendChild(cat);
+
+      setTimeout(() => cat.remove(), 1200);
+    }
+  });
+
+  // occasional chaos
+setInterval(() => {
+
+  // bonk event
+  if (Math.random() < 0.35) {
+    bonkOneOccasionally();
+  }
+
+  // wizard sparkle
+  document.querySelectorAll(".wizard-henn").forEach(wizard => {
+    if (Math.random() < 0.05) {
+      const sparkle = document.createElement("div");
+      sparkle.className = "henn-sparkle";
+
+      sparkle.style.left = wizard.offsetLeft + 20 + "px";
+      sparkle.style.top = wizard.offsetTop + 20 + "px";
+
+      wizard.parentElement.appendChild(sparkle);
+
+      setTimeout(() => sparkle.remove(), 800);
+    }
+  });
+
+  // cowboy bullet
+  document.querySelectorAll(".cowboy-henn").forEach(cowboy => {
+    if (Math.random() < 0.03) {
+      const bullet = document.createElement("div");
+      bullet.className = "henn-bullet";
+
+      bullet.style.left = cowboy.offsetLeft + 40 + "px";
+      bullet.style.top = cowboy.offsetTop + 30 + "px";
+
+      cowboy.parentElement.appendChild(bullet);
+
+      setTimeout(() => bullet.remove(), 800);
+    }
+  });
+
+  // cat chaos
+  document.querySelectorAll(".cat-henn").forEach(catLady => {
+    if (Math.random() < 0.02) {
+      const cat = document.createElement("div");
+      cat.className = "henn-cat-run";
+
+      cat.style.left = catLady.offsetLeft + "px";
+      cat.style.top = catLady.offsetTop + 40 + "px";
+
+      catLady.parentElement.appendChild(cat);
+
+      setTimeout(() => cat.remove(), 1200);
+    }
+  });
+
+  // ninja leap
+  document.querySelectorAll(".nin-henn").forEach(ninja => {
+    if (Math.random() < 0.14) {
+  
+      ninja.classList.add("henn-leap");
+  
+      setTimeout(() => {
+        ninja.classList.remove("henn-leap");
+      }, 900);
+  
+    }
+  });
+
+}, 5000);
