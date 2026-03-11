@@ -16,6 +16,7 @@ function makeRunner(sprite, index) {
   el.style.width = `${sprite.width}px`;
   el.style.height = `${sprite.name === "cat-henn" ? 64 : 56}px`;
   el.style.top = `${sprite.name === "cat-henn" ? 6 : 10}px`;
+  el.style.left = "-90px";
   el.style.animationDuration = `${sprite.duration}s, 0.32s`;
   el.style.animationDelay = `${sprite.delay}s, 0s`;
   el.dataset.name = sprite.name;
