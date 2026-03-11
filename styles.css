@@ -1757,6 +1757,31 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   opacity: 0;
 }
 
+/* marching henn sprite */
+.henn {
+  position: absolute;
+  top: 8px;
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+
+  animation: hennWalk 0.6s steps(2) infinite;
+}
+
+/* sprite walking bounce */
+@keyframes hennWalk {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-2px); }
+  100% { transform: translateY(0px); }
+}
+
+#henn-banner {
+  position: relative;
+  height: 72px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
                   /* breathing room under parade */
                   body {
                     padding-top: 88px;
