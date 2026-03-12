@@ -185,7 +185,7 @@ function chaosRoll() {
               
                 // warrior sword slash
                 document.querySelectorAll(".warrior-henn").forEach(warrior => {
-                  if (Math.random() < 0.98) {
+                  if (Math.random() < 0.14) {
                     console.log("WARRIOR FOUND", warrior);
               
                     spawnEffect(
