@@ -184,19 +184,19 @@ function chaosRoll() {
           }
 
               // warrior sword slash
-            document.querySelectorAll(".warrior-henn").forEach(warrior => {
-              if (Math.random() < 0.98) {
-            
-                spawnEffect(
-                  warrior.parentElement,
-                  "henn-slash",
-                  warrior.offsetLeft + 26,
-                  warrior.offsetTop + 12,
-                  450
-                );
-            
-              }
-            });
+document.querySelectorAll(".warrior-henn").forEach(warrior => {
+  if (Math.random() < 0.98) {
+    console.log("WARRIOR FOUND", warrior);
+
+    spawnEffect(
+      warrior.parentElement,
+      "henn-slash",
+      warrior.offsetLeft + 10,
+      warrior.offsetTop + 5,
+      2000
+    );
+  }
+});
             
               // tron neon pulse
             document.querySelectorAll(".tron-henn").forEach(tron => {
