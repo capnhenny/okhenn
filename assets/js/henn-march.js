@@ -108,19 +108,21 @@ function chaosRoll() {
     });
   }
 
-                // wizard sparkle
-                document.querySelectorAll(".wizard-henn").forEach(wizard => {
-                  if (Math.random() < 0.15) {
-                    spawnEffect(
-                      wizard.parentElement,
-                      "henn-sparkle",
-                      wizard.offsetLeft + 20,
-                      wizard.offsetTop + 20,
-                      800
-                    );
-                  }
-                });
-              
+                  // wizard magic
+                  document.querySelectorAll(".wizard-henn").forEach(wizard => {
+                    if (Math.random() < 0.15) {
+                  
+                      spawnEffect(
+                        wizard.parentElement,
+                        "henn-magic-circle",
+                        wizard.offsetLeft + 14,
+                        wizard.offsetTop + 20,
+                        900
+                      );
+                  
+                    }
+                  });
+                                
                 // cowboy bullet
                 document.querySelectorAll(".cowboy-henn").forEach(cowboy => {
                   if (Math.random() < 0.16) {
@@ -134,29 +136,38 @@ function chaosRoll() {
                   }
                 });
               
-                // cat chaos
-                document.querySelectorAll(".cat-henn").forEach(catLady => {
-                  if (Math.random() < 0.12) {
-                    spawnEffect(
-                      catLady.parentElement,
-                      "henn-cat-run",
-                      catLady.offsetLeft,
-                      catLady.offsetTop + 40,
-                      1200
-                    );
-                  }
-                });
+                    // cat chaos
+                    document.querySelectorAll(".cat-henn").forEach(catLady => {
+                      if (Math.random() < 0.12) {
+                        spawnEffect(
+                          catLady.parentElement,
+                          "henn-cat-run",
+                          catLady.offsetLeft,
+                          catLady.offsetTop + 40,
+                          1200
+                        );
+                      }
+                    });
               
-                // dino stomp
-                document.querySelectorAll(".dino-henn").forEach(dino => {
-                  if (Math.random() < 0.14 && !dino.classList.contains("henn-leap")) {
-                    dino.classList.add("henn-leap");
-                    setTimeout(() => {
-                      dino.classList.remove("henn-leap");
-                    }, 900);
-                  }
-                });
-              
+                  // dino stomp
+                  document.querySelectorAll(".dino-henn").forEach(dino => {
+                    if (Math.random() < 0.14 && !dino.classList.contains("henn-stomp")) {
+                  
+                      dino.classList.add("henn-stomp");
+                      setTimeout(() => {
+                        spawnEffect(
+                          dino.parentElement,
+                          "henn-dust",
+                          dino.offsetLeft + 12,
+                          dino.offsetTop + 34,
+                          700
+                        );
+                        dino.classList.remove("henn-stomp");
+                  
+                      }, 400);
+                    }
+                  });
+                                
                 // explorer compass confusion
                 document.querySelectorAll(".explorer-henn").forEach(explorer => {
                   if (Math.random() < 0.14) {
