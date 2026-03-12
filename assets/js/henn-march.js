@@ -183,6 +183,36 @@ function chaosRoll() {
             });
           }
 
+              // warrior sword slash
+            document.querySelectorAll(".warrior-henn").forEach(warrior => {
+              if (Math.random() < 0.16) {
+            
+                spawnEffect(
+                  warrior.parentElement,
+                  "henn-slash",
+                  warrior.offsetLeft + 26,
+                  warrior.offsetTop + 12,
+                  450
+                );
+            
+              }
+            });
+            
+              // tron neon pulse
+            document.querySelectorAll(".tron-henn").forEach(tron => {
+              if (Math.random() < 0.15) {
+            
+                spawnEffect(
+                  tron.parentElement,
+                  "henn-tron-pulse",
+                  tron.offsetLeft + 20,
+                  tron.offsetTop + 14,
+                  600
+                );
+            
+              }
+            });
+            
 // occasional chaos
 chaosRoll();
 
@@ -190,6 +220,6 @@ setInterval(() => {
   setTimeout(() => {
     chaosRoll();
   }, Math.random() * 800);
-}, 3000);
+}, 2200);
 
                           });
