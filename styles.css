@@ -1924,32 +1924,28 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 .henn-slash {
   position: absolute;
-  width: 30px;
-  height: 30px;
-  background: red;
-  border: 2px solid yellow;
-  z-index: 999;
+  width: 18px;
+  height: 18px;
+  border-top: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  border-radius: 50%;
+  transform: rotate(-40deg);
   pointer-events: none;
-  animation: slashArc 2s ease-out forwards;
+  animation: slashArc 0.45s ease-out forwards;
 }
 
 @keyframes slashArc {
-
   0% {
     opacity: 1;
-    transform: rotate(-40deg) scale(0.4);
-  }
+    transform: rotate(-40deg) scale(0.4); }
 
   70% {
     opacity: 1;
-    transform: rotate(-10deg) scale(1);
-  }
+    transform: rotate(-10deg) scale(1);  }
 
   100% {
     opacity: 0;
-    transform: rotate(10deg) scale(1.2);
-  }
-
+    transform: rotate(10deg) scale(1.2);  }
 }
 
 .henn-tron-pulse {
@@ -1966,18 +1962,15 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
   0% {
     opacity: 1;
-    transform: scale(0.4);
-  }
+    transform: scale(0.4);  }
 
   70% {
     opacity: 0.8;
-    transform: scale(1.2);
-  }
+    transform: scale(1.2);  }
 
   100% {
     opacity: 0;
-    transform: scale(1.8);
-  }
+    transform: scale(1.8);  }
 
 }
 
