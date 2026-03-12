@@ -9,6 +9,17 @@ const SPRITES = [
   { name: "cat-henn", file: "/assets/henn-sprites/cat-henn.png", width: 64, duration: 29, delay: 21 }
 ];
 
+            // helper function
+            function spawnEffect(parent, className, left, top, duration) {
+              const effect = document.createElement("div");
+              effect.className = className;
+              effect.style.left = left + "px";
+              effect.style.top = top + "px";
+              parent.appendChild(effect);
+            
+              setTimeout(() => effect.remove(), duration);
+            }
+
 function makeRunner(sprite, index) {
   const el = document.createElement("div");
   el.className = `henn-sprite-runner ${sprite.name}${index % 2 ? " alt-step" : ""}`;
@@ -49,12 +60,13 @@ function bonkOneOccasionally() {
   if (visible.length < 1) return;
 
   const victim = visible[Math.floor(Math.random() * visible.length)];
-
-    spawnEffect(
+  const rect = victim.getBoundingClientRect();
+  
+  spawnEffect(
     victim.parentElement,
     "henn-bonk-star",
-  victim.offsetLeft + rect.width * 0.45,
-  victim.offsetTop + rect.height * 0.35,
+    victim.offsetLeft + rect.width * 0.45,
+    victim.offsetTop + rect.height * 0.35,
     500
   );
   
@@ -77,17 +89,6 @@ function bonkOneOccasionally() {
 document.addEventListener("DOMContentLoaded", () => {
   seedRunners();
 
-// helper function
-function spawnEffect(parent, className, left, top, duration) {
-  const effect = document.createElement("div");
-  effect.className = className;
-  effect.style.left = left + "px";
-  effect.style.top = top + "px";
-  parent.appendChild(effect);
-
-  setTimeout(() => effect.remove(), duration);
-}
-
 function chaosRoll() {
 
   // bonk event
@@ -95,123 +96,121 @@ function chaosRoll() {
     bonkOneOccasionally();
   }
 
-            // rare JRPG party victory bounce
-            if (Math.random() < 0.01) {
-              document.querySelectorAll(".henn-sprite-runner").forEach(henn => {
-                if (!henn.classList.contains("henn-victory")) {
-                  henn.classList.add("henn-victory");
-                  setTimeout(() => {
-                    henn.classList.remove("henn-victory");
-                  }, 800);
-                }
-              });
-            }
-          
-            // wizard sparkle
-            document.querySelectorAll(".wizard-henn").forEach(wizard => {
-              if (Math.random() < 0.15) {
-                spawnEffect(
-                  wizard.parentElement,
-                  "henn-sparkle",
-                  wizard.offsetLeft + 20,
-                  wizard.offsetTop + 20,
-                  800
-                );
-              }
-            });
-          
-            // cowboy bullet
-            document.querySelectorAll(".cowboy-henn").forEach(cowboy => {
-              if (Math.random() < 0.16) {
-                spawnEffect(
-                  cowboy.parentElement,
-                  "henn-bullet",
-                  cowboy.offsetLeft + 40,
-                  cowboy.offsetTop + 30,
-                  800
-                );
-              }
-            });
-          
-            // cat chaos
-            document.querySelectorAll(".cat-henn").forEach(catLady => {
-              if (Math.random() < 0.12) {
-                spawnEffect(
-                  catLady.parentElement,
-                  "henn-cat-run",
-                  catLady.offsetLeft,
-                  catLady.offsetTop + 40,
-                  1200
-                );
-              }
-            });
-          
-            // dino stomp
-            document.querySelectorAll(".dino-henn").forEach(dino => {
-              if (Math.random() < 0.14 && !dino.classList.contains("henn-leap")) {
-                dino.classList.add("henn-leap");
-                setTimeout(() => {
-                  dino.classList.remove("henn-leap");
-                }, 900);
-              }
-            });
-          
-            // explorer compass confusion
-            document.querySelectorAll(".explorer-henn").forEach(explorer => {
-              if (Math.random() < 0.14) {
-                spawnEffect(
-                  explorer.parentElement,
-                  "henn-compass",
-                  explorer.offsetLeft + 24,
-                  explorer.offsetTop + 10,
-                  1200
-                );
-              }
-            });
-          
-            // chef pancake flip
-            document.querySelectorAll(".chef-henn").forEach(chef => {
-              if (Math.random() < 0.14) {
-                spawnEffect(
-                  chef.parentElement,
-                  "henn-pancake",
-                  chef.offsetLeft + 28,
-                  chef.offsetTop + 18,
-                  1000
-                );
-              }
-            });
-          }
-
-              // warrior sword slash
-document.querySelectorAll(".warrior-henn").forEach(warrior => {
-  if (Math.random() < 0.98) {
-    console.log("WARRIOR FOUND", warrior);
-
-    spawnEffect(
-      warrior.parentElement,
-      "henn-slash",
-      warrior.offsetLeft + 10,
-      warrior.offsetTop + 5,
-      2000
-    );
+  // rare JRPG party victory bounce
+  if (Math.random() < 0.01) {
+    document.querySelectorAll(".henn-sprite-runner").forEach(henn => {
+      if (!henn.classList.contains("henn-victory")) {
+        henn.classList.add("henn-victory");
+        setTimeout(() => {
+          henn.classList.remove("henn-victory");
+        }, 800);
+      }
+    });
   }
-});
-            
-              // tron neon pulse
-            document.querySelectorAll(".tron-henn").forEach(tron => {
-              if (Math.random() < 0.15) {
-            
-                spawnEffect(
-                  tron.parentElement,
-                  "henn-tron-pulse",
-                  tron.offsetLeft + 20,
-                  tron.offsetTop + 14,
-                  600
-                );
-            
+
+                // wizard sparkle
+                document.querySelectorAll(".wizard-henn").forEach(wizard => {
+                  if (Math.random() < 0.15) {
+                    spawnEffect(
+                      wizard.parentElement,
+                      "henn-sparkle",
+                      wizard.offsetLeft + 20,
+                      wizard.offsetTop + 20,
+                      800
+                    );
+                  }
+                });
+              
+                // cowboy bullet
+                document.querySelectorAll(".cowboy-henn").forEach(cowboy => {
+                  if (Math.random() < 0.16) {
+                    spawnEffect(
+                      cowboy.parentElement,
+                      "henn-bullet",
+                      cowboy.offsetLeft + 40,
+                      cowboy.offsetTop + 30,
+                      800
+                    );
+                  }
+                });
+              
+                // cat chaos
+                document.querySelectorAll(".cat-henn").forEach(catLady => {
+                  if (Math.random() < 0.12) {
+                    spawnEffect(
+                      catLady.parentElement,
+                      "henn-cat-run",
+                      catLady.offsetLeft,
+                      catLady.offsetTop + 40,
+                      1200
+                    );
+                  }
+                });
+              
+                // dino stomp
+                document.querySelectorAll(".dino-henn").forEach(dino => {
+                  if (Math.random() < 0.14 && !dino.classList.contains("henn-leap")) {
+                    dino.classList.add("henn-leap");
+                    setTimeout(() => {
+                      dino.classList.remove("henn-leap");
+                    }, 900);
+                  }
+                });
+              
+                // explorer compass confusion
+                document.querySelectorAll(".explorer-henn").forEach(explorer => {
+                  if (Math.random() < 0.14) {
+                    spawnEffect(
+                      explorer.parentElement,
+                      "henn-compass",
+                      explorer.offsetLeft + 24,
+                      explorer.offsetTop + 10,
+                      1200
+                    );
+                  }
+                });
+              
+                // chef pancake flip
+                document.querySelectorAll(".chef-henn").forEach(chef => {
+                  if (Math.random() < 0.14) {
+                    spawnEffect(
+                      chef.parentElement,
+                      "henn-pancake",
+                      chef.offsetLeft + 28,
+                      chef.offsetTop + 18,
+                      1000
+                    );
+                  }
+                });
+              
+                // warrior sword slash
+                document.querySelectorAll(".warrior-henn").forEach(warrior => {
+                  if (Math.random() < 0.98) {
+                    console.log("WARRIOR FOUND", warrior);
+              
+                    spawnEffect(
+                      warrior.parentElement,
+                      "henn-slash",
+                      warrior.offsetLeft + 10,
+                      warrior.offsetTop + 5,
+                      2000
+                    );
+                  }
+                });
+              
+                // tron neon pulse
+                document.querySelectorAll(".tron-henn").forEach(tron => {
+                  if (Math.random() < 0.15) {
+                    spawnEffect(
+                      tron.parentElement,
+                      "henn-tron-pulse",
+                      tron.offsetLeft + 20,
+                      tron.offsetTop + 14,
+                      600
+                    );
+                  }
+                });
               }
-            });
             
 // occasional chaos
 chaosRoll();
