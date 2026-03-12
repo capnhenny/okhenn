@@ -1821,52 +1821,88 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   to { transform: translateX(80px); }
 }
 
-.henn-sparkle {
+.henn-magic-circle {
   position: absolute;
-  width: 6px;
-  height: 6px;
-  background: #7ffcff;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #7ffcff;
   border-radius: 50%;
   pointer-events: none;
-  animation: sparkle 0.8s ease-out forwards;
+  animation: magicCircle 0.9s ease-out forwards;
 }
 
-@keyframes sparkle {
+@keyframes magicCircle {
   0% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: scale(0.4) rotate(0deg);
   }
+
+  70% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+
   100% {
     opacity: 0;
-    transform: translateY(-10px) scale(0.2);
+    transform: scale(1.5) rotate(360deg);
   }
 }
 
-.henn-cat-run {
+.henn-cat-throw {
   position: absolute;
   width: 20px;
   height: 20px;
   background-image: url("/assets/henn-sprites/cat-run.png");
   background-size: contain;
   background-repeat: no-repeat;
-  animation: catDash 1.2s linear forwards;
+  pointer-events: none;
+  animation: catThrow 1.2s ease-out forwards;
 }
 
-@keyframes catDash {
-  from { transform: translateX(0); }
-  to { transform: translateX(120px); }
+@keyframes catThrow {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+
+  40% {
+    transform: translateX(60px) translateY(-18px) rotate(120deg);
+  }
+
+  100% {
+    transform: translateX(120px) translateY(10px) rotate(260deg);
+  }
 }
 
-/* ninja leap */
-.henn-leap {
-  animation: ninjaLeap 0.9s ease-out forwards;
+.henn-stomp {
+  animation: dinoStomp 0.5s ease-out;
 }
 
-@keyframes ninjaLeap {
-  0%   { transform: translateY(0) rotate(0deg); }
-  40%  { transform: translateY(-24px) rotate(-8deg); }
-  70%  { transform: translateY(-12px) rotate(6deg); }
-  100% { transform: translateY(0) rotate(0deg); }
+@keyframes dinoStomp {
+  0%   { transform: translateY(0); }
+  40%  { transform: translateY(-18px); }
+  80%  { transform: translateY(0); }
+  100% { transform: translateY(2px); }
+}
+
+.henn-dust {
+  position: absolute;
+  width: 14px;
+  height: 6px;
+  background: rgba(120,120,120,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: dustPuff 0.7s ease-out forwards;
+}
+
+@keyframes dustPuff {
+  0% {
+    opacity: 1;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
 }
 
 /* explorer compass */
