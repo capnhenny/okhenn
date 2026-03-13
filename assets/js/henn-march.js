@@ -7,6 +7,14 @@ const SPRITES = [
   { name: "tron-henn", file: "/assets/henn-sprites/tron-henn.png", width: 56, duration: 21, delay: 15 },
   { name: "cowboy-henn", file: "/assets/henn-sprites/cowboy-henn.png", width: 56, duration: 24, delay: 18 },
   { name: "cat-henn", file: "/assets/henn-sprites/cat-henn.png", width: 64, duration: 29, delay: 21 }
+  { name: "pirate-henn", file: "/assets/henn-sprites/pirate-henn.png", width: 56, duration: 24, delay: 24 },
+  { name: "gamer-henn", file: "/assets/henn-sprites/gamer-henn.png", width: 56, duration: 23, delay: 27 },
+  { name: "magic-carpet-henn", file: "/assets/henn-sprites/magic-carpet-henn.png", width: 60, duration: 25, delay: 30 },
+  { name: "bard-henn", file: "/assets/henn-sprites/bard-henn.png", width: 56, duration: 24, delay: 33 },
+  { name: "ghost-henn", file: "/assets/henn-sprites/ghost-henn.png", width: 56, duration: 22, delay: 36 },
+  { name: "fisherman-henn", file: "/assets/henn-sprites/fisherman-henn.png", width: 56, duration: 26, delay: 39 },
+  { name: "robot-henn", file: "/assets/henn-sprites/robot-henn.png", width: 56, duration: 22, delay: 42 },
+  { name: "caveman-henn", file: "/assets/henn-sprites/caveman-henn.png", width: 56, duration: 25, delay: 45 }
 ];
 
             // helper function
@@ -223,6 +231,110 @@ function chaosRoll() {
                 });
               }
             
+                // pirate parrot fly
+              document.querySelectorAll(".pirate-henn").forEach(pirate => {
+                if (Math.random() < 0.12) {
+                  spawnEffect(
+                    pirate.parentElement,
+                    "henn-parrot",
+                    pirate.offsetLeft + 24,
+                    pirate.offsetTop + 4,
+                    1200
+                  );
+                }
+              });
+            
+              // gamer coin toss
+              document.querySelectorAll(".gamer-henn").forEach(gamer => {
+                if (Math.random() < 0.12) {
+                  spawnEffect(
+                    gamer.parentElement,
+                    "henn-coin",
+                    gamer.offsetLeft + 22,
+                    gamer.offsetTop + 10,
+                    900
+                  );
+                }
+              });
+            
+              // magic carpet swoosh
+              document.querySelectorAll(".magic-carpet-henn").forEach(rider => {
+                if (Math.random() < 0.12) {
+                  spawnEffect(
+                    rider.parentElement,
+                    "henn-carpet-spark",
+                    rider.offsetLeft + 18,
+                    rider.offsetTop + 22,
+                    1000
+                  );
+                }
+              });
+            
+              // bard music note
+              document.querySelectorAll(".bard-henn").forEach(bard => {
+                if (Math.random() < 0.14) {
+                  spawnEffect(
+                    bard.parentElement,
+                    "henn-note",
+                    bard.offsetLeft + 26,
+                    bard.offsetTop + 8,
+                    1000
+                  );
+                }
+              });
+            
+              // ghost float wisp
+              document.querySelectorAll(".ghost-henn").forEach(ghost => {
+                if (Math.random() < 0.12) {
+                  spawnEffect(
+                    ghost.parentElement,
+                    "henn-wisp",
+                    ghost.offsetLeft + 20,
+                    ghost.offsetTop + 10,
+                    1100
+                  );
+                }
+              });
+            
+              // fisherman cast
+              document.querySelectorAll(".fisherman-henn").forEach(fisher => {
+                if (Math.random() < 0.12) {
+                  spawnEffect(
+                    fisher.parentElement,
+                    "henn-bobber",
+                    fisher.offsetLeft + 28,
+                    fisher.offsetTop + 12,
+                    1200
+                  );
+                }
+              });
+            
+              // robot laser eyes
+              document.querySelectorAll(".robot-henn").forEach(robot => {
+                if (Math.random() < 0.14) {
+                  spawnEffect(
+                    robot.parentElement,
+                    "henn-laser",
+                    robot.offsetLeft + 34,
+                    robot.offsetTop + 12,
+                    500
+                  );
+                }
+              });
+            
+              // caveman club bonk
+              document.querySelectorAll(".caveman-henn").forEach(caveman => {
+                if (Math.random() < 0.12) {
+                  spawnEffect(
+                    caveman.parentElement,
+                    "henn-club-swing",
+                    caveman.offsetLeft + 18,
+                    caveman.offsetTop + 8,
+                    700
+                  );
+                }
+              });
+                        
 // occasional chaos
 chaosRoll();
 
