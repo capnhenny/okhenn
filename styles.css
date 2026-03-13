@@ -1777,14 +1777,8 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 @keyframes bonkStar {
-  0% {
-    opacity: 1;
-    transform: scale(0.6) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.4) rotate(90deg) translateY(-8px);
-  }
+  0% {   opacity: 1;   transform: scale(0.6) rotate(0deg); }
+  100% {  opacity: 0;   transform: scale(1.4) rotate(90deg) translateY(-8px); }
 }
 
  /* SPRITE UPGRADES */
@@ -1795,17 +1789,11 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 @keyframes hennVictory {
-
   0%   { transform: translateY(0); }
-
   25%  { transform: translateY(-14px); }
-
   50%  { transform: translateY(0); }
-
   75%  { transform: translateY(-8px); }
-
   100% { transform: translateY(0); }
-
 }
 
 .henn-bullet {
@@ -1832,20 +1820,9 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 @keyframes magicCircle {
-  0% {
-    opacity: 1;
-    transform: scale(0.4) rotate(0deg);
-  }
-
-  70% {
-    opacity: 1;
-    transform: scale(1.2) rotate(180deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: scale(1.5) rotate(360deg);
-  }
+  0% {  opacity: 1;   transform: scale(0.4) rotate(0deg);  }
+  70% {  opacity: 1;   transform: scale(1.2) rotate(180deg);  }
+  100% {  opacity: 0;  transform: scale(1.5) rotate(360deg);  }
 }
 
 .henn-cat-throw {
@@ -1860,17 +1837,9 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 @keyframes catThrow {
-  0% {
-    transform: translateX(0) translateY(0) rotate(0deg);
-  }
-
-  40% {
-    transform: translateX(60px) translateY(-18px) rotate(120deg);
-  }
-
-  100% {
-    transform: translateX(120px) translateY(10px) rotate(260deg);
-  }
+  0% {  transform: translateX(0) translateY(0) rotate(0deg);  }
+  40% {  transform: translateX(60px) translateY(-18px) rotate(120deg);  }
+  100% {  transform: translateX(120px) translateY(10px) rotate(260deg); }
 }
 
 .henn-stomp {
@@ -1895,14 +1864,8 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 @keyframes dustPuff {
-  0% {
-    opacity: 1;
-    transform: scale(0.6);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(2);
-  }
+  0% {  opacity: 1;  transform: scale(0.6);  }
+  100% { opacity: 0;  transform: scale(2);  }
 }
 
 /* explorer compass */
@@ -1918,16 +1881,9 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 @keyframes compassSpin {
-  0% {
-    opacity: 1;
-    transform: rotate(0deg) translateY(0);  }
-
-  50% {
-    transform: rotate(180deg) translateY(-8px);  }
-
-  100% {
-    opacity: 0;
-    transform: rotate(360deg) translateY(-14px);  }
+  0% {  opacity: 1;  transform: rotate(0deg) translateY(0);  }
+  50% {  transform: rotate(180deg) translateY(-8px);  }
+  100% { opacity: 0; transform: rotate(360deg) translateY(-14px);  }
 }
 
 /* chef pancake flip */
@@ -1943,19 +1899,10 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 @keyframes pancakeFlip {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;  }
-
-  40% {
-    transform: translateY(-18px) rotate(180deg);  }
-
-  70% {
-    transform: translateY(-10px) rotate(300deg);  }
-
-  100% {
-    transform: translateY(0) rotate(360deg);
-    opacity: 0;  }
+  0% {  transform: translateY(0) rotate(0deg);  opacity: 1;  }
+  40% {  transform: translateY(-18px) rotate(180deg);  }
+  70% {  transform: translateY(-10px) rotate(300deg);  }
+  100% { transform: translateY(0) rotate(360deg); opacity: 0;  }
 }
 
 .henn-slash {
@@ -1971,17 +1918,9 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 @keyframes slashArc {
-  0% {
-    opacity: 1;
-    transform: rotate(-40deg) scale(0.4); }
-
-  70% {
-    opacity: 1;
-    transform: rotate(-10deg) scale(1);  }
-
-  100% {
-    opacity: 0;
-    transform: rotate(10deg) scale(1.2);  }
+  0% {  opacity: 1;  transform: rotate(-40deg) scale(0.4); }
+  70% {  opacity: 1;  transform: rotate(-10deg) scale(1);  }
+  100% {  opacity: 0;  transform: rotate(10deg) scale(1.2);  }
 }
 
 .henn-tron-pulse {
@@ -1995,19 +1934,144 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 @keyframes tronPulse {
+  0% { opacity: 1;  transform: scale(0.4);  }
+  70% { opacity: 0.8; transform: scale(1.2);  }
+  100% { opacity: 0; transform: scale(1.8);  }
+}
 
-  0% {
-    opacity: 1;
-    transform: scale(0.4);  }
+.henn-parrot {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #3fd36b;
+  clip-path: polygon(0 60%, 20% 35%, 45% 20%, 75% 30%, 100% 50%, 72% 72%, 38% 80%, 12% 72%);
+  pointer-events: none;
+  animation: parrotFly 1.2s ease-out forwards;
+}
 
-  70% {
-    opacity: 0.8;
-    transform: scale(1.2);  }
+@keyframes parrotFly {
+  0% { opacity: 1; transform: translateX(0) translateY(0) rotate(-8deg); }
+  50% { opacity: 1; transform: translateX(48px) translateY(-14px) rotate(8deg); }
+  100% { opacity: 0; transform: translateX(92px) translateY(-6px) rotate(0deg); }
+}
 
-  100% {
-    opacity: 0;
-    transform: scale(1.8);  }
+.henn-coin {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffd54a;
+  border: 1px solid #9b7600;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: coinPop 0.9s ease-out forwards;
+}
 
+@keyframes coinPop {
+  0% { opacity: 1; transform: translateY(0) scale(0.8); }
+  45% { opacity: 1; transform: translateY(-18px) scale(1.1); }
+  100% { opacity: 0; transform: translateY(-28px) scale(0.9); }
+}
+
+.henn-carpet-spark {
+  position: absolute;
+  width: 22px;
+  height: 8px;
+  background: linear-gradient(90deg, #8e44ff, #ff7ad9);
+  border-radius: 3px;
+  pointer-events: none;
+  animation: carpetSwoosh 1s ease-out forwards;
+}
+
+@keyframes carpetSwoosh {
+  0% { opacity: 1; transform: translateX(0) translateY(0) rotate(0deg); }
+  50% { opacity: 1; transform: translateX(30px) translateY(-10px) rotate(-6deg); }
+  100% { opacity: 0; transform: translateX(70px) translateY(-20px) rotate(-10deg); }
+}
+
+.henn-note {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  color: #6a3ccf;
+  pointer-events: none;
+  animation: noteFloat 1s ease-out forwards;
+}
+
+.henn-note::before {
+  content: "♪";
+  font-size: 14px;
+  line-height: 12px;
+  display: block;
+}
+
+@keyframes noteFloat {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(-18px) rotate(12deg); }
+}
+
+.henn-wisp {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: rgba(190, 240, 255, 0.75);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: ghostWisp 1.1s ease-out forwards;
+}
+
+@keyframes ghostWisp {
+  0% { opacity: 0.9; transform: translateX(0) translateY(0) scale(0.8); }
+  50% { opacity: 0.8; transform: translateX(12px) translateY(-10px) scale(1.1); }
+  100% { opacity: 0; transform: translateX(24px) translateY(-20px) scale(1.3); }
+}
+
+.henn-bobber {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #ff4d4d;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: bobberCast 1.2s ease-out forwards;
+}
+
+@keyframes bobberCast {
+  0% { opacity: 1; transform: translateX(0) translateY(0); }
+  50% { opacity: 1; transform: translateX(34px) translateY(-14px); }
+  100% { opacity: 0; transform: translateX(64px) translateY(2px); }
+}
+
+.henn-laser {
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background: #ff2b6e;
+  box-shadow: 0 0 6px #ff2b6e;
+  pointer-events: none;
+  animation: laserShot 0.5s linear forwards;
+}
+
+@keyframes laserShot {
+  0% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(70px); }
+}
+
+.henn-club-swing {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-top: 3px solid #7a4a17;
+  border-right: 3px solid #7a4a17;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: clubSwing 0.7s ease-out forwards;
+}
+
+@keyframes clubSwing {
+  0% { opacity: 1; transform: rotate(-70deg) scale(0.6); }
+  60% { opacity: 1; transform: rotate(10deg) scale(1); }
+  100% { opacity: 0; transform: rotate(35deg) scale(1.1); }
 }
 
                   /* breathing room under parade */
