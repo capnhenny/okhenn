@@ -33,6 +33,7 @@ function makeRunner(sprite, index) {
   const el = document.createElement("div");
   el.className = `henn-sprite-runner ${sprite.name}${index % 2 ? " alt-step" : ""}`;
   el.style.backgroundImage = `url("${sprite.file}")`;
+  el.style.setProperty("--sprite-image", `url("${sprite.file}")`);
   el.style.width = `${sprite.width}px`;
   el.style.height = `${sprite.height}px`;
 
@@ -47,28 +48,29 @@ function makeRunner(sprite, index) {
   const spacing = 90;
   el.style.left = `${-90 - index * spacing}px`;
 
-el.style.animationDuration = `${sprite.duration}s, 0.32s`;
-el.style.animationDelay = `${sprite.delay}s, 0s`;
+  el.style.animationDuration = `${sprite.duration}s, 0.32s`;
+  el.style.animationDelay = `${sprite.delay}s, 0s`;
   el.dataset.name = sprite.name;
+
+  if (sprite.name === "fisherman-henn") {
+    const prop = document.createElement("div");
+    prop.className = "henn-held-bobber";
+    el.appendChild(prop);
+  }
+
+  if (sprite.name === "pirate-henn") {
+    const parrot = document.createElement("div");
+    parrot.className = "henn-parrot-loop";
+    el.appendChild(parrot);
+  }
+
+  if (sprite.name === "gamer-henn") {
+    const coin = document.createElement("div");
+    coin.className = "henn-held-coin";
+    el.appendChild(coin);
+  }
+
   return el;
-}
-
-if (sprite.name === "fisherman-henn") {
-  const prop = document.createElement("div");
-  prop.className = "henn-held-bobber";
-  el.appendChild(prop);
-}
-
-if (sprite.name === "pirate-henn") {
-  const parrot = document.createElement("div");
-  parrot.className = "henn-parrot-loop";
-  el.appendChild(parrot);
-}
-
-if (sprite.name === "gamer-henn") {
-  const coin = document.createElement("div");
-  coin.className = "henn-held-coin";
-  el.appendChild(coin);
 }
 
 function seedRunners() {
@@ -518,6 +520,7 @@ function chaosRoll() {
                     bonkNearby(caveman, 55);
                   }
                 });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   seedRunners();
