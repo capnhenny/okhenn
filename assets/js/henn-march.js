@@ -308,18 +308,72 @@ function chaosRoll() {
     }
   });
 
-  // robot laser eyes
-  document.querySelectorAll(".robot-henn").forEach(robot => {
-    if (Math.random() < 0.14) {
-      spawnEffect(
-        robot.parentElement,
-        "henn-laser",
-        robot.offsetLeft + 34,
-        robot.offsetTop + 14,
-        500
-      );
-    }
-  });
+// robot laser eyes
+document.querySelectorAll(".robot-henn").forEach(robot => {
+  if (Math.random() < 0.14) {
+
+    const laser = document.createElement("div");
+    laser.className = "henn-laser";
+
+    const startX = robot.offsetLeft + 36;
+    const startY = robot.offsetTop + 18;
+
+    laser.style.left = startX + "px";
+    laser.style.top = startY + "px";
+
+    robot.parentElement.appendChild(laser);
+
+    // move laser forward
+    let distance = 0;
+    const speed = 6;
+
+    const interval = setInterval(() => {
+      distance += speed;
+      laser.style.transform = `translateX(${distance}px)`;
+
+      // collision check
+      const runners = document.querySelectorAll(".henn-sprite-runner");
+
+      for (let target of runners) {
+        if (target === robot) continue;
+
+        const rect = target.getBoundingClientRect();
+        const laserRect = laser.getBoundingClientRect();
+
+        const hit =
+          laserRect.right > rect.left &&
+          laserRect.left < rect.right &&
+          laserRect.bottom > rect.top &&
+          laserRect.top < rect.bottom;
+
+        if (hit) {
+          spawnEffect(
+            robot.parentElement,
+            "henn-bonk-star",
+            rect.left + rect.width * 0.3,
+            rect.top + rect.height * 0.3,
+            500
+          );
+
+          target.classList.add("bonked");
+
+          setTimeout(() => target.classList.remove("bonked"), 600);
+
+          clearInterval(interval);
+          laser.remove();
+          return;
+        }
+      }
+
+      // cleanup if off screen
+      if (distance > window.innerWidth) {
+        clearInterval(interval);
+        laser.remove();
+      }
+
+    }, 16);
+  }
+});
 
   // caveman club bonk
   document.querySelectorAll(".caveman-henn").forEach(caveman => {
