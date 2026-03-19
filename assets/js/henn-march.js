@@ -67,10 +67,8 @@ function seedRunners() {
 function bonkRunner(victim) {
   if (!victim || victim.classList.contains("bonked")) return;
 
-  const parent = victim.parentElement;
-
   spawnEffect(
-    parent,
+    victim.parentElement,
     "henn-bonk-star",
     victim.offsetLeft + victim.offsetWidth * 0.35,
     victim.offsetTop + victim.offsetHeight * 0.25,
@@ -87,8 +85,9 @@ function bonkRunner(victim) {
     void victim.offsetHeight;
 
     const sprite = SPRITES.find(s => s.name === victim.dataset.name);
-    const walkAnim = victim.classList.contains("alt-step") ? "henn-walk-b" : "henn-walk-a";
+    if (!sprite) return;
 
+    const walkAnim = victim.classList.contains("alt-step") ? "henn-walk-b" : "henn-walk-a";
     victim.style.animation = `henn-march ${sprite.duration}s linear infinite, ${walkAnim} 0.32s ease-in-out infinite`;
     victim.style.animationDelay = `0s, 0s`;
   }, 700);
@@ -104,35 +103,10 @@ function bonkOneOccasionally() {
     return rect.right > 0 && rect.left < window.innerWidth;
   });
 
-  if (visible.length < 1) return;
+  if (!visible.length) return;
 
   const victim = visible[Math.floor(Math.random() * visible.length)];
   bonkRunner(victim);
-  const rect = victim.getBoundingClientRect();
-}
-
-bonkRunner(target);
-
-target.classList.add("bonked");
-setTimeout(() => target.classList.remove("bonked"), 600);
-
-target.classList.add("bonked");
-setTimeout(() => target.classList.remove("bonked"), 600);
-
-  victim.classList.add("bonked");
-  victim.style.transform = "translateX(26px) translateY(-10px) rotate(14deg)";
-
-  setTimeout(() => {
-    victim.classList.remove("bonked");
-    victim.style.transform = "";
-    victim.style.animation = "none";
-    void victim.offsetHeight;
-
-    const sprite = SPRITES.find(s => s.name === victim.dataset.name);
-    const walkAnim = victim.classList.contains("alt-step") ? "henn-walk-b" : "henn-walk-a";
-    victim.style.animation = `henn-march ${sprite.duration}s linear infinite, ${walkAnim} 0.32s ease-in-out infinite`;
-    victim.style.animationDelay = `0s, 0s`;
-  }, 900);
 }
 
 function chaosRoll() {
@@ -378,34 +352,22 @@ document.querySelectorAll(".robot-henn").forEach(robot => {
           laserRect.bottom > rect.top &&
           laserRect.top < rect.bottom;
 
-        if (hit) {
-          spawnEffect(
-            robot.parentElement,
-            "henn-bonk-star",
-            rect.left + rect.width * 0.3,
-            rect.top + rect.height * 0.3,
-            500
-          );
-
-          target.classList.add("bonked");
-
-          setTimeout(() => target.classList.remove("bonked"), 600);
-
-          clearInterval(interval);
-          laser.remove();
-          return;
-        }
-      }
-
-      // cleanup if off screen
-      if (distance > window.innerWidth) {
-        clearInterval(interval);
-        laser.remove();
-      }
-
-    }, 16);
-  }
-});
+          if (hit) {
+            bonkRunner(target);
+            clearInterval(interval);
+            laser.remove();
+            return;
+          }
+          
+                // cleanup if off screen
+                if (distance > window.innerWidth) {
+                  clearInterval(interval);
+                  laser.remove();
+                }
+          
+              }, 16);
+            }
+          });
 
   // caveman club bonk
   document.querySelectorAll(".caveman-henn").forEach(caveman => {
