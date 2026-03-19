@@ -1773,9 +1773,9 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 .henn-sprite-runner.bonked {
   animation-play-state: paused;
-  transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
-  opacity: 0.8;
-  filter: brightness(1.15);
+  transition: transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+  opacity: 0.95;
+  filter: brightness(1.2);
 }
 
 /* =========================
