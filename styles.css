@@ -1744,10 +1744,76 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   top: -8px;
 }
 
+.henn-parrot-loop {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 28px;
+  top: -6px;
+  background: url("/assets/henn-sprites/parrot.png") center/contain no-repeat;
+  animation: henn-parrot-orbit 2.6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes henn-parrot-orbit {
+  0%   { transform: translate(0, 0) scaleX(1); }
+  25%  { transform: translate(16px, -10px) scaleX(1); }
+  50%  { transform: translate(0, -18px) scaleX(-1); }
+  75%  { transform: translate(-14px, -8px) scaleX(-1); }
+  100% { transform: translate(0, 0) scaleX(1); }
+}
+
+.henn-held-coin {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 30px;
+  top: -4px;
+  background: url("/assets/henn-sprites/coin.png") center/contain no-repeat;
+  animation: henn-coin-hover 0.9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes henn-coin-hover {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
 .henn-sprite-runner.magic-carpet-henn {
   width: 56px;
   height: 56px;
   top: -8px;
+}
+
+.henn-sprite-runner.henn-defeated {
+  animation-play-state: paused !important;
+}
+
+.henn-sprite-runner.henn-defeated::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: inherit;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: henn-death-pop 0.9s ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes henn-death-pop {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  18% {
+    transform: translateY(-10px) scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(22px) scale(0.96);
+    opacity: 0;
+  }
 }
 
 @keyframes henn-march {
