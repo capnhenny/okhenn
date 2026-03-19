@@ -64,6 +64,36 @@ function seedRunners() {
   });
 }
 
+function bonkRunner(victim) {
+  if (!victim || victim.classList.contains("bonked")) return;
+
+  const parent = victim.parentElement;
+
+  spawnEffect(
+    parent,
+    "henn-bonk-star",
+    victim.offsetLeft + victim.offsetWidth * 0.35,
+    victim.offsetTop + victim.offsetHeight * 0.25,
+    500
+  );
+
+  victim.classList.add("bonked");
+  victim.style.transform = "translateX(20px) translateY(-8px) rotate(10deg)";
+
+  setTimeout(() => {
+    victim.classList.remove("bonked");
+    victim.style.transform = "";
+    victim.style.animation = "none";
+    void victim.offsetHeight;
+
+    const sprite = SPRITES.find(s => s.name === victim.dataset.name);
+    const walkAnim = victim.classList.contains("alt-step") ? "henn-walk-b" : "henn-walk-a";
+
+    victim.style.animation = `henn-march ${sprite.duration}s linear infinite, ${walkAnim} 0.32s ease-in-out infinite`;
+    victim.style.animationDelay = `0s, 0s`;
+  }, 700);
+}
+
 function bonkOneOccasionally() {
   const runners = Array.from(document.querySelectorAll(".henn-sprite-runner"));
   if (!runners.length) return;
@@ -77,15 +107,17 @@ function bonkOneOccasionally() {
   if (visible.length < 1) return;
 
   const victim = visible[Math.floor(Math.random() * visible.length)];
+  bonkRunner(victim);
   const rect = victim.getBoundingClientRect();
+}
 
-  spawnEffect(
-    victim.parentElement,
-    "henn-bonk-star",
-    victim.offsetLeft + rect.width * 0.45,
-    victim.offsetTop + rect.height * 0.35,
-    500
-  );
+bonkRunner(target);
+
+target.classList.add("bonked");
+setTimeout(() => target.classList.remove("bonked"), 600);
+
+target.classList.add("bonked");
+setTimeout(() => target.classList.remove("bonked"), 600);
 
   victim.classList.add("bonked");
   victim.style.transform = "translateX(26px) translateY(-10px) rotate(14deg)";
