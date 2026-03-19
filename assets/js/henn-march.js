@@ -22,8 +22,8 @@ const SPRITES = [
 function spawnEffect(parent, className, left, top, duration) {
   const effect = document.createElement("div");
   effect.className = className;
-  effect.style.left = left + "px";
-  effect.style.top = top + "px";
+  effect.style.left = `${left}px`;
+  effect.style.top = `${top}px`;
   parent.appendChild(effect);
 
   setTimeout(() => effect.remove(), duration);
@@ -47,8 +47,8 @@ function makeRunner(sprite, index) {
   const spacing = 90;
   el.style.left = `${-90 - index * spacing}px`;
 
-  el.style.animationDuration = `${sprite.duration}s, 0.32s`;
-  el.style.animationDelay = `${index * 1.6}s, 0s`;
+el.style.animationDuration = `${sprite.duration}s, 0.32s`;
+el.style.animationDelay = `${sprite.delay}s, 0s`;
   el.dataset.name = sprite.name;
   return el;
 }
@@ -314,57 +314,52 @@ function chaosRoll() {
     }
   });
 
-// robot laser eyes
-document.querySelectorAll(".robot-henn").forEach(robot => {
-  if (Math.random() < 0.14) {
-
-    const laser = document.createElement("div");
-    laser.className = "henn-laser";
-
-    const startX = robot.offsetLeft + 36;
-    const startY = robot.offsetTop + 18;
-
-    laser.style.left = startX + "px";
-    laser.style.top = startY + "px";
-
-    robot.parentElement.appendChild(laser);
-
-    // move laser forward
-    let distance = 0;
-    const speed = 6;
-
-    const interval = setInterval(() => {
-      distance += speed;
-      laser.style.transform = `translateX(${distance}px)`;
-
-      // collision check
-      const runners = document.querySelectorAll(".henn-sprite-runner");
-
-      for (let target of runners) {
-        if (target === robot) continue;
-
-        const rect = target.getBoundingClientRect();
-        const laserRect = laser.getBoundingClientRect();
-
-        const hit =
-          laserRect.right > rect.left &&
-          laserRect.left < rect.right &&
-          laserRect.bottom > rect.top &&
-          laserRect.top < rect.bottom;
-
-          if (hit) {
-            bonkRunner(target);
-            clearInterval(interval);
-            laser.remove();
-            return;
-          }
+          // robot laser eyes
+          document.querySelectorAll(".robot-henn").forEach(robot => {
+            if (Math.random() < 0.14) {
+              const laser = document.createElement("div");
+              laser.className = "henn-laser";
           
-                // cleanup if off screen
+              const startX = robot.offsetLeft + 36;
+              const startY = robot.offsetTop + 18;
+          
+              laser.style.left = `${startX}px`;
+              laser.style.top = `${startY}px`;
+          
+              robot.parentElement.appendChild(laser);
+          
+              let distance = 0;
+              const speed = 6;
+          
+              const interval = setInterval(() => {
+                distance += speed;
+                laser.style.transform = `translateX(${distance}px)`;
+          
+                const laserRect = laser.getBoundingClientRect();
+                const runners = document.querySelectorAll(".henn-sprite-runner");
+          
+                for (const target of runners) {
+                  if (target === robot) continue;
+          
+                  const rect = target.getBoundingClientRect();
+                  const hit =
+                    laserRect.right > rect.left &&
+                    laserRect.left < rect.right &&
+                    laserRect.bottom > rect.top &&
+                    laserRect.top < rect.bottom;
+          
+                  if (hit) {
+                    bonkRunner(target);
+                    clearInterval(interval);
+                    laser.remove();
+                    return;
+                  }
+                }
+          
                 if (distance > window.innerWidth) {
                   clearInterval(interval);
                   laser.remove();
                 }
-          
               }, 16);
             }
           });
@@ -385,7 +380,6 @@ document.querySelectorAll(".robot-henn").forEach(robot => {
 
 document.addEventListener("DOMContentLoaded", () => {
   seedRunners();
-
   chaosRoll();
 
   setInterval(() => {
