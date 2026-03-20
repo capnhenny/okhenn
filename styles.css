@@ -1911,15 +1911,19 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   100% { transform: translateY(0); }
 }
 
-.henn-stomp {
-  animation: dinoStomp 0.5s ease-out;
+.dino-henn.henn-stomp {
+  animation:
+    henn-march 28s linear infinite,
+    henn-dino-stomp 0.62s ease-out 1 !important;
 }
 
-@keyframes dinoStomp {
-  0%   { transform: translateY(0); }
-  40%  { transform: translateY(-18px); }
-  80%  { transform: translateY(0); }
-  100% { transform: translateY(2px); }
+@keyframes henn-dino-stomp {
+  0%   { transform: translateY(0) scaleY(1); }
+  18%  { transform: translateY(-16px) scaleY(1.02); }
+  36%  { transform: translateY(-22px) scaleY(1.04); }
+  58%  { transform: translateY(0) scaleY(0.92); }
+  72%  { transform: translateY(2px) scaleY(0.96); }
+  100% { transform: translateY(0) scaleY(1); }
 }
 
 /* =========================
@@ -2082,10 +2086,18 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 .henn-coin {
+  position: absolute;
   width: 16px;
   height: 16px;
+  left: 0;
+  top: 0;
   background-image: url("/assets/henn-effects/coin.png");
-  animation: coinPop 0.9s ease-out forwards;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: henn-spin-fly 0.28s linear infinite;
+  pointer-events: none;
+  z-index: 5;
 }
 
 @keyframes coinPop {
@@ -2095,15 +2107,28 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 .henn-music-note {
+  position: absolute;
   width: 16px;
   height: 16px;
   background-image: url("/assets/henn-effects/music-note.png");
-  animation: noteFloat 1s ease-out forwards;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation:
+    henn-note-float 1s ease-out forwards,
+    henn-spin-fly 0.55s linear infinite;
+  pointer-events: none;
+  z-index: 5;
 }
 
 @keyframes noteFloat {
   0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
   100% { opacity: 0; transform: translateY(-18px) rotate(12deg); }
+}
+
+@keyframes henn-spin-fly {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .henn-wisp {
