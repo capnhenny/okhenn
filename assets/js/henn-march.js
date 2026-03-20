@@ -343,19 +343,26 @@ function chaosRoll() {
   });
 
                     // pirate parrot fly
-                  document.querySelectorAll(".pirate-henn").forEach(pirate => {
-                    if (Math.random() < 0.10) {
-                      launchProjectile({
-                        shooter: pirate,
-                        className: "henn-parrot",
-                        startX: pirate.offsetLeft + 30,
-                        startY: pirate.offsetTop + 4,
-                        speed: 5.4,
-                        arc: 10,
-                        life: 1000
-                      });
-                    }
-                  });
+                    document.querySelectorAll(".pirate-henn").forEach(pirate => {
+                      if (Math.random() < 0.10) {
+                        const held = pirate.querySelector(".henn-parrot-loop");
+                        if (held) held.style.opacity = "0";
+                    
+                        launchProjectile({
+                          shooter: pirate,
+                          className: "henn-parrot",
+                          startX: pirate.offsetLeft + 30,
+                          startY: pirate.offsetTop + 4,
+                          speed: 5.4,
+                          arc: 10,
+                          life: 1000
+                        });
+                    
+                        setTimeout(() => {
+                          if (held) held.style.opacity = "";
+                        }, 1000);
+                      }
+                    });
 
                                   // gamer coin toss
                                 document.querySelectorAll(".gamer-henn").forEach(gamer => {
