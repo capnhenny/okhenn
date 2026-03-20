@@ -135,6 +135,27 @@ function bonkRunner(victim) {
               return false;
             }
 
+            function bonkUnderneath(attacker, xRange = 34, yRange = 28) {
+              const a = attacker.getBoundingClientRect();
+              const runners = document.querySelectorAll(".henn-sprite-runner");
+            
+              for (const target of runners) {
+                if (target === attacker || target.classList.contains("bonked")) continue;
+            
+                const r = target.getBoundingClientRect();
+            
+                const closeX = Math.abs((r.left + r.width / 2) - (a.left + a.width / 2)) < xRange;
+                const closeY = Math.abs(r.top - a.top) < yRange;
+            
+                if (closeX && closeY) {
+                  bonkRunner(target);
+                  return true;
+                }
+              }
+            
+              return false;
+            }
+
 function respawnRunner(name) {
   const track = document.getElementById("hennMarchTrack");
   if (!track) return;
@@ -327,23 +348,27 @@ function chaosRoll() {
                         }
                       });
 
-  // dino stomp
-  document.querySelectorAll(".dino-henn").forEach(dino => {
-    if (Math.random() < 0.14 && !dino.classList.contains("henn-stomp")) {
-      dino.classList.add("henn-stomp");
-
-      setTimeout(() => {
-        spawnEffect(
-          dino.parentElement,
-          "henn-dust",
-          dino.offsetLeft + 14,
-          dino.offsetTop + 36,
-          700
-        );
-        dino.classList.remove("henn-stomp");
-      }, 400);
-    }
-  });
+                    // dino stomp
+                    document.querySelectorAll(".dino-henn").forEach(dino => {
+                      if (Math.random() < 0.14 && !dino.classList.contains("henn-stomp")) {
+                        dino.classList.add("henn-stomp");
+                    
+                        // landing hit check near the end of the stomp
+                        setTimeout(() => {
+                          spawnEffect(
+                            dino.parentElement,
+                            "henn-dust",
+                            dino.offsetLeft + 14,
+                            dino.offsetTop + 36,
+                            700
+                          );
+                    
+                          bonkUnderneath(dino, 34, 28);
+                    
+                          dino.classList.remove("henn-stomp");
+                        }, 520);
+                      }
+                    });
 
   // explorer compass
   document.querySelectorAll(".explorer-henn").forEach(explorer => {
