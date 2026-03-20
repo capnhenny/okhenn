@@ -70,6 +70,12 @@ function makeRunner(sprite, index) {
     el.appendChild(coin);
   }
 
+  if (sprite.name === "cat-henn") {
+  const cat = document.createElement("div");
+  cat.className = "henn-held-cat";
+  el.appendChild(cat);
+}
+  
   return el;
 }
 
@@ -216,6 +222,61 @@ function launchProjectile({
   }, 16);
 }
 
+function launchCatAttack(catLady) {
+  if (!catLady || !catLady.parentElement) return;
+
+  const cat = document.createElement("div");
+  cat.className = "henn-cat-runner";
+  cat.style.left = `${catLady.offsetLeft + 8}px`;
+  cat.style.top = `${catLady.offsetTop + 30}px`;
+  catLady.parentElement.appendChild(cat);
+
+  let distance = 0;
+  const speed = 7;
+
+  const interval = setInterval(() => {
+    distance += speed;
+    cat.style.transform = `translateX(${distance}px)`;
+
+    const catRect = cat.getBoundingClientRect();
+    const runners = document.querySelectorAll(".henn-sprite-runner");
+
+    for (const target of runners) {
+      if (target === catLady || target.classList.contains("bonked")) continue;
+
+      const rect = target.getBoundingClientRect();
+      const hit =
+        catRect.right > rect.left &&
+        catRect.left < rect.right &&
+        catRect.bottom > rect.top &&
+        catRect.top < rect.bottom;
+
+      if (hit) {
+        cat.classList.add("attacking");
+
+        spawnEffect(
+          catLady.parentElement,
+          "henn-slash",
+          target.offsetLeft + 14,
+          target.offsetTop + 10,
+          500
+        );
+
+        bonkRunner(target);
+
+        setTimeout(() => cat.remove(), 140);
+        clearInterval(interval);
+        return;
+      }
+    }
+
+    if (catLady.offsetLeft + distance > window.innerWidth + 60) {
+      clearInterval(interval);
+      cat.remove();
+    }
+  }, 16);
+}
+
 function chaosRoll() {
 
   // rare JRPG party victory bounce
@@ -258,18 +319,12 @@ function chaosRoll() {
               }
             });
 
-  // cat chaos
-  document.querySelectorAll(".cat-henn").forEach(catLady => {
-    if (Math.random() < 0.12) {
-      spawnEffect(
-        catLady.parentElement,
-        "henn-cat-run",
-        catLady.offsetLeft + 10,
-        catLady.offsetTop + 28,
-        1200
-      );
-    }
-  });
+                      // cat chaos
+                      document.querySelectorAll(".cat-henn").forEach(catLady => {
+                        if (Math.random() < 0.12) {
+                          launchCatAttack(catLady);
+                        }
+                      });
 
   // dino stomp
   document.querySelectorAll(".dino-henn").forEach(dino => {
