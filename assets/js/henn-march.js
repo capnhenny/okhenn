@@ -45,7 +45,7 @@ function makeRunner(sprite, index) {
 
   el.style.top = `${topOffsets[sprite.name] ?? 4}px`;
 
-  const spacing = 90;
+  const spacing = 78;
   el.style.left = `${-90 - index * spacing}px`;
 
   el.style.animationDuration = `${sprite.duration}s, 0.32s`;
@@ -70,9 +70,9 @@ function makeRunner(sprite, index) {
     el.appendChild(coin);
   }
 
-  if (sprite.name === "cat-henn") {
+if (sprite.name === "cat-henn") {
   const cat = document.createElement("div");
-  cat.className = "henn-held-cat";
+  cat.className = "henn-companion-cat";
   el.appendChild(cat);
 }
   
@@ -109,7 +109,7 @@ function bonkRunner(victim) {
 
   setTimeout(() => {
     victim.remove();
-    setTimeout(() => respawnRunner(spriteName), 1200 + Math.random() * 2000);
+    setTimeout(() => respawnRunner(spriteName), 700 + Math.random() * 1200);
   }, 900);
 }
 
@@ -246,6 +246,10 @@ function launchProjectile({
 function launchCatAttack(catLady) {
   if (!catLady || !catLady.parentElement) return;
 
+  const held = catLady.querySelector(".henn-companion-cat");
+  catLady.dataset.catAttacking = "1";
+  if (held) held.style.opacity = "0";
+
   const cat = document.createElement("div");
   cat.className = "henn-cat-runner";
   cat.style.left = `${catLady.offsetLeft + 8}px`;
@@ -286,8 +290,12 @@ function launchCatAttack(catLady) {
 
         bonkRunner(target);
 
-        setTimeout(() => cat.remove(), 140);
         clearInterval(interval);
+        setTimeout(() => {
+          cat.remove();
+          if (held) held.style.opacity = "";
+          catLady.dataset.catAttacking = "0";
+        }, 180);
         return;
       }
     }
@@ -295,8 +303,34 @@ function launchCatAttack(catLady) {
     if (catLady.offsetLeft + distance > window.innerWidth + 60) {
       clearInterval(interval);
       cat.remove();
+      if (held) held.style.opacity = "";
+      catLady.dataset.catAttacking = "0";
     }
   }, 16);
+}
+
+function animateCompanionCats() {
+  document.querySelectorAll(".cat-henn").forEach(catLady => {
+    const cat = catLady.querySelector(".henn-companion-cat");
+    if (!cat || catLady.classList.contains("bonked")) return;
+    if (catLady.dataset.catAttacking === "1") return;
+
+    const burst = Math.random() < 0.28;
+
+    if (burst) {
+      cat.classList.add("bursting");
+      cat.style.left = `${14 + Math.random() * 16}px`;
+      cat.style.top = `${30 + Math.random() * 4}px`;
+
+      setTimeout(() => {
+        cat.classList.remove("bursting");
+      }, 500);
+    } else {
+      cat.classList.remove("bursting");
+      cat.style.left = `${6 + Math.random() * 10}px`;
+      cat.style.top = `${31 + Math.random() * 3}px`;
+    }
+  });
 }
 
 function chaosRoll() {
@@ -613,6 +647,11 @@ function chaosRoll() {
 document.addEventListener("DOMContentLoaded", () => {
   seedRunners();
   chaosRoll();
+  animateCompanionCats();
+
+  setInterval(() => {
+    animateCompanionCats();
+  }, 700);
 
   setInterval(() => {
     setTimeout(() => {
