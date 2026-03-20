@@ -1750,7 +1750,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   height: 20px;
   left: 28px;
   top: -6px;
-  background-image: url("/assets/henn-sprites/parrot.png");
+  background-image: url("/assets/henn-effects/parrot.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -2050,21 +2050,24 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 .henn-parrot {
+  position: absolute;
   width: 20px;
   height: 20px;
+  left: 0;
+  top: 0;
   background-image: url("/assets/henn-effects/parrot.png");
-  animation: parrotFly 1.2s linear forwards, parrotFlap 0.28s steps(1) infinite;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: henn-parrot-flap 0.28s steps(1) infinite;
+  pointer-events: none;
+  z-index: 5;
 }
 
-@keyframes parrotFly {
-  0%   { opacity: 1; transform: translateX(0) translateY(0) rotate(-6deg); }
-  50%  { opacity: 1; transform: translateX(48px) translateY(-14px) rotate(4deg); }
-  100% { opacity: 0; transform: translateX(92px) translateY(-6px) rotate(0deg); }
-}
-
-@keyframes parrotFlap {
-  0%, 49%   { background-image: url("/assets/henn-effects/parrot.png"); }
-  50%, 100% { background-image: url("/assets/henn-effects/alt-parrot.png"); }
+.henn-parrot {
+  animation:
+    henn-parrot-flap 0.28s steps(1) infinite,
+    parrotFly 0.9s ease-out forwards;
 }
 
 .henn-coin {
