@@ -236,7 +236,7 @@ function launchCatAttack(catLady) {
 
   const interval = setInterval(() => {
     distance += speed;
-    cat.style.transform = `translateX(${distance}px)`;
+    cat.style.transform = `translateX(${distance}px) translateY(${Math.sin(distance / 10) * 2}px)`;
 
     const catRect = cat.getBoundingClientRect();
     const runners = document.querySelectorAll(".henn-sprite-runner");
@@ -252,6 +252,7 @@ function launchCatAttack(catLady) {
         catRect.top < rect.bottom;
 
       if (hit) {
+        cat.style.transform += " scaleX(1.1)";
         cat.classList.add("attacking");
 
         spawnEffect(
