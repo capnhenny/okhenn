@@ -13,12 +13,7 @@ const SPRITES = [
   { name: "magic-carpet-henn", file: "/assets/henn-sprites/magic-carpet-henn.png", width: 60, height: 60, duration: 25, delay: 30 },
 {  name: "bard-henn",
   file: "/assets/henn-sprites/bard-henn.png",
-  alt: "/assets/henn-sprites/alt-step-sprites/bard-henn-alt-step.png",
-  width: 56,
-  height: 56,
-  duration: 24,
-  delay: 33
-}
+  alt: "/assets/henn-sprites/alt-step-sprites/bard-henn-alt-step.png",  width: 56,  height: 56,  duration: 24,  delay: 33 },
   { name: "ghost-henn", file: "/assets/henn-sprites/ghost-henn.png", width: 56, height: 56, duration: 22, delay: 36 },
   { name: "fisherman-henn", file: "/assets/henn-sprites/fisherman-henn.png", width: 56, height: 56, duration: 26, delay: 39 },
   { name: "robot-henn", file: "/assets/henn-sprites/robot-henn.png", width: 56, height: 56, duration: 22, delay: 42 },
