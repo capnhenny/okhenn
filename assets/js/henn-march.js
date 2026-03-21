@@ -11,7 +11,14 @@ const SPRITES = [
   { name: "pirate-henn", file: "/assets/henn-sprites/pirate-henn.png", width: 56, height: 56, duration: 24, delay: 24 },
   { name: "gamer-henn", file: "/assets/henn-sprites/gamer-henn.png", width: 56, height: 56, duration: 23, delay: 27 },
   { name: "magic-carpet-henn", file: "/assets/henn-sprites/magic-carpet-henn.png", width: 60, height: 60, duration: 25, delay: 30 },
-  { name: "bard-henn", file: "/assets/henn-sprites/bard-henn.png", width: 56, height: 56, duration: 24, delay: 33 },
+{  name: "bard-henn",
+  file: "/assets/henn-sprites/bard-henn.png",
+  alt: "/assets/henn-sprites/alt-step-sprites/bard-henn-alt-step.png",
+  width: 56,
+  height: 56,
+  duration: 24,
+  delay: 33
+}
   { name: "ghost-henn", file: "/assets/henn-sprites/ghost-henn.png", width: 56, height: 56, duration: 22, delay: 36 },
   { name: "fisherman-henn", file: "/assets/henn-sprites/fisherman-henn.png", width: 56, height: 56, duration: 26, delay: 39 },
   { name: "robot-henn", file: "/assets/henn-sprites/robot-henn.png", width: 56, height: 56, duration: 22, delay: 42 },
@@ -32,8 +39,8 @@ function spawnEffect(parent, className, left, top, duration) {
 function makeRunner(sprite, index) {
   const el = document.createElement("div");
   el.className = `henn-sprite-runner ${sprite.name}${index % 2 ? " alt-step" : ""}`;
-  el.style.backgroundImage = `url("${sprite.file}")`;
-  el.style.setProperty("--sprite-image", `url("${sprite.file}")`);
+el.style.setProperty("--sprite-a", `url("${sprite.file}")`);
+el.style.setProperty("--sprite-b", `url("${sprite.alt || sprite.file}")`);
   el.style.width = `${sprite.width}px`;
   el.style.height = `${sprite.height}px`;
 
