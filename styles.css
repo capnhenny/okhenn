@@ -1724,11 +1724,11 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   transform-origin: center bottom;
   animation:
     henn-march linear infinite,
-    henn-walk-cycle 0.32s steps(1) infinite;
+    henn-walk-cycle 0.32s ease-in-out infinite;
 }
 
 .henn-sprite-runner.alt-step {
-  background-image: var(--sprite-a);
+  background-image: var(--sprite-b);
   animation:
     henn-march linear infinite,
     henn-walk-b 0.32s ease-in-out infinite;
