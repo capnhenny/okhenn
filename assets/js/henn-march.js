@@ -6,8 +6,9 @@ const SPRITES = [
   { name: "explorer-henn", file: "/assets/henn-sprites/explorer-henn.png", width: 56, height: 56, duration: 25, delay: 12 },
   { name: "tron-henn", file: "/assets/henn-sprites/tron-henn.png", width: 56, height: 56, duration: 21, delay: 15 },
   { name: "cowboy-henn", file: "/assets/henn-sprites/cowboy-henn.png", width: 56, height: 56, duration: 24, delay: 18 },
-  { name: "cat-henn", file: "/assets/henn-sprites/cat-henn.png", width: 64, height: 64, duration: 29, delay: 21 },
-
+{  name: "cat-henn",
+  file: "/assets/henn-sprites/cat-henn.png",
+  alt: "/assets/henn-sprites/alt-step-sprites/cat-henn-alt-step.png",  width: 64,  height: 64,  duration: 29,  delay: 21 },
   { name: "pirate-henn", file: "/assets/henn-sprites/pirate-henn.png", width: 56, height: 56, duration: 24, delay: 24 },
   { name: "gamer-henn", file: "/assets/henn-sprites/gamer-henn.png", width: 56, height: 56, duration: 23, delay: 27 },
   { name: "magic-carpet-henn", file: "/assets/henn-sprites/magic-carpet-henn.png", width: 60, height: 60, duration: 25, delay: 30 },
