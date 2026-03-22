@@ -595,8 +595,8 @@ function chaosRoll() {
       launchProjectile({
         shooter: fisher,
         className: "henn-bobber",
-        startX: fisher.offsetLeft + 34,
-        startY: fisher.offsetTop + 6,
+        startX: fisher.offsetLeft + 36,
+        startY: fisher.offsetTop + 4,
         speed: 4.8,
         arc: 12,
         life: 900
