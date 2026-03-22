@@ -360,6 +360,12 @@ function animateCompanionCats() {
   });
 }
 
+function pulseAttacker(attacker, className = "henn-attacking", duration = 180) {
+  if (!attacker) return;
+  attacker.classList.add(className);
+  setTimeout(() => attacker.classList.remove(className), duration);
+}
+
 function chaosRoll() {
   // rare JRPG party victory bounce
   if (Math.random() < 0.01) {
@@ -589,8 +595,8 @@ function chaosRoll() {
       launchProjectile({
         shooter: fisher,
         className: "henn-bobber",
-        startX: fisher.offsetLeft + 30,
-        startY: fisher.offsetTop + 18,
+        startX: fisher.offsetLeft + 38,
+        startY: fisher.offsetTop + 10,
         speed: 4.8,
         arc: 12,
         life: 900
