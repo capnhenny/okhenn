@@ -1709,29 +1709,46 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   height: 100%;
 }
 
+/* =========================
+   RUNNERS
+========================= */
+
 .henn-sprite-runner {
-    background-image: var(--sprite-a);
+  --walk-phase: 0s;
   position: absolute;
   left: -90px;
   top: -6px;
   width: 48px;
   height: 48px;
+  overflow: visible;
   image-rendering: pixelated;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
   will-change: left, transform;
   transform-origin: center bottom;
   animation:
     henn-march linear infinite,
-    henn-walk-cycle 0.32s ease-in-out infinite;
+    henn-walk-a 0.32s ease-in-out infinite;
 }
 
 .henn-sprite-runner.alt-step {
-  background-image: var(--sprite-b);
+  --walk-phase: -0.16s;
   animation:
     henn-march linear infinite,
     henn-walk-b 0.32s ease-in-out infinite;
+}
+
+/* actual sprite art lives here so movement + frame-swap don't fight */
+.henn-sprite-runner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--sprite-a);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+  animation: henn-walk-cycle 0.32s steps(1) infinite;
+  animation-delay: var(--walk-phase);
 }
 
 .henn-sprite-runner.cat-henn {
@@ -1746,71 +1763,19 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   top: -8px;
 }
 
-.henn-parrot-loop {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  left: 28px;
-  top: -6px;
-  background-image: url("/assets/henn-effects/parrot.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  animation:
-    henn-parrot-orbit 2.4s linear infinite,
-    henn-parrot-flap 0.28s steps(1) infinite;
-  pointer-events: none;
-  z-index: 3;
-}
-
-@keyframes henn-parrot-orbit {
-  0%   { transform: translate(0, 0) scaleX(1); }
-  25%  { transform: translate(12px, -8px) scaleX(1); }
-  50%  { transform: translate(0, -14px) scaleX(-1); }
-  75%  { transform: translate(-10px, -6px) scaleX(-1); }
-  100% { transform: translate(0, 0) scaleX(1); }
-}
-
-@keyframes henn-parrot-flap {
-  0%, 49.9% {    background-image: url("/assets/henn-effects/parrot.png");  }
-  50%, 100% {    background-image: url("/assets/henn-effects/alt-parrot.png");  }
-}
-
-.henn-held-bobber {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  left: 30px;
-  top: 18px;
-  background: url("/assets/henn-effects/bobber.png") center/contain no-repeat;
-  pointer-events: none;
-  z-index: 4;
-}
-
-.henn-held-coin {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  left: 30px;
-  top: -4px;
-  background: url("/assets/henn-effects/coin.png") center/contain no-repeat;
-  animation: henn-coin-hover 0.9s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 4;
-}
-
-@keyframes henn-coin-hover {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-3px); }
-}
-
 .henn-sprite-runner.magic-carpet-henn {
   width: 56px;
   height: 56px;
   top: -8px;
 }
 
+/* defeat state */
 .henn-sprite-runner.henn-defeated {
+  animation-play-state: paused !important;
+}
+
+.henn-sprite-runner.henn-defeated::before {
+  opacity: 0;
   animation-play-state: paused !important;
 }
 
@@ -1818,12 +1783,23 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   content: "";
   position: absolute;
   inset: 0;
-  background-image: inherit;
-  background-size: contain;
+  background-image: var(--sprite-a);
   background-repeat: no-repeat;
   background-position: center;
-  animation: henn-death-pop 0.9s ease-in forwards;
+  background-size: contain;
+  image-rendering: pixelated;
   pointer-events: none;
+  animation:
+    henn-death-pop 0.9s ease-in forwards,
+    henn-walk-cycle 0.32s steps(1) infinite;
+  animation-delay: 0s, var(--walk-phase);
+}
+
+.henn-sprite-runner.bonked {
+  animation-play-state: paused;
+  transition: transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+  opacity: 0.95;
+  filter: brightness(1.2);
 }
 
 @keyframes henn-death-pop {
@@ -1867,11 +1843,115 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   50%, 100% { background-image: var(--sprite-b); }
 }
 
-.henn-sprite-runner.bonked {
-  animation-play-state: paused;
-  transition: transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
-  opacity: 0.95;
-  filter: brightness(1.2);
+/* =========================
+   PERSISTENT CHARACTER EXTRAS
+========================= */
+
+.henn-parrot-loop {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 28px;
+  top: -6px;
+  background-image: url("/assets/henn-effects/parrot.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation:
+    henn-parrot-orbit 2.4s linear infinite,
+    henn-parrot-flap 0.28s steps(1) infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes henn-parrot-orbit {
+  0%   { transform: translate(0, 0) scaleX(1); }
+  25%  { transform: translate(12px, -8px) scaleX(1); }
+  50%  { transform: translate(0, -14px) scaleX(-1); }
+  75%  { transform: translate(-10px, -6px) scaleX(-1); }
+  100% { transform: translate(0, 0) scaleX(1); }
+}
+
+@keyframes henn-parrot-flap {
+  0%, 49.9% { background-image: url("/assets/henn-effects/parrot.png"); }
+  50%, 100% { background-image: url("/assets/henn-effects/alt-parrot.png"); }
+}
+
+.henn-held-bobber {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 30px;
+  top: 18px;
+  background: url("/assets/henn-effects/bobber.png") center/contain no-repeat;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.henn-held-coin {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 30px;
+  top: -4px;
+  background: url("/assets/henn-effects/coin.png") center/contain no-repeat;
+  animation: henn-coin-hover 0.9s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 4;
+}
+
+@keyframes henn-coin-hover {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+.henn-companion-cat {
+  position: absolute;
+  width: 22px;
+  height: 18px;
+  left: 8px;
+  top: 31px;
+  background-image: url("/assets/henn-effects/cat-run-1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: henn-cat-scamper 0.22s steps(1) infinite;
+  pointer-events: none;
+  z-index: 4;
+  transition: left 0.45s ease, top 0.45s ease;
+}
+
+.henn-companion-cat.bursting {
+  animation: henn-cat-scamper 0.16s steps(1) infinite;
+}
+
+.henn-cat-runner {
+  position: absolute;
+  width: 22px;
+  height: 18px;
+  left: 0;
+  top: 0;
+  background-image: url("/assets/henn-effects/cat-run-1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: henn-cat-scamper 0.22s steps(1) infinite;
+  pointer-events: none;
+  z-index: 6;
+}
+
+@keyframes henn-cat-scamper {
+  0%, 49.9% { background-image: url("/assets/henn-effects/cat-run-1.png"); }
+  50%, 100% { background-image: url("/assets/henn-effects/cat-run-2.png"); }
+}
+
+.henn-cat-runner.attacking {
+  animation: henn-cat-attack 0.16s steps(1) infinite;
+}
+
+@keyframes henn-cat-attack {
+  0%, 49.9% { background-image: url("/assets/henn-effects/cat-attack-1.png"); }
+  50%, 100% { background-image: url("/assets/henn-effects/cat-attack-2.png"); }
 }
 
 /* =========================
@@ -1885,6 +1965,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 .henn-tron-pulse,
 .henn-parrot,
 .henn-coin,
+.henn-coin-pop,
 .henn-music-note,
 .henn-wisp,
 .henn-bobber,
@@ -1973,55 +2054,6 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   to   { transform: translateX(80px); }
 }
 
-.henn-companion-cat {
-  position: absolute;
-  width: 22px;
-  height: 18px;
-  left: 8px;
-  top: 31px;
-  background-image: url("/assets/henn-effects/cat-run-1.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  animation: henn-cat-scamper 0.22s steps(1) infinite;
-  pointer-events: none;
-  z-index: 4;
-  transition: left 0.45s ease, top 0.45s ease;
-}
-
-.henn-companion-cat.bursting {
-  animation: henn-cat-scamper 0.16s steps(1) infinite;
-}
-
-.henn-cat-runner {
-  position: absolute;
-  width: 22px;
-  height: 18px;
-  left: 0;
-  top: 0;
-  background-image: url("/assets/henn-effects/cat-run-1.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  animation: henn-cat-scamper 0.22s steps(1) infinite;
-  pointer-events: none;
-  z-index: 6;
-}
-
-@keyframes henn-cat-scamper {
-  0%, 49.9% {    background-image: url("/assets/henn-effects/cat-run-1.png");  }
-  50%, 100% {    background-image: url("/assets/henn-effects/cat-run-2.png");  }
-}
-
-.henn-cat-runner.attacking {
-  animation: henn-cat-attack 0.16s steps(1) infinite;
-}
-
-@keyframes henn-cat-attack {
-  0%, 49.9% {    background-image: url("/assets/henn-effects/cat-attack-1.png");  }
-  50%, 100% {    background-image: url("/assets/henn-effects/cat-attack-2.png");  }
-}
-
 .henn-dust {
   width: 14px;
   height: 6px;
@@ -2101,15 +2133,17 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  animation: henn-parrot-flap 0.28s steps(1) infinite;
+  animation:
+    henn-parrot-flap 0.28s steps(1) infinite,
+    parrotFly 0.9s ease-out forwards;
   pointer-events: none;
   z-index: 5;
 }
 
-.henn-parrot {
-  animation:
-    henn-parrot-flap 0.28s steps(1) infinite,
-    parrotFly 0.9s ease-out forwards;
+@keyframes parrotFly {
+  0%   { opacity: 1; transform: translateX(0) translateY(0) rotate(-6deg); }
+  50%  { opacity: 1; transform: translateX(48px) translateY(-14px) rotate(4deg); }
+  100% { opacity: 0; transform: translateX(92px) translateY(-6px) rotate(0deg); }
 }
 
 .henn-coin {
@@ -2123,6 +2157,21 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   background-repeat: no-repeat;
   background-position: center;
   animation: henn-spin-fly 0.28s linear infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.henn-coin-pop {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 0;
+  top: 0;
+  background-image: url("/assets/henn-effects/coin.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: coinPop 0.6s ease-out forwards;
   pointer-events: none;
   z-index: 5;
 }
@@ -2142,7 +2191,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   background-repeat: no-repeat;
   background-position: center;
   animation:
-    henn-note-float 1s ease-out forwards,
+    noteFloat 1s ease-out forwards,
     henn-spin-fly 0.55s linear infinite;
   pointer-events: none;
   z-index: 5;
@@ -2238,6 +2287,7 @@ header {
 
   .henn-parrot,
   .henn-coin,
+  .henn-coin-pop,
   .henn-music-note,
   .henn-bobber,
   .henn-sparkle,
