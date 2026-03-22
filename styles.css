@@ -1817,6 +1817,35 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   }
 }
 
+.henn-hit-flash {
+  width: 26px;
+  height: 26px;
+  background-image: url("/assets/henn-effects/bonk-star.png");
+  animation: hennHitFlash 0.22s ease-out forwards;
+  z-index: 8;
+}
+
+@keyframes hennHitFlash {
+  0% {
+    opacity: 1;
+    transform: scale(0.6) rotate(0deg);
+    filter: brightness(1.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35) rotate(30deg);
+    filter: brightness(1);
+  }
+}
+
+.henn-sprite-runner.henn-hit-stop {
+  filter: brightness(1.25);
+}
+
+.henn-sprite-runner.henn-attacking {
+  filter: brightness(1.12);
+}
+
 @keyframes henn-march {
   from { left: -90px; }
   to { left: calc(100% + 90px); }
@@ -1881,8 +1910,8 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   position: absolute;
   width: 14px;
   height: 14px;
-  left: 30px;
-  top: 18px;
+  left: 37px;
+  top: 10px;
   background: url("/assets/henn-effects/bobber.png") center/contain no-repeat;
   pointer-events: none;
   z-index: 4;
@@ -1980,7 +2009,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   background-size: contain;
   image-rendering: pixelated;
   pointer-events: none;
-  z-index: 4;
+  z-index: 7;
 }
 
 /* =========================
@@ -2019,15 +2048,16 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 ========================= */
 
 .henn-bonk-star {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   background-image: url("/assets/henn-effects/bonk-star.png");
-  animation: bonkStar 0.5s ease-out forwards;
+  animation: bonkStar 0.65s ease-out forwards;
+  z-index: 7;
 }
 
 @keyframes bonkStar {
   0%   { opacity: 1; transform: scale(0.7) rotate(0deg); }
-  100% { opacity: 0; transform: scale(1.25) rotate(90deg) translateY(-8px); }
+  100% { opacity: 0; transform: scale(1.45) rotate(110deg) translateY(-10px); }
 }
 
 .henn-sparkle {
@@ -2148,8 +2178,8 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 .henn-coin {
   position: absolute;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   left: 0;
   top: 0;
   background-image: url("/assets/henn-effects/coin.png");
@@ -2221,8 +2251,8 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 .henn-bobber {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   background-image: url("/assets/henn-effects/bobber.png");
   animation: bobberCast 1.2s ease-out forwards;
 }
