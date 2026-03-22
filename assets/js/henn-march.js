@@ -105,23 +105,38 @@ function bonkRunner(victim) {
   if (!victim || victim.classList.contains("bonked")) return;
 
   const spriteName = victim.dataset.name;
+  const parent = victim.parentElement;
 
   spawnEffect(
-    victim.parentElement,
+    parent,
     "henn-bonk-star",
     victim.offsetLeft + victim.offsetWidth * 0.35,
-    victim.offsetTop + victim.offsetHeight * 0.2,
-    500
+    victim.offsetTop + victim.offsetHeight * 0.18,
+    650
   );
 
-  victim.classList.add("bonked", "henn-defeated");
+  spawnEffect(
+    parent,
+    "henn-hit-flash",
+    victim.offsetLeft + victim.offsetWidth * 0.18,
+    victim.offsetTop + victim.offsetHeight * 0.1,
+    220
+  );
+
+  victim.classList.add("bonked", "henn-defeated", "henn-hit-stop");
   victim.style.animation = "none";
+  victim.style.filter = "brightness(1.35)";
   void victim.offsetHeight;
+
+  setTimeout(() => {
+    victim.classList.remove("henn-hit-stop");
+    victim.style.filter = "";
+  }, 120);
 
   setTimeout(() => {
     victim.remove();
     setTimeout(() => respawnRunner(spriteName), 700 + Math.random() * 1200);
-  }, 900);
+  }, 980);
 }
 
 function bonkNearby(attacker, range = 70) {
