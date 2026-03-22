@@ -1906,15 +1906,36 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   50%, 100% { background-image: url("/assets/henn-effects/alt-parrot.png"); }
 }
 
+.henn-held-bobber::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 6px;
+  width: 12px;
+  height: 2px;
+  background: rgba(255,255,255,0.7);
+  transform: rotate(25deg);
+  transform-origin: left center;
+}
+
 .henn-held-bobber {
   position: absolute;
   width: 14px;
   height: 14px;
-  left: 37px;
-  top: 10px;
+  left: 34px;
+  top: 6px;
   background: url("/assets/henn-effects/bobber.png") center/contain no-repeat;
   pointer-events: none;
   z-index: 4;
+}
+
+.henn-held-bobber {
+  animation: bobberIdle 1.4s ease-in-out infinite;
+}
+
+@keyframes bobberIdle {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-2px); }
 }
 
 .henn-held-coin {
