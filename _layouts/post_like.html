@@ -4,13 +4,6 @@ layout: default
 
 <article class="post">
   {% assign hero = page.media | default: page.photo | default: page.image %}
-  {% if hero %}
-    <a class="gallery-item post-hero" href="{{ hero | relative_url }}">
-      <img
-        src="{{ hero | relative_url }}"
-        alt="{{ page.image_alt | default: page.title }}">
-    </a>
-  {% endif %}
 
   <header class="post-head">
     <h1>{{ page.title }}</h1>
@@ -37,6 +30,14 @@ layout: default
       {% endif %}
     </div>
   </header>
+
+  {% if hero %}
+    <a class="gallery-item post-hero" href="{{ hero | relative_url }}">
+      <img
+        src="{{ hero | relative_url }}"
+        alt="{{ page.image_alt | default: page.title }}">
+    </a>
+  {% endif %}
 
   <div class="post-body">
     {{ content }}
