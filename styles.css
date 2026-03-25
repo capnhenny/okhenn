@@ -37,8 +37,9 @@
 html, body { height: 100%; margin: 0; padding: 0; }
 
 body {
-  font-family: Nunito, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
- color: var(--on-wall); /* readable on dark wallpaper */
+  font-family: "Bricolage Grotesque", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 450;
+  color: var(--on-wall); /* readable on dark wallpaper */
 
   /* skeleton wallpaper everywhere */
   background: url("./assets/skeleton-gradient.jpg") no-repeat center bottom / cover fixed;
@@ -434,7 +435,7 @@ html,body { overflow-x: hidden; }
 }
 
 /* ------------------ Type ------------------ */
-h1, h2, h3 { font-family: "Space Grotesk", Nunito, sans-serif; letter-spacing: .2px; }
+h1, h2, h3 {   font-family: "Space Grotesk", "Bricolage Grotesque", sans-serif;  letter-spacing: .2px; }
 h1 { margin: .25rem 0; font-size: 2.6rem; }
 h2 { margin: 0 0 .4rem; font-size: 1.6rem; }
 .tag { color: var(--muted); margin: .25rem 0 0; }
