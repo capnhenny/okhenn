@@ -16,7 +16,7 @@ Robert (yes, the one from the quote!) & Lynda H. are a very fun, very immature c
 
 It's always refreshing to see people so giddy, no matter their age. This is a trait I've always admired in the H.'s. I love to tackle anything (and everything) with a playful spirit and I'm quite cognizant of the many sideways looks I receive. To be honest, those looks will never get old. My unseriousness bothers the hell out of some people, but it's always worth it when you see someone physically relax in response. You never know when someone needed it.
 
-"Immature" isn't a word I think about often. That's probably why Robert's use of it stuck out so much. I think the word, and the attitude that goes hand-in-hand, are wildly underestimated. We could all stand to be immature sometimes. Don't let yourself stray too far to ouright disrespectful, but if there's any message I want to impart in this life it is: It's OK to play.
+"Immature" isn't a word I think about often. That's probably why Robert's use of it stuck out so much. I think the word, and the attitude that goes hand-in-hand, are wildly underestimated. We could all stand to be immature sometimes. Don't let yourself stray too far to ouright disrespectful, but if there's any message I want to impart in this life it is: Be a goofball - it's way more fun.
 
 Anyways, this is my website. 
 
