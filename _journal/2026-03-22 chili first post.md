@@ -2,7 +2,7 @@
 title: "Hello, Internet"
 date: 2026-03-22 02:37:32
 thumb: /assets/images/journal-01-thumb.jpg
-hero_image: /assets/journal/3-22-26-chili.png
+media: /assets/journal/3-22-26-chili.png
 image_alt: "8-bit chili pot with toys popping out"
 ---
 "You're only young once; but you can be immature forever."
