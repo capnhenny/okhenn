@@ -1,5 +1,45 @@
 <!-- Favicons -->
-<link rel="icon" href="/assets/logo.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+<link id="favicon-default" rel="icon" href="/assets/favicon.png">
+<link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
+<link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.png">
+<link id="favicon-apple" rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+
+<script>
+(function () {
+  const icons = [
+    "/assets/logo.png",
+    "/assets/henn-sprites/chef-henn.png",
+    "/assets/henn-sprites/dino-henn.png",
+    "/assets/henn-sprites/warrior-henn.png",
+    "/assets/henn-sprites/wizard-henn.png",
+    "/assets/henn-sprites/explorer-henn.png",
+    "/assets/henn-sprites/tron-henn.png",
+    "/assets/henn-sprites/cowboy-henn.png",
+    "/assets/henn-sprites/cat-henn.png",
+    "/assets/henn-sprites/pirate-henn.png",
+    "/assets/henn-sprites/gamer-henn.png",
+    "/assets/henn-sprites/magic-carpet-henn.png",
+    "/assets/henn-sprites/bard-henn.png",
+    "/assets/henn-sprites/ghost-henn.png",
+    "/assets/henn-sprites/fisherman-henn.png",
+    "/assets/henn-sprites/robot-henn.png",
+    "/assets/henn-sprites/caveman-henn.png"
+  ];
+
+  let chosen = sessionStorage.getItem("randomFavicon");
+
+  if (!chosen) {
+    chosen = icons[Math.floor(Math.random() * icons.length)];
+    sessionStorage.setItem("randomFavicon", chosen);
+  }
+
+  const cacheBusted = `${chosen}?v=${Date.now()}`;
+
+  const ids = ["favicon-default", "favicon-32", "favicon-16", "favicon-apple"];
+
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.href = cacheBusted;
+  });
+})();
+</script>
