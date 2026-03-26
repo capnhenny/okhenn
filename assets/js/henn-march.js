@@ -266,7 +266,7 @@ function launchRollingBoulder(explorer) {
   const rock = document.createElement("div");
   rock.className = "henn-tumble-rock";
 
-  const startX = explorer.offsetLeft + 22;
+  const startX = explorer.offsetLeft + 18;
   const startY = explorer.offsetTop + 18;
 
   rock.style.left = `${startX}px`;
@@ -274,13 +274,15 @@ function launchRollingBoulder(explorer) {
   explorer.parentElement.appendChild(rock);
 
   let distance = 0;
-  const speed = 5.6;
-  const bounceHeight = 2.5;
+  const speed = 3.2;          // slower
+  const maxDistance = 220;    // shorter travel
+  const bounceHeight = 1.2;   // subtler bounce
   const hitTargets = new Set();
 
   const interval = setInterval(() => {
     distance += speed;
-    rock.style.transform = `translateX(${distance}px) translateY(${Math.sin(distance / 10) * bounceHeight}px)`;
+
+    rock.style.transform = `translateX(${distance}px) translateY(${Math.sin(distance / 12) * bounceHeight}px)`;
 
     const rockRect = rock.getBoundingClientRect();
     const runners = document.querySelectorAll(".henn-sprite-runner");
@@ -314,17 +316,17 @@ function launchRollingBoulder(explorer) {
       }
     }
 
-    if (Math.random() < 0.22) {
+    if (Math.random() < 0.16) {
       spawnEffect(
         explorer.parentElement,
         "henn-dust",
-        startX + distance - 6,
-        startY + 32,
-        350
+        startX + distance - 4,
+        startY + 28,
+        280
       );
     }
 
-    if (startX + distance > window.innerWidth + 120) {
+    if (distance > maxDistance) {
       clearInterval(interval);
       rock.remove();
     }
