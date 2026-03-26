@@ -260,6 +260,77 @@ function launchProjectile({
   }, 16);
 }
 
+function launchRollingBoulder(explorer) {
+  if (!explorer || !explorer.parentElement) return;
+
+  const rock = document.createElement("div");
+  rock.className = "henn-tumble-rock";
+
+  const startX = explorer.offsetLeft + 22;
+  const startY = explorer.offsetTop + 18;
+
+  rock.style.left = `${startX}px`;
+  rock.style.top = `${startY}px`;
+  explorer.parentElement.appendChild(rock);
+
+  let distance = 0;
+  const speed = 5.6;
+  const bounceHeight = 2.5;
+  const hitTargets = new Set();
+
+  const interval = setInterval(() => {
+    distance += speed;
+    rock.style.transform = `translateX(${distance}px) translateY(${Math.sin(distance / 10) * bounceHeight}px)`;
+
+    const rockRect = rock.getBoundingClientRect();
+    const runners = document.querySelectorAll(".henn-sprite-runner");
+
+    for (const target of runners) {
+      if (target === explorer || target.classList.contains("bonked")) continue;
+      if (hitTargets.has(target)) continue;
+
+      const rect = target.getBoundingClientRect();
+      const hit =
+        rockRect.right > rect.left &&
+        rockRect.left < rect.right &&
+        rockRect.bottom > rect.top &&
+        rockRect.top < rect.bottom;
+
+      if (hit) {
+        hitTargets.add(target);
+
+        spawnEffect(
+          explorer.parentElement,
+          "henn-dust",
+          target.offsetLeft + 10,
+          target.offsetTop + 24,
+          500
+        );
+
+        bonkRunner(target);
+
+        rock.classList.add("impact");
+        setTimeout(() => rock.classList.remove("impact"), 120);
+      }
+    }
+
+    if (Math.random() < 0.22) {
+      spawnEffect(
+        explorer.parentElement,
+        "henn-dust",
+        startX + distance - 6,
+        startY + 32,
+        350
+      );
+    }
+
+    if (startX + distance > window.innerWidth + 120) {
+      clearInterval(interval);
+      rock.remove();
+    }
+  }, 16);
+}
+
 function launchCatAttack(catLady) {
   if (!catLady || !catLady.parentElement) return;
 
@@ -367,13 +438,26 @@ function canTrigger(el, cooldown = DEFAULT_COOLDOWN) {
 
 function doWizardMove(wizard) {
   pulseAttacker(wizard);
-  spawnEffect(
-    wizard.parentElement,
-    "henn-sparkle",
-    wizard.offsetLeft + 18,
-    wizard.offsetTop + 10,
-    900
-  );
+
+  launchProjectile({
+    shooter: wizard,
+    className: "henn-spell",
+    startX: wizard.offsetLeft + 36,
+    startY: wizard.offsetTop + 10,
+    speed: 5.8,
+    arc: -4,
+    life: 950,
+    onHit: (target) => {
+      spawnEffect(
+        wizard.parentElement,
+        "henn-sparkle-burst",
+        target.offsetLeft + 16,
+        target.offsetTop + 8,
+        500
+      );
+      bonkRunner(target);
+    }
+  });
 }
 
 function doCowboyMove(cowboy) {
@@ -415,13 +499,7 @@ function doDinoMove(dino) {
 
 function doExplorerMove(explorer) {
   pulseAttacker(explorer);
-  spawnEffect(
-    explorer.parentElement,
-    "henn-compass",
-    explorer.offsetLeft + 28,
-    explorer.offsetTop + 8,
-    1200
-  );
+  launchRollingBoulder(explorer);
 }
 
 function doChefMove(chef) {
@@ -627,54 +705,6 @@ function doCavemanMove(caveman) {
     650
   );
   bonkNearby(caveman, 55);
-}
-
-function doWizardMove(wizard) {
-  pulseAttacker(wizard);
-
-  launchProjectile({
-    shooter: wizard,
-    className: "henn-spell",
-    startX: wizard.offsetLeft + 36,
-    startY: wizard.offsetTop + 10,
-    speed: 5.8,
-    arc: -4,
-    life: 950,
-    onHit: (target) => {
-      spawnEffect(
-        wizard.parentElement,
-        "henn-sparkle-burst",
-        target.offsetLeft + 16,
-        target.offsetTop + 8,
-        500
-      );
-      bonkRunner(target);
-    }
-  });
-}
-
-function doExplorerMove(explorer) {
-  pulseAttacker(explorer);
-
-  launchProjectile({
-    shooter: explorer,
-    className: "henn-tumble-rock",
-    startX: explorer.offsetLeft + 8,
-    startY: explorer.offsetTop + 8,
-    speed: 4.8,
-    arc: 2,
-    life: 950,
-    onHit: (target) => {
-      spawnEffect(
-        explorer.parentElement,
-        "henn-dust",
-        target.offsetLeft + 14,
-        target.offsetTop + 26,
-        500
-      );
-      bonkRunner(target);
-    }
-  });
 }
 
 /* =========================
