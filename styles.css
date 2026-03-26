@@ -2396,16 +2396,16 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 .henn-tumble-rock {
   position: absolute;
-  width: 58px;
-  height: 58px;
+  width: 42px;
+  height: 42px;
   background-image: url("/assets/henn-effects/tumble-rock.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   pointer-events: none;
-  z-index: 7;
+  z-index: 8;
   transform-origin: center center;
-  animation: rockRollSpin 0.28s linear infinite;
+  animation: rockRollSpin 0.42s linear infinite;
 }
 
 @keyframes rockRollSpin {
@@ -2415,7 +2415,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 .henn-tumble-rock.impact {
   animation:
-    rockRollSpin 0.28s linear infinite,
+    rockRollSpin 0.42s linear infinite,
     rockImpact 0.14s ease-out 1;
 }
 
