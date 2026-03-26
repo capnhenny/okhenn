@@ -286,7 +286,7 @@ function launchRollingBoulder(explorer) {
   const interval = setInterval(() => {
     distance += speed;
 
-    // movement only on outer wrapper
+    // outer wrapper moves forward; inner rock spins in CSS
     rock.style.transform = `translateX(${distance}px) translateY(${Math.sin(distance / 12) * bounceHeight}px)`;
 
     const rockRect = rock.getBoundingClientRect();
@@ -330,13 +330,6 @@ function launchRollingBoulder(explorer) {
         280
       );
     }
-
-    if (distance > maxDistance) {
-      clearInterval(interval);
-      rock.remove();
-    }
-  }, 16);
-}
 
     if (distance > maxDistance) {
       clearInterval(interval);
