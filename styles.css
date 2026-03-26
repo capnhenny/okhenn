@@ -1710,7 +1710,7 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   width: 100%;
   height: 62px;
   overflow: hidden;
-  pointer-events: none;
+  pointer-events: auto;
   z-index: 1;
 }
 
@@ -1728,6 +1728,19 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   position: relative;
   width: 100%;
   height: 100%;
+}
+
+.henn-march {
+  pointer-events: none;
+}
+
+.henn-sprite-runner {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.henn-sprite-runner.henn-clickable:active {
+  transform: scale(0.98);
 }
 
 /* =========================
