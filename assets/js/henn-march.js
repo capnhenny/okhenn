@@ -279,14 +279,13 @@ function launchRollingBoulder(explorer) {
 
   let distance = 0;
   const speed = 3.2;
-  const maxDistance = 220;
+  const maxDistance = 110;   // about half as far
   const bounceHeight = 1.2;
   const hitTargets = new Set();
 
   const interval = setInterval(() => {
     distance += speed;
 
-    // outer wrapper moves forward; inner rock spins in CSS
     rock.style.transform = `translateX(${distance}px) translateY(${Math.sin(distance / 12) * bounceHeight}px)`;
 
     const rockRect = rock.getBoundingClientRect();
@@ -321,13 +320,13 @@ function launchRollingBoulder(explorer) {
       }
     }
 
-    if (Math.random() < 0.16) {
+    if (Math.random() < 0.12) {
       spawnEffect(
         explorer.parentElement,
         "henn-dust",
         startX + distance - 4,
         startY + 28,
-        280
+        220
       );
     }
 
