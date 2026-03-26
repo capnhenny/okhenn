@@ -338,8 +338,8 @@ function animateCompanionCats() {
 
     if (burst) {
       cat.classList.add("bursting");
-      cat.style.left = `${14 + Math.random() * 16}px`;
-      cat.style.top = `${30 + Math.random() * 4}px`;
+      cat.style.left = `${8 + Math.random() * 12}px`;
+      cat.style.top = `${36 + Math.random() * 4}px`;
 
       setTimeout(() => {
         cat.classList.remove("bursting");
@@ -347,7 +347,7 @@ function animateCompanionCats() {
     } else {
       cat.classList.remove("bursting");
       cat.style.left = `${6 + Math.random() * 10}px`;
-      cat.style.top = `${31 + Math.random() * 3}px`;
+      cat.style.top = `${37 + Math.random() * 3}px`;
     }
   });
 }
@@ -660,9 +660,9 @@ function doExplorerMove(explorer) {
     shooter: explorer,
     className: "henn-tumble-rock",
     startX: explorer.offsetLeft + 8,
-    startY: explorer.offsetTop + 22,
-    speed: 5.2,
-    arc: 6,
+    startY: explorer.offsetTop + 8,
+    speed: 4.8,
+    arc: 2,
     life: 950,
     onHit: (target) => {
       spawnEffect(
