@@ -1906,6 +1906,35 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
   50%, 100% { background-image: var(--sprite-b); }
 }
 
+.henn-sprite-runner.henn-attacking {
+  filter: brightness(1.12);
+}
+
+.henn-hit-flash {
+  width: 26px;
+  height: 26px;
+  background-image: url("/assets/henn-effects/bonk-star.png");
+  animation: hennHitFlash 0.22s ease-out forwards;
+  z-index: 8;
+}
+
+@keyframes hennHitFlash {
+  0% {
+    opacity: 1;
+    transform: scale(0.6) rotate(0deg);
+    filter: brightness(1.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35) rotate(30deg);
+    filter: brightness(1);
+  }
+}
+
+.henn-sprite-runner.henn-hit-stop {
+  filter: brightness(1.25);
+}
+
 /* =========================
    PERSISTENT CHARACTER EXTRAS
 ========================= */
