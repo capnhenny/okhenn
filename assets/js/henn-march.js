@@ -266,6 +266,10 @@ function launchRollingBoulder(explorer) {
   const rock = document.createElement("div");
   rock.className = "henn-tumble-rock";
 
+  const inner = document.createElement("div");
+  inner.className = "henn-tumble-rock-inner";
+  rock.appendChild(inner);
+
   const startX = explorer.offsetLeft + 18;
   const startY = explorer.offsetTop + 18;
 
@@ -274,14 +278,15 @@ function launchRollingBoulder(explorer) {
   explorer.parentElement.appendChild(rock);
 
   let distance = 0;
-  const speed = 3.2;          // slower
-  const maxDistance = 220;    // shorter travel
-  const bounceHeight = 1.2;   // subtler bounce
+  const speed = 3.2;
+  const maxDistance = 220;
+  const bounceHeight = 1.2;
   const hitTargets = new Set();
 
   const interval = setInterval(() => {
     distance += speed;
 
+    // movement only on outer wrapper
     rock.style.transform = `translateX(${distance}px) translateY(${Math.sin(distance / 12) * bounceHeight}px)`;
 
     const rockRect = rock.getBoundingClientRect();
@@ -311,8 +316,8 @@ function launchRollingBoulder(explorer) {
 
         bonkRunner(target);
 
-        rock.classList.add("impact");
-        setTimeout(() => rock.classList.remove("impact"), 120);
+        inner.classList.add("impact");
+        setTimeout(() => inner.classList.remove("impact"), 120);
       }
     }
 
@@ -325,6 +330,13 @@ function launchRollingBoulder(explorer) {
         280
       );
     }
+
+    if (distance > maxDistance) {
+      clearInterval(interval);
+      rock.remove();
+    }
+  }, 16);
+}
 
     if (distance > maxDistance) {
       clearInterval(interval);
