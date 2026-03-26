@@ -2396,10 +2396,11 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 .henn-tumble-rock {
   position: absolute;
-  width: 42px;
-  height: 42px;
+  width: 84px;   /* doubled from 42 */
+  height: 84px;
   pointer-events: none;
   z-index: 8;
+  background: none !important;
 }
 
 .henn-tumble-rock-inner {
