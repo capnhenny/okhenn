@@ -629,6 +629,54 @@ function doCavemanMove(caveman) {
   bonkNearby(caveman, 55);
 }
 
+function doWizardMove(wizard) {
+  pulseAttacker(wizard);
+
+  launchProjectile({
+    shooter: wizard,
+    className: "henn-spell",
+    startX: wizard.offsetLeft + 36,
+    startY: wizard.offsetTop + 10,
+    speed: 5.8,
+    arc: -4,
+    life: 950,
+    onHit: (target) => {
+      spawnEffect(
+        wizard.parentElement,
+        "henn-sparkle-burst",
+        target.offsetLeft + 16,
+        target.offsetTop + 8,
+        500
+      );
+      bonkRunner(target);
+    }
+  });
+}
+
+function doExplorerMove(explorer) {
+  pulseAttacker(explorer);
+
+  launchProjectile({
+    shooter: explorer,
+    className: "henn-tumble-rock",
+    startX: explorer.offsetLeft + 34,
+    startY: explorer.offsetTop + 24,
+    speed: 5.2,
+    arc: 6,
+    life: 950,
+    onHit: (target) => {
+      spawnEffect(
+        explorer.parentElement,
+        "henn-dust",
+        target.offsetLeft + 14,
+        target.offsetTop + 26,
+        500
+      );
+      bonkRunner(target);
+    }
+  });
+}
+
 /* =========================
    CLICK DISPATCH
 ========================= */
