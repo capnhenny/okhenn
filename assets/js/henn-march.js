@@ -659,8 +659,8 @@ function doExplorerMove(explorer) {
   launchProjectile({
     shooter: explorer,
     className: "henn-tumble-rock",
-    startX: explorer.offsetLeft + 34,
-    startY: explorer.offsetTop + 24,
+    startX: explorer.offsetLeft + 8,
+    startY: explorer.offsetTop + 22,
     speed: 5.2,
     arc: 6,
     life: 950,
