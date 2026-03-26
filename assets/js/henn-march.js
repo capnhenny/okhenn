@@ -23,7 +23,8 @@ const SPRITES = [
   { name: "caveman-henn", file: "/assets/henn-sprites/caveman-henn.png", alt: altStepPath("caveman-henn"), width: 56, height: 56, duration: 25, delay: 45 }
 ];
 
-// helper function
+const DEFAULT_COOLDOWN = 900;
+
 function spawnEffect(parent, className, left, top, duration) {
   if (!parent) return;
 
@@ -36,11 +37,16 @@ function spawnEffect(parent, className, left, top, duration) {
   setTimeout(() => effect.remove(), duration);
 }
 
+function pulseAttacker(attacker, className = "henn-attacking", duration = 180) {
+  if (!attacker) return;
+  attacker.classList.add(className);
+  setTimeout(() => attacker.classList.remove(className), duration);
+}
+
 function makeRunner(sprite, index) {
   const el = document.createElement("div");
-  el.className = `henn-sprite-runner ${sprite.name}${index % 2 ? " alt-step" : ""}`;
+  el.className = `henn-sprite-runner henn-clickable ${sprite.name}${index % 2 ? " alt-step" : ""}`;
 
-  // normal + alt-step sprite sources for CSS
   el.style.setProperty("--sprite-a", `url("${sprite.file}")`);
   el.style.setProperty("--sprite-b", `url("${sprite.alt || sprite.file}")`);
 
@@ -62,6 +68,7 @@ function makeRunner(sprite, index) {
   el.style.animationDelay = `${sprite.delay}s, 0s`;
   el.dataset.name = sprite.name;
   el.dataset.catAttacking = "0";
+  el.dataset.lastTrigger = "0";
 
   if (sprite.name === "fisherman-henn") {
     const prop = document.createElement("div");
@@ -111,7 +118,7 @@ function bonkRunner(victim) {
     parent,
     "henn-bonk-star",
     victim.offsetLeft + victim.offsetWidth * 0.35,
-    victim.offsetTop + victim.offsetHeight * 0.18,
+    victim.offsetTop + victim.offsetHeight * 0.2,
     650
   );
 
@@ -196,23 +203,6 @@ function respawnRunner(name) {
   track.appendChild(runner);
 }
 
-// kept as fallback utility, not currently used
-function bonkOneOccasionally() {
-  const runners = Array.from(document.querySelectorAll(".henn-sprite-runner"));
-  if (!runners.length) return;
-
-  const visible = runners.filter(el => {
-    if (el.classList.contains("bonked")) return false;
-    const rect = el.getBoundingClientRect();
-    return rect.right > 0 && rect.left < window.innerWidth;
-  });
-
-  if (!visible.length) return;
-
-  const victim = visible[Math.floor(Math.random() * visible.length)];
-  bonkRunner(victim);
-}
-
 function launchProjectile({
   shooter,
   className,
@@ -272,6 +262,8 @@ function launchProjectile({
 
 function launchCatAttack(catLady) {
   if (!catLady || !catLady.parentElement) return;
+
+  pulseAttacker(catLady);
 
   const held = catLady.querySelector(".henn-companion-cat");
   catLady.dataset.catAttacking = "1";
@@ -360,14 +352,314 @@ function animateCompanionCats() {
   });
 }
 
-function pulseAttacker(attacker, className = "henn-attacking", duration = 180) {
-  if (!attacker) return;
-  attacker.classList.add(className);
-  setTimeout(() => attacker.classList.remove(className), duration);
+function canTrigger(el, cooldown = DEFAULT_COOLDOWN) {
+  if (!el) return false;
+  const now = Date.now();
+  const last = Number(el.dataset.lastTrigger || 0);
+  if (now - last < cooldown) return false;
+  el.dataset.lastTrigger = String(now);
+  return true;
 }
 
+/* =========================
+   MOVE FUNCTIONS
+========================= */
+
+function doWizardMove(wizard) {
+  pulseAttacker(wizard);
+  spawnEffect(
+    wizard.parentElement,
+    "henn-sparkle",
+    wizard.offsetLeft + 18,
+    wizard.offsetTop + 10,
+    900
+  );
+}
+
+function doCowboyMove(cowboy) {
+  pulseAttacker(cowboy);
+  launchProjectile({
+    shooter: cowboy,
+    className: "henn-bullet",
+    startX: cowboy.offsetLeft + 40,
+    startY: cowboy.offsetTop + 24,
+    speed: 8,
+    arc: 0,
+    life: 700
+  });
+}
+
+function doCatMove(catLady) {
+  launchCatAttack(catLady);
+}
+
+function doDinoMove(dino) {
+  if (dino.classList.contains("henn-stomp")) return;
+
+  pulseAttacker(dino);
+  dino.classList.add("henn-stomp");
+
+  setTimeout(() => {
+    spawnEffect(
+      dino.parentElement,
+      "henn-dust",
+      dino.offsetLeft + 14,
+      dino.offsetTop + 36,
+      700
+    );
+
+    bonkUnderneath(dino, 34, 28);
+    dino.classList.remove("henn-stomp");
+  }, 520);
+}
+
+function doExplorerMove(explorer) {
+  pulseAttacker(explorer);
+  spawnEffect(
+    explorer.parentElement,
+    "henn-compass",
+    explorer.offsetLeft + 28,
+    explorer.offsetTop + 8,
+    1200
+  );
+}
+
+function doChefMove(chef) {
+  pulseAttacker(chef);
+  spawnEffect(
+    chef.parentElement,
+    "henn-pancake",
+    chef.offsetLeft + 28,
+    chef.offsetTop + 14,
+    1000
+  );
+}
+
+function doWarriorMove(warrior) {
+  pulseAttacker(warrior);
+  spawnEffect(
+    warrior.parentElement,
+    "henn-slash",
+    warrior.offsetLeft + 22,
+    warrior.offsetTop + 8,
+    700
+  );
+  bonkNearby(warrior, 60);
+}
+
+function doTronMove(tron) {
+  pulseAttacker(tron);
+  spawnEffect(
+    tron.parentElement,
+    "henn-tron-pulse",
+    tron.offsetLeft + 20,
+    tron.offsetTop + 14,
+    600
+  );
+}
+
+function doPirateMove(pirate) {
+  pulseAttacker(pirate);
+
+  const held = pirate.querySelector(".henn-parrot-loop");
+  if (held) held.style.opacity = "0";
+
+  launchProjectile({
+    shooter: pirate,
+    className: "henn-parrot",
+    startX: pirate.offsetLeft + 30,
+    startY: pirate.offsetTop + 4,
+    speed: 5.4,
+    arc: 10,
+    life: 1000
+  });
+
+  setTimeout(() => {
+    if (held) held.style.opacity = "";
+  }, 1000);
+}
+
+function doGamerMove(gamer) {
+  pulseAttacker(gamer);
+
+  const held = gamer.querySelector(".henn-held-coin");
+  if (!held) return;
+
+  spawnEffect(
+    gamer.parentElement,
+    "henn-coin-pop",
+    gamer.offsetLeft + 30,
+    gamer.offsetTop - 4,
+    600
+  );
+
+  held.style.opacity = "0";
+
+  launchProjectile({
+    shooter: gamer,
+    className: "henn-coin",
+    startX: gamer.offsetLeft + 30,
+    startY: gamer.offsetTop + 4,
+    speed: 6.2,
+    arc: 8,
+    life: 900
+  });
+
+  setTimeout(() => {
+    held.style.opacity = "";
+  }, 900);
+}
+
+function doMagicCarpetMove(rider) {
+  pulseAttacker(rider);
+  spawnEffect(
+    rider.parentElement,
+    "henn-sparkle",
+    rider.offsetLeft + 18,
+    rider.offsetTop + 12,
+    900
+  );
+}
+
+function doBardMove(bard) {
+  pulseAttacker(bard);
+  spawnEffect(
+    bard.parentElement,
+    "henn-music-note",
+    bard.offsetLeft + 34,
+    bard.offsetTop + 4,
+    1000
+  );
+}
+
+function doGhostMove(ghost) {
+  pulseAttacker(ghost);
+  spawnEffect(
+    ghost.parentElement,
+    "henn-sparkle",
+    ghost.offsetLeft + 18,
+    ghost.offsetTop + 10,
+    900
+  );
+}
+
+function doFishermanMove(fisher) {
+  if (fisher.classList.contains("casting")) return;
+
+  pulseAttacker(fisher);
+  fisher.classList.add("casting");
+
+  const held = fisher.querySelector(".henn-held-bobber");
+  if (held) held.style.opacity = "0";
+
+  launchProjectile({
+    shooter: fisher,
+    className: "henn-bobber",
+    startX: fisher.offsetLeft + 26,
+    startY: fisher.offsetTop + 14,
+    speed: 4.8,
+    arc: 12,
+    life: 900
+  });
+
+  setTimeout(() => {
+    if (held) held.style.opacity = "";
+    fisher.classList.remove("casting");
+  }, 900);
+}
+
+function doRobotMove(robot) {
+  pulseAttacker(robot);
+
+  const laser = document.createElement("div");
+  laser.className = "henn-laser";
+
+  const startX = robot.offsetLeft + 36;
+  const startY = robot.offsetTop + 18;
+
+  laser.style.left = `${startX}px`;
+  laser.style.top = `${startY}px`;
+
+  robot.parentElement.appendChild(laser);
+
+  let distance = 0;
+  const speed = 6;
+
+  const interval = setInterval(() => {
+    distance += speed;
+    laser.style.transform = `translateX(${distance}px)`;
+
+    const laserRect = laser.getBoundingClientRect();
+    const runners = document.querySelectorAll(".henn-sprite-runner");
+
+    for (const target of runners) {
+      if (target === robot) continue;
+
+      const rect = target.getBoundingClientRect();
+      const hit =
+        laserRect.right > rect.left &&
+        laserRect.left < rect.right &&
+        laserRect.bottom > rect.top &&
+        laserRect.top < rect.bottom;
+
+      if (hit) {
+        bonkRunner(target);
+        clearInterval(interval);
+        laser.remove();
+        return;
+      }
+    }
+
+    if (distance > window.innerWidth) {
+      clearInterval(interval);
+      laser.remove();
+    }
+  }, 16);
+}
+
+function doCavemanMove(caveman) {
+  pulseAttacker(caveman);
+  spawnEffect(
+    caveman.parentElement,
+    "henn-slash",
+    caveman.offsetLeft + 24,
+    caveman.offsetTop + 8,
+    650
+  );
+  bonkNearby(caveman, 55);
+}
+
+/* =========================
+   CLICK DISPATCH
+========================= */
+
+function triggerSpriteMove(el) {
+  if (!el || el.classList.contains("bonked")) return;
+  if (!canTrigger(el)) return;
+
+  if (el.classList.contains("chef-henn")) return doChefMove(el);
+  if (el.classList.contains("dino-henn")) return doDinoMove(el);
+  if (el.classList.contains("warrior-henn")) return doWarriorMove(el);
+  if (el.classList.contains("wizard-henn")) return doWizardMove(el);
+  if (el.classList.contains("explorer-henn")) return doExplorerMove(el);
+  if (el.classList.contains("tron-henn")) return doTronMove(el);
+  if (el.classList.contains("cowboy-henn")) return doCowboyMove(el);
+  if (el.classList.contains("cat-henn")) return doCatMove(el);
+  if (el.classList.contains("pirate-henn")) return doPirateMove(el);
+  if (el.classList.contains("gamer-henn")) return doGamerMove(el);
+  if (el.classList.contains("magic-carpet-henn")) return doMagicCarpetMove(el);
+  if (el.classList.contains("bard-henn")) return doBardMove(el);
+  if (el.classList.contains("ghost-henn")) return doGhostMove(el);
+  if (el.classList.contains("fisherman-henn")) return doFishermanMove(el);
+  if (el.classList.contains("robot-henn")) return doRobotMove(el);
+  if (el.classList.contains("caveman-henn")) return doCavemanMove(el);
+}
+
+/* =========================
+   RANDOM CHAOS
+========================= */
+
 function chaosRoll() {
-  // rare JRPG party victory bounce
   if (Math.random() < 0.01) {
     document.querySelectorAll(".henn-sprite-runner").forEach(henn => {
       if (!henn.classList.contains("henn-victory")) {
@@ -379,300 +671,76 @@ function chaosRoll() {
     });
   }
 
-  // wizard sparkle
   document.querySelectorAll(".wizard-henn").forEach(wizard => {
-    if (Math.random() < 0.15) {
-      spawnEffect(
-        wizard.parentElement,
-        "henn-sparkle",
-        wizard.offsetLeft + 18,
-        wizard.offsetTop + 10,
-        900
-      );
-    }
+    if (Math.random() < 0.15) doWizardMove(wizard);
   });
 
-  // cowboy bullet
   document.querySelectorAll(".cowboy-henn").forEach(cowboy => {
-    if (Math.random() < 0.16) {
-      launchProjectile({
-        shooter: cowboy,
-        className: "henn-bullet",
-        startX: cowboy.offsetLeft + 40,
-        startY: cowboy.offsetTop + 24,
-        speed: 8,
-        arc: 0,
-        life: 700
-      });
-    }
+    if (Math.random() < 0.16) doCowboyMove(cowboy);
   });
 
-  // cat chaos
   document.querySelectorAll(".cat-henn").forEach(catLady => {
-    if (Math.random() < 0.12) {
-      launchCatAttack(catLady);
-    }
+    if (Math.random() < 0.12) doCatMove(catLady);
   });
 
-  // dino stomp
   document.querySelectorAll(".dino-henn").forEach(dino => {
-    if (Math.random() < 0.14 && !dino.classList.contains("henn-stomp")) {
-      dino.classList.add("henn-stomp");
-
-      setTimeout(() => {
-        spawnEffect(
-          dino.parentElement,
-          "henn-dust",
-          dino.offsetLeft + 14,
-          dino.offsetTop + 36,
-          700
-        );
-
-        bonkUnderneath(dino, 34, 28);
-        dino.classList.remove("henn-stomp");
-      }, 520);
-    }
+    if (Math.random() < 0.14) doDinoMove(dino);
   });
 
-  // explorer compass
   document.querySelectorAll(".explorer-henn").forEach(explorer => {
-    if (Math.random() < 0.14) {
-      spawnEffect(
-        explorer.parentElement,
-        "henn-compass",
-        explorer.offsetLeft + 28,
-        explorer.offsetTop + 8,
-        1200
-      );
-    }
+    if (Math.random() < 0.14) doExplorerMove(explorer);
   });
 
-  // chef pancake flip
   document.querySelectorAll(".chef-henn").forEach(chef => {
-    if (Math.random() < 0.14) {
-      spawnEffect(
-        chef.parentElement,
-        "henn-pancake",
-        chef.offsetLeft + 28,
-        chef.offsetTop + 14,
-        1000
-      );
-    }
+    if (Math.random() < 0.14) doChefMove(chef);
   });
 
-  // warrior sword slash
   document.querySelectorAll(".warrior-henn").forEach(warrior => {
-    if (Math.random() < 0.14) {
-      spawnEffect(
-        warrior.parentElement,
-        "henn-slash",
-        warrior.offsetLeft + 22,
-        warrior.offsetTop + 8,
-        700
-      );
-      bonkNearby(warrior, 60);
-    }
+    if (Math.random() < 0.14) doWarriorMove(warrior);
   });
 
-  // tron neon pulse
   document.querySelectorAll(".tron-henn").forEach(tron => {
-    if (Math.random() < 0.15) {
-      spawnEffect(
-        tron.parentElement,
-        "henn-tron-pulse",
-        tron.offsetLeft + 20,
-        tron.offsetTop + 14,
-        600
-      );
-    }
+    if (Math.random() < 0.15) doTronMove(tron);
   });
 
-  // pirate parrot fly
   document.querySelectorAll(".pirate-henn").forEach(pirate => {
-    if (Math.random() < 0.10) {
-      const held = pirate.querySelector(".henn-parrot-loop");
-      if (held) held.style.opacity = "0";
-
-      launchProjectile({
-        shooter: pirate,
-        className: "henn-parrot",
-        startX: pirate.offsetLeft + 30,
-        startY: pirate.offsetTop + 4,
-        speed: 5.4,
-        arc: 10,
-        life: 1000
-      });
-
-      setTimeout(() => {
-        if (held) held.style.opacity = "";
-      }, 1000);
-    }
+    if (Math.random() < 0.10) doPirateMove(pirate);
   });
 
-  // gamer coin toss
   document.querySelectorAll(".gamer-henn").forEach(gamer => {
-    const held = gamer.querySelector(".henn-held-coin");
-    if (!held) return;
-
-    // coin pop
-    if (Math.random() < 0.08) {
-      spawnEffect(
-        gamer.parentElement,
-        "henn-coin-pop",
-        gamer.offsetLeft + 30,
-        gamer.offsetTop - 4,
-        600
-      );
-    }
-
-    // thrown coin
-    if (Math.random() < 0.08) {
-      held.style.opacity = "0";
-
-      launchProjectile({
-        shooter: gamer,
-        className: "henn-coin",
-        startX: gamer.offsetLeft + 30,
-        startY: gamer.offsetTop + 4,
-        speed: 6.2,
-        arc: 8,
-        life: 900
-      });
-
-      setTimeout(() => {
-        held.style.opacity = "";
-      }, 900);
-    }
+    if (Math.random() < 0.08) doGamerMove(gamer);
   });
 
-  // magic carpet sparkle
   document.querySelectorAll(".magic-carpet-henn").forEach(rider => {
-    if (Math.random() < 0.12) {
-      spawnEffect(
-        rider.parentElement,
-        "henn-sparkle",
-        rider.offsetLeft + 18,
-        rider.offsetTop + 12,
-        900
-      );
-    }
+    if (Math.random() < 0.12) doMagicCarpetMove(rider);
   });
 
-  // bard music note
   document.querySelectorAll(".bard-henn").forEach(bard => {
-    if (Math.random() < 0.14) {
-      spawnEffect(
-        bard.parentElement,
-        "henn-music-note",
-        bard.offsetLeft + 34,
-        bard.offsetTop + 4,
-        1000
-      );
-    }
+    if (Math.random() < 0.14) doBardMove(bard);
   });
 
-  // ghost float wisp
   document.querySelectorAll(".ghost-henn").forEach(ghost => {
-    if (Math.random() < 0.12) {
-      spawnEffect(
-        ghost.parentElement,
-        "henn-sparkle",
-        ghost.offsetLeft + 18,
-        ghost.offsetTop + 10,
-        900
-      );
-    }
+    if (Math.random() < 0.12) doGhostMove(ghost);
   });
 
-  // fisherman cast
   document.querySelectorAll(".fisherman-henn").forEach(fisher => {
-    if (Math.random() < 0.12 && !fisher.classList.contains("casting")) {
-      fisher.classList.add("casting");
-
-      const held = fisher.querySelector(".henn-held-bobber");
-      if (held) held.style.opacity = "0";
-
-      launchProjectile({
-        shooter: fisher,
-        className: "henn-bobber",
-        startX: fisher.offsetLeft + 26,
-        startY: fisher.offsetTop + 14,
-        speed: 4.8,
-        arc: 12,
-        life: 900
-      });
-
-      setTimeout(() => {
-        if (held) held.style.opacity = "";
-        fisher.classList.remove("casting");
-      }, 900);
-    }
+    if (Math.random() < 0.12) doFishermanMove(fisher);
   });
 
-  // robot laser eyes
   document.querySelectorAll(".robot-henn").forEach(robot => {
-    if (Math.random() < 0.14) {
-      const laser = document.createElement("div");
-      laser.className = "henn-laser";
-
-      const startX = robot.offsetLeft + 36;
-      const startY = robot.offsetTop + 18;
-
-      laser.style.left = `${startX}px`;
-      laser.style.top = `${startY}px`;
-
-      robot.parentElement.appendChild(laser);
-
-      let distance = 0;
-      const speed = 6;
-
-      const interval = setInterval(() => {
-        distance += speed;
-        laser.style.transform = `translateX(${distance}px)`;
-
-        const laserRect = laser.getBoundingClientRect();
-        const runners = document.querySelectorAll(".henn-sprite-runner");
-
-        for (const target of runners) {
-          if (target === robot) continue;
-
-          const rect = target.getBoundingClientRect();
-          const hit =
-            laserRect.right > rect.left &&
-            laserRect.left < rect.right &&
-            laserRect.bottom > rect.top &&
-            laserRect.top < rect.bottom;
-
-          if (hit) {
-            bonkRunner(target);
-            clearInterval(interval);
-            laser.remove();
-            return;
-          }
-        }
-
-        if (distance > window.innerWidth) {
-          clearInterval(interval);
-          laser.remove();
-        }
-      }, 16);
-    }
+    if (Math.random() < 0.14) doRobotMove(robot);
   });
 
-  // caveman club bonk
   document.querySelectorAll(".caveman-henn").forEach(caveman => {
-    if (Math.random() < 0.12) {
-      spawnEffect(
-        caveman.parentElement,
-        "henn-slash",
-        caveman.offsetLeft + 24,
-        caveman.offsetTop + 8,
-        650
-      );
-      bonkNearby(caveman, 55);
-    }
+    if (Math.random() < 0.12) doCavemanMove(caveman);
   });
 }
+
+document.addEventListener("click", e => {
+  const runner = e.target.closest(".henn-sprite-runner");
+  if (!runner) return;
+  triggerSpriteMove(runner);
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   seedRunners();
