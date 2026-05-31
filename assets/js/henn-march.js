@@ -21,6 +21,11 @@ const SPRITES = [
   { name: "fisherman-henn", file: "/assets/henn-sprites/fisherman-henn.png", alt: altStepPath("fisherman-henn"), width: 56, height: 56, duration: 26, delay: 39 },
   { name: "robot-henn", file: "/assets/henn-sprites/robot-henn.png", alt: altStepPath("robot-henn"), width: 56, height: 56, duration: 22, delay: 42 },
   { name: "caveman-henn", file: "/assets/henn-sprites/caveman-henn.png", alt: altStepPath("caveman-henn"), width: 56, height: 56, duration: 25, delay: 45 }
+  { name: "artist-henn", file: "/assets/henn-sprites/artist-henn.png", alt: altStepPath("artist-henn"), width: 56, height: 56, duration: 24, delay: 48 },
+  { name: "beach-henn", file: "/assets/henn-sprites/beach-henn.png", alt: altStepPath("beach-henn"), width: 56, height: 56, duration: 25, delay: 51 },
+  { name: "karate-henn", file: "/assets/henn-sprites/karate-henn.png", alt: altStepPath("karate-henn"), width: 56, height: 56, duration: 23, delay: 54 },
+  { name: "carpenter-henn", file: "/assets/henn-sprites/carpenter-henn.png", alt: altStepPath("carpenter-henn"), width: 56, height: 56, duration: 24, delay: 57 },
+  { name: "gardener-henn", file: "/assets/henn-sprites/gardener-henn.png", alt: altStepPath("gardener-henn"), width: 56, height: 56, duration: 26, delay: 60 }
 ];
 
 const DEFAULT_COOLDOWN = 900;
@@ -713,6 +718,118 @@ function doCavemanMove(caveman) {
   bonkNearby(caveman, 55);
 }
 
+function doArtistMove(artist) {
+  pulseAttacker(artist);
+
+  spawnEffect(
+    artist.parentElement,
+    "henn-artist-swipe",
+    artist.offsetLeft + 24,
+    artist.offsetTop - 6,
+    700
+  );
+
+  bonkNearby(artist, 70);
+}
+
+function doBeachMove(beach) {
+  pulseAttacker(beach);
+
+  spawnEffect(
+    beach.parentElement,
+    "henn-beach-attack",
+    beach.offsetLeft + 28,
+    beach.offsetTop - 4,
+    750
+  );
+
+  setTimeout(() => {
+    spawnEffect(
+      beach.parentElement,
+      "henn-sand-castle",
+      beach.offsetLeft + 58,
+      beach.offsetTop + 6,
+      900
+    );
+    bonkNearby(beach, 85);
+  }, 120);
+}
+
+function doKarateMove(karate) {
+  pulseAttacker(karate, "henn-karate-dash", 360);
+
+  spawnEffect(
+    karate.parentElement,
+    "henn-karate-kick",
+    karate.offsetLeft + 18,
+    karate.offsetTop - 8,
+    520
+  );
+
+  bonkNearby(karate, 90);
+}
+
+function doCarpenterMove(carpenter) {
+  pulseAttacker(carpenter);
+
+  launchProjectile({
+    shooter: carpenter,
+    className: "henn-hammer-projectile",
+    startX: carpenter.offsetLeft + 34,
+    startY: carpenter.offsetTop + 10,
+    speed: 6.5,
+    arc: 6,
+    life: 850,
+    onHit: target => {
+      spawnEffect(
+        carpenter.parentElement,
+        "henn-hammer-impact",
+        target.offsetLeft + 10,
+        target.offsetTop + 6,
+        520
+      );
+      bonkRunner(target);
+    }
+  });
+}
+
+function doGardenerMove(gardener) {
+  pulseAttacker(gardener);
+
+  const useTrap = Math.random() < 0.55;
+
+  if (useTrap) {
+    spawnEffect(
+      gardener.parentElement,
+      "henn-venus-trap",
+      gardener.offsetLeft + 54,
+      gardener.offsetTop + 0,
+      900
+    );
+
+    setTimeout(() => bonkNearby(gardener, 90), 180);
+  } else {
+    spawnEffect(
+      gardener.parentElement,
+      "henn-water-pour",
+      gardener.offsetLeft + 24,
+      gardener.offsetTop - 4,
+      700
+    );
+
+    setTimeout(() => {
+      spawnEffect(
+        gardener.parentElement,
+        "henn-venus-trap",
+        gardener.offsetLeft + 58,
+        gardener.offsetTop + 0,
+        900
+      );
+      bonkNearby(gardener, 90);
+    }, 260);
+  }
+}
+
 /* =========================
    CLICK DISPATCH
 ========================= */
@@ -737,6 +854,11 @@ function triggerSpriteMove(el) {
   if (el.classList.contains("fisherman-henn")) return doFishermanMove(el);
   if (el.classList.contains("robot-henn")) return doRobotMove(el);
   if (el.classList.contains("caveman-henn")) return doCavemanMove(el);
+  if (el.classList.contains("artist-henn")) return doArtistMove(el);
+  if (el.classList.contains("beach-henn")) return doBeachMove(el);
+  if (el.classList.contains("karate-henn")) return doKarateMove(el);
+  if (el.classList.contains("carpenter-henn")) return doCarpenterMove(el);
+  if (el.classList.contains("gardener-henn")) return doGardenerMove(el);
 }
 
 /* =========================
@@ -817,6 +939,26 @@ function chaosRoll() {
 
   document.querySelectorAll(".caveman-henn").forEach(caveman => {
     if (Math.random() < 0.12) doCavemanMove(caveman);
+  });
+  
+  document.querySelectorAll(".artist-henn").forEach(artist => {
+    if (Math.random() < 0.12) doArtistMove(artist);
+  });
+  
+  document.querySelectorAll(".beach-henn").forEach(beach => {
+    if (Math.random() < 0.10) doBeachMove(beach);
+  });
+  
+  document.querySelectorAll(".karate-henn").forEach(karate => {
+    if (Math.random() < 0.12) doKarateMove(karate);
+  });
+  
+  document.querySelectorAll(".carpenter-henn").forEach(carpenter => {
+    if (Math.random() < 0.11) doCarpenterMove(carpenter);
+  });
+  
+  document.querySelectorAll(".gardener-henn").forEach(gardener => {
+    if (Math.random() < 0.11) doGardenerMove(gardener);
   });
 }
 
