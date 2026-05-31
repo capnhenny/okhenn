@@ -2510,6 +2510,139 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 }
 
 /* =========================
+   NEW HENN EFFECTS
+========================= */
+
+.henn-artist-swipe,
+.henn-beach-attack,
+.henn-sand-castle,
+.henn-karate-kick,
+.henn-hammer-projectile,
+.henn-hammer-impact,
+.henn-water-pour,
+.henn-venus-trap {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* artist */
+
+.henn-artist-swipe {
+  width: 72px;
+  height: 72px;
+  background-image: url("/assets/henn-effects/artist-swipe.png");
+  animation: artistSwipe 0.7s ease-out forwards;
+}
+
+@keyframes artistSwipe {
+  0%   { opacity: 0; transform: scale(0.7) rotate(-10deg); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.05) rotate(6deg); }
+}
+
+/* beach */
+
+.henn-beach-attack {
+  width: 54px;
+  height: 54px;
+  background-image: url("/assets/henn-effects/beach-henn-attack.png");
+  animation: beachAttack 0.75s ease-out forwards;
+}
+
+@keyframes beachAttack {
+  0%   { opacity: 0; transform: translateX(0); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translateX(12px); }
+}
+
+.henn-sand-castle {
+  width: 90px;
+  height: 90px;
+  background-image: url("/assets/henn-effects/sand-castle.png");
+  animation: sandCastlePop 0.9s ease-out forwards;
+}
+
+@keyframes sandCastlePop {
+  0%   { opacity: 0; transform: scale(0.5); }
+  25%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.05); }
+}
+
+/* karate */
+
+.henn-karate-kick {
+  width: 68px;
+  height: 68px;
+  background-image: url("/assets/henn-effects/karate-henn-kick.png");
+  animation: karateKick 0.52s ease-out forwards;
+}
+
+@keyframes karateKick {
+  0%   { opacity: 0; transform: scale(0.8); }
+  15%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.08); }
+}
+
+/* carpenter */
+
+.henn-hammer-projectile {
+  width: 24px;
+  height: 24px;
+  background-image: url("/assets/henn-effects/hammer.png");
+  animation: hammerSpin 0.35s linear infinite;
+}
+
+.henn-hammer-impact {
+  width: 44px;
+  height: 44px;
+  background-image: url("/assets/henn-effects/carpenter-henn-hammer-throw.png");
+  animation: hammerImpact 0.5s ease-out forwards;
+}
+
+@keyframes hammerSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes hammerImpact {
+  0%   { opacity: 1; transform: scale(0.7); }
+  100% { opacity: 0; transform: scale(1.15); }
+}
+
+/* gardener */
+
+.henn-water-pour {
+  width: 64px;
+  height: 64px;
+  background-image: url("/assets/henn-effects/gardener-henn-pouring-water.png");
+  animation: waterPour 0.7s ease-out forwards;
+}
+
+@keyframes waterPour {
+  0%   { opacity: 0; }
+  20%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.henn-venus-trap {
+  width: 64px;
+  height: 64px;
+  background-image: url("/assets/henn-effects/venus-henntrap.png");
+  animation: venusTrapPop 0.9s ease-out forwards;
+}
+
+@keyframes venusTrapPop {
+  0%   { opacity: 0; transform: scale(0.4); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.1); }
+}
+
+/* =========================
    SPACING AROUND HEADER
 ========================= */
 
