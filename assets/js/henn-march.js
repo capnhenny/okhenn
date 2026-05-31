@@ -737,22 +737,26 @@ function doBeachMove(beach) {
 
   spawnEffect(
     beach.parentElement,
-    "henn-beach-attack",
-    beach.offsetLeft + 28,
-    beach.offsetTop - 4,
-    750
+    "henn-sand-castle",
+    beach.offsetLeft + 55,
+    beach.offsetTop + 2,
+    1000
   );
 
   setTimeout(() => {
-    spawnEffect(
-      beach.parentElement,
-      "henn-sand-castle",
-      beach.offsetLeft + 58,
-      beach.offsetTop + 6,
-      900
-    );
-    bonkNearby(beach, 85);
-  }, 120);
+    const runners = document.querySelectorAll(".henn-sprite-runner");
+
+    runners.forEach(target => {
+      if (
+        target !== beach &&
+        !target.classList.contains("bonked") &&
+        target.offsetLeft > beach.offsetLeft &&
+        target.offsetLeft < beach.offsetLeft + 120
+      ) {
+        bonkRunner(target);
+      }
+    });
+  }, 180);
 }
 
 function doKarateMove(karate) {
