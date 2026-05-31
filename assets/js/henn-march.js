@@ -66,8 +66,8 @@ function makeRunner(sprite, index) {
 
   el.style.top = `${topOffsets[sprite.name] ?? 4}px`;
 
-  el.style.left = `${-90 - index * spacing}px`;
-
+el.style.left = "-90px";
+  
   el.style.animationDuration = `${sprite.duration}s, 0.32s`;
   el.style.animationDelay = `${sprite.delay}s, 0s`;
   el.dataset.name = sprite.name;
