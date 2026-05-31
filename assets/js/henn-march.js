@@ -29,6 +29,9 @@ const SPRITES = [
 
 const DEFAULT_COOLDOWN = 900;
 
+const PARADE_REPEAT = 2;
+const PARADE_DELAY_STEP = 1.6;
+
 function spawnEffect(parent, className, left, top, duration) {
   if (!parent) return;
 
@@ -65,7 +68,7 @@ function makeRunner(sprite, index) {
 
   el.style.top = `${topOffsets[sprite.name] ?? 4}px`;
 
-  const spacing = 78;
+  const spacing = 48;
   el.style.left = `${-90 - index * spacing}px`;
 
   el.style.animationDuration = `${sprite.duration}s, 0.32s`;
@@ -107,8 +110,18 @@ function seedRunners() {
 
   track.innerHTML = "";
 
-  SPRITES.forEach((sprite, index) => {
-    track.appendChild(makeRunner(sprite, index));
+  const parade = [];
+
+  for (let round = 0; round < PARADE_REPEAT; round++) {
+    SPRITES.forEach(sprite => parade.push(sprite));
+  }
+
+  parade.forEach((sprite, index) => {
+    const runner = makeRunner(sprite, index);
+
+    runner.style.animationDelay = `${index * PARADE_DELAY_STEP}s, 0s`;
+
+    track.appendChild(runner);
   });
 }
 
