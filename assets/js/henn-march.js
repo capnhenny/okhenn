@@ -21,7 +21,8 @@ const SPRITES = [
   { name: "fisherman-henn", file: "/assets/henn-sprites/fisherman-henn.png", alt: altStepPath("fisherman-henn"), width: 56, height: 56, duration: 26, delay: 39 },
   { name: "robot-henn", file: "/assets/henn-sprites/robot-henn.png", alt: altStepPath("robot-henn"), width: 56, height: 56, duration: 22, delay: 42 },
   { name: "caveman-henn", file: "/assets/henn-sprites/caveman-henn.png", alt: altStepPath("caveman-henn"), width: 56, height: 56, duration: 25, delay: 45 },
-  { name: "artist-henn", file: "/assets/henn-sprites/artist-henn.png", alt: altStepPath("artist-henn"), width: 56, height: 56, duration: 24, delay: 48 },  { name: "beach-henn", file: "/assets/henn-sprites/beach-henn.png", alt: altStepPath("beach-henn"), width: 56, height: 56, duration: 25, delay: 51 },
+  { name: "artist-henn", file: "/assets/henn-sprites/artist-henn.png", alt: altStepPath("artist-henn"), width: 56, height: 56, duration: 24, delay: 48 },  
+  { name: "beach-henn", file: "/assets/henn-sprites/beach-henn.png", alt: altStepPath("beach-henn"), width: 56, height: 56, duration: 25, delay: 51 },
   { name: "karate-henn", file: "/assets/henn-sprites/karate-henn.png", alt: altStepPath("karate-henn"), width: 56, height: 56, duration: 23, delay: 54 },
   { name: "carpenter-henn", file: "/assets/henn-sprites/carpenter-henn.png", alt: altStepPath("carpenter-henn"), width: 56, height: 56, duration: 24, delay: 57 },
   { name: "gardener-henn", file: "/assets/henn-sprites/gardener-henn.png", alt: altStepPath("gardener-henn"), width: 56, height: 56, duration: 26, delay: 60 }
