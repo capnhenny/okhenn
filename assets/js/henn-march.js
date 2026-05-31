@@ -5,6 +5,7 @@ function altStepPath(name) {
 }
 
 const SPRITES = [
+  { name: "karate-henn", file: "/assets/henn-sprites/karate-henn.png", alt: altStepPath("karate-henn"), width: 56, height: 56, duration: 23, delay: 54 },
   { name: "chef-henn", file: "/assets/henn-sprites/chef-henn.png", alt: altStepPath("chef-henn"), width: 56, height: 56, duration: 24, delay: 0 },
   { name: "dino-henn", file: "/assets/henn-sprites/dino-henn.png", alt: altStepPath("dino-henn"), width: 62, height: 62, duration: 28, delay: 3 },
   { name: "warrior-henn", file: "/assets/henn-sprites/warrior-henn.png", alt: altStepPath("warrior-henn"), width: 56, height: 56, duration: 23, delay: 6 },
@@ -23,7 +24,6 @@ const SPRITES = [
   { name: "caveman-henn", file: "/assets/henn-sprites/caveman-henn.png", alt: altStepPath("caveman-henn"), width: 56, height: 56, duration: 25, delay: 45 },
   { name: "artist-henn", file: "/assets/henn-sprites/artist-henn.png", alt: altStepPath("artist-henn"), width: 56, height: 56, duration: 24, delay: 48 },  
   { name: "beach-henn", file: "/assets/henn-sprites/beach-henn.png", alt: altStepPath("beach-henn"), width: 56, height: 56, duration: 25, delay: 51 },
-  { name: "karate-henn", file: "/assets/henn-sprites/karate-henn.png", alt: altStepPath("karate-henn"), width: 56, height: 56, duration: 23, delay: 54 },
   { name: "carpenter-henn", file: "/assets/henn-sprites/carpenter-henn.png", alt: altStepPath("carpenter-henn"), width: 56, height: 56, duration: 24, delay: 57 },
   { name: "gardener-henn", file: "/assets/henn-sprites/gardener-henn.png", alt: altStepPath("gardener-henn"), width: 56, height: 56, duration: 26, delay: 60 }
 ];
@@ -101,7 +101,7 @@ el.style.left = "-90px";
   return el;
 }
 
-const PARADE_REPEAT = 2;
+const PARADE_REPEAT = 1;
 
 function seedRunners() {
   const track = document.getElementById("hennMarchTrack");
