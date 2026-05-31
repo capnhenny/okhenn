@@ -2648,9 +2648,9 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
     hennKarateDash 0.36s ease-out 1 !important;
 }
 @keyframes hennKarateDash {
-  0% {   transform: translateX(0) scale(1); filter: brightess (1) }
-  35% {    transform: translateX(24px) scale(1.03); filter: brightness (1.15)  }
-  100% {    transform: translateX(0) scale(1); filter: brightness (1)  }
+  0% {   transform: translateX(0) scale(1); filter: brightess (1); }
+  35% {    transform: translateX(24px) scale(1.03); filter: brightness (1.15);  }
+  100% {    transform: translateX(0) scale(1); filter: brightness (1);  }
 }
 
 /* =========================
@@ -2673,7 +2673,7 @@ header {
 
 @media (max-width: 768px) {
   .henn-march {
-    height: 56px;
+    height: 82px;
     top: 4px;
   }
 
@@ -2706,12 +2706,6 @@ header {
   .henn-wisp {
     width: 14px;
     height: 14px;
-  }
-
-  @media (max-width: 768px) {
-  .henn-march {
-    height: 82px;
-    top: 4px;
   }
 
   .henn-tumble-rock {
