@@ -979,11 +979,14 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
 
 .post-hero img {
   width: 100%;
+  height: auto;
   max-width: 720px;
   max-height: 420px;
 
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: center center;
+
+  margin: 0 auto;
 
   border-radius: 16px;
 
