@@ -10,7 +10,7 @@ photos:
   - "/journal/assets/japan/leg trolley.JPG"
 ---
                   
-For my first ever solo trip, I chose Japan.
+Give a kid a solo trip, get a kid who went on a solo trip that one time.
 
 19 years old, never left the United States East Coast - hell, never been on a plane - and going through some normal and abnormal earth-shattering, harrowing, deeply defeating, and long-term strengthening experiences. 
 
