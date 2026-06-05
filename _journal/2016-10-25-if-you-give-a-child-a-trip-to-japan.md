@@ -11,7 +11,7 @@ photos:
   - "_journal/assets/leg trolley.JPG"
                   ---
                   
-                  For my first ever solo trip, I chose Japan.
+For my first ever solo trip, I chose Japan.
 
 19 years old, never left the United States East Coast, and going through some normal and abnormal earth-shattering, harrowing, deeply defeating, and long-term strengthening experiences. 
 
