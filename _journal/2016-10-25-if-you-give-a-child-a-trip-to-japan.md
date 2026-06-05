@@ -1,7 +1,7 @@
 ---
                   layout: post_like
                   title: "If You Give a Child a Trip to Japan"
-                  date: 2016-10-25 19:29:00
+                  date: 2026-06-05 16:57:00
                   location: "sleeping on a bus bench"
                   view: "first-person"
 media: "_journal/assets/elephant shorts.JPG"
