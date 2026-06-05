@@ -4,11 +4,11 @@
                   date: 2026-06-05 16:57:00
                   location: "sleeping on a bus bench"
                   view: "first-person"
-media: "_journal/assets/elephant shorts.JPG"
+media: "journal/assets/japan/elephant shorts.JPG"
 photos:
-  - "_journal/assets/happy robot restaurant w new zealand.JPG"
-  - "_journal/assets/kinkaku in.JPG"
-  - "_journal/assets/leg trolley.JPG"
+  - "journal/assets/japan/happy robot restaurant w new zealand.JPG"
+  - "journal/assets/japan/kinkaku in.JPG"
+  - "journal/assets/japan/leg trolley.JPG"
                   ---
                   
 For my first ever solo trip, I chose Japan.
