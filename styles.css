@@ -477,6 +477,21 @@ main { padding: 2rem 1rem; }
   opacity: 0;
   animation: riseIn .6s ease forwards;
 }
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+}
+
+.card {
+  overflow: hidden;
+}
+
 .cards .card:nth-child(1){ animation-delay:.1s; }
 .cards .card:nth-child(2){ animation-delay:.2s; }
 .cards .card:nth-child(3){ animation-delay:.3s; }
@@ -2651,9 +2666,9 @@ button:hover { transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.12
     hennKarateDash 0.36s ease-out 1 !important;
 }
 @keyframes hennKarateDash {
-  0% {   transform: translateX(0) scale(1); filter: brightess (1); }
-  35% {    transform: translateX(24px) scale(1.03); filter: brightness (1.15);  }
-  100% {    transform: translateX(0) scale(1); filter: brightness (1);  }
+  0% {   transform: translateX(0) scale(1); filter: brightess(1); }
+  35% {    transform: translateX(24px) scale(1.03); filter: brightness(1.15);  }
+  100% {    transform: translateX(0) scale(1); filter: brightness(1);  }
 }
 
 /* =========================
