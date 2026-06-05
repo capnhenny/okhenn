@@ -3,7 +3,6 @@ layout: post_like
 title: "If You Give a Kid a Trip to Japan"
 date: 2026-06-05 16:57:00
 location: "sleeping on a bus bench"
-view: "first-person"
 media: "/journal/assets/japan/elephant shorts.JPG"
 photos:
   - "/journal/assets/japan/happy robot restaurant w new zealand.JPG"
