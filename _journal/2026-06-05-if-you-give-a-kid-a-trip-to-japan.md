@@ -12,7 +12,7 @@ photos:
                   
 Give a kid a solo trip, get a kid who went on a solo trip that one time.
 
-19 years old, never left the United States East Coast - hell, never been on a plane - and going through some normal and abnormal earth-shattering, harrowing, deeply defeating, and long-term strengthening experiences. 
+19 years old, barely ever ventured further than the United States East Coast - hell, never been on a plane - and going through some normal and abnormal earth-shattering, harrowing, deeply defeating, and long-term strengthening experiences. 
 
 At this point, I'd never even flown on a plane. Ever. 
 I figured if I learned I was afraid of heights, I'd have to get over it - classic exposure therapy. 
