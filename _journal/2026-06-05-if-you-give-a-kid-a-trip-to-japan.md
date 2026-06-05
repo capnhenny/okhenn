@@ -1,19 +1,19 @@
 ---
-                  layout: post_like
-                  title: "If You Give a Kid a Trip to Japan"
-                  date: 2026-06-05 16:57:00
-                  location: "sleeping on a bus bench"
-                  view: "first-person"
-media: "journal/assets/japan/elephant shorts.JPG"
+layout: post_like
+title: "If You Give a Kid a Trip to Japan"
+date: 2026-06-05 16:57:00
+location: "sleeping on a bus bench"
+view: "first-person"
+media: "/journal/assets/japan/elephant shorts.JPG"
 photos:
-  - "journal/assets/japan/happy robot restaurant w new zealand.JPG"
-  - "journal/assets/japan/kinkaku in.JPG"
-  - "journal/assets/japan/leg trolley.JPG"
-                  ---
+  - "/journal/assets/japan/happy robot restaurant w new zealand.JPG"
+  - "/journal/assets/japan/kinkaku in.JPG"
+  - "/journal/assets/japan/leg trolley.JPG"
+---
                   
 For my first ever solo trip, I chose Japan.
 
-19 years old, never left the United States East Coast, and going through some normal and abnormal earth-shattering, harrowing, deeply defeating, and long-term strengthening experiences. 
+19 years old, never left the United States East Coast - hell, never been on a plane - and going through some normal and abnormal earth-shattering, harrowing, deeply defeating, and long-term strengthening experiences. 
 
 At this point, I'd never even flown on a plane. Ever. 
 I figured if I learned I was afraid of heights, I'd have to get over it - classic exposure therapy. 
